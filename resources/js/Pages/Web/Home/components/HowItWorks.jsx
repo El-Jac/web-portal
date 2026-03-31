@@ -1,106 +1,41 @@
 import React from 'react';
-import { Typography, Box, Container, Grid, Card, CardContent } from '@mui/material';
-import { Landscape } from '@mui/icons-material';
+import {processSteps} from './homeData';
 
-const HowItWorks = ({
-    title = 'How it works?'
-}) => {
-    // Create 4 identical cards
-    const cards = Array(4).fill({
-        icon: <Landscape />,
-        title: 'Title',
-        description: 'Praeterea, ex culpa non invenies unum aut non accusatis unum. Et nihil'
-    });
+const HowItWorks = () => (
+    <section className="mesh-section overflow-hidden bg-[#f9f9f9] px-5 py-18 md:px-10 md:py-24 lg:px-16">
+        <div className="mx-auto max-w-[1120px]">
+            <div className="mb-14 text-center md:mb-18">
+                <span className="mb-4 block text-[10px] font-semibold uppercase tracking-[0.18em] text-[#1a1c1c]">
+                    What We Do
+                </span>
+                <h2 className="mb-6 text-[2.15rem] font-extrabold leading-[0.98] tracking-[-0.05em] text-[#1a1c1c] sm:text-[2.5rem] md:text-[3.8rem]">
+                    We Make Travel Planning
+                    <br/>
+                    <span className="font-light italic text-[#3260FE]">Personalized.</span>
+                </h2>
+                <p className="mx-auto max-w-[560px] text-[14px] leading-[1.7] text-[#3f484a] md:text-[15px]">
+                    We bridge the gap between travelers and locals, turning ideas into thoughtfully planned journeys tailored to you.
+                </p>
+            </div>
 
-    return (
-        <Box sx={{ py: { xs: 6, md: 10 }, backgroundColor: '#FFFFFF' }}>
-            <Container maxWidth="lg">
-                <Box sx={{ textAlign: 'center', mb: 6 }}>
-                    <Typography 
-                        variant="h3" 
-                        component="h2" 
-                        gutterBottom
-                        sx={{
-                            fontWeight: 700,
-                            mb: 2,
-                            fontSize: { xs: '2rem', md: '2.75rem' },
-                            color: 'text.primary'
-                        }}
-                    >
-                        {title}
-                    </Typography>
-                </Box>
-
-                <Grid container spacing={3}>
-                    {cards.map((card, index) => (
-                        <Grid size={{ xs: 12, sm: 6, md: 3 }} key={index}>
-                            <Card 
-                                sx={{ 
-                                    height: '100%',
-                                    textAlign: 'center',
-                                    backgroundColor: '#E0E0E0',
-                                    boxShadow: 'none',
-                                    border: 'none',
-                                    borderRadius: 1
-                                }}
-                            >
-                                <CardContent sx={{ p: 3 }}>
-                                    <Box 
-                                        sx={{ 
-                                            display: 'flex',
-                                            justifyContent: 'center',
-                                            mb: 2
-                                        }}
-                                    >
-                                        <Box
-                                            sx={{
-                                                width: { xs: '60px', md: '80px' },
-                                                height: { xs: '60px', md: '80px' },
-                                                backgroundColor: '#A0A0A0',
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                justifyContent: 'center',
-                                                borderRadius: 1,
-                                                '& svg': {
-                                                    fontSize: { xs: '2rem', md: '2.5rem' },
-                                                    color: '#4B5563'
-                                                }
-                                            }}
-                                        >
-                                            {card.icon}
-                                        </Box>
-                                    </Box>
-                                    <Typography 
-                                        variant="h6" 
-                                        component="h3" 
-                                        gutterBottom
-                                        sx={{ 
-                                            fontWeight: 700,
-                                            mb: 1.5,
-                                            color: 'text.primary'
-                                        }}
-                                    >
-                                        {card.title}
-                                    </Typography>
-                                    <Typography 
-                                        variant="body2" 
-                                        sx={{ 
-                                            color: 'text.primary',
-                                            fontSize: '0.875rem',
-                                            lineHeight: 1.6
-                                        }}
-                                    >
-                                        {card.description}
-                                    </Typography>
-                                </CardContent>
-                            </Card>
-                        </Grid>
-                    ))}
-                </Grid>
-            </Container>
-        </Box>
-    );
-};
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+                {processSteps.map(({step, title, description, icon: Icon}) => (
+                    <div key={step} className="flex flex-col">
+                        <div className="editorial-shadow mb-5 flex h-[92px] items-center justify-center overflow-hidden rounded-[2rem] border border-[#ececec] bg-white">
+                            <div className="flex h-full w-full items-center justify-center bg-[#f8f8f8] transition-colors duration-500 hover:bg-[#3260FE]/5">
+                                <Icon sx={{fontSize: 40, color: '#3260FE', opacity: 0.9}}/>
+                            </div>
+                        </div>
+                        <div className="mb-3 inline-flex w-fit items-center rounded-full border border-[#EA6D4F]/40 px-2.5 py-1 text-[8px] font-bold uppercase tracking-[0.14em] text-[#EA6D4F]">
+                            {step}
+                        </div>
+                        <h3 className="mb-2 text-[1.45rem] font-extrabold leading-[1.02] tracking-[-0.04em] text-[#1a1c1c] sm:text-[1.6rem] md:text-[1.8rem]">{title}</h3>
+                        <p className="max-w-[280px] text-[12px] leading-[1.6] text-[#3f484a]">{description}</p>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+);
 
 export default HowItWorks;
-
