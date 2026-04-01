@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
             // SpecialistSeeder::class,
             // DestinationSeeder::class,
             // DestinationImageSeeder::class,
+            // SampleDestinationsSeeder::class, // Creates 100 sample destinations with images, seasons, activities, itineraries
         ]);
     }
 }

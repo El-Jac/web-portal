@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {usePage} from '@inertiajs/react';
 import WebsiteLayout from '../../../Layouts/WebsiteLayout.jsx';
 import HomeMeta from './components/HomeMeta.jsx';
 import HomeStyles from './components/HomeStyles.jsx';
@@ -9,6 +10,7 @@ import DestinationsSection from './components/DestinationsSection.jsx';
 import HowItWorks from './components/HowItWorks.jsx';
 
 const Index = () => {
+    const {destinations} = usePage().props;
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     return (
@@ -23,7 +25,7 @@ const Index = () => {
                 />
                 <HomePageHeading/>
                 <WhatIsPlanLikeALocal/>
-                <DestinationsSection/>
+                <DestinationsSection destinations={destinations}/>
                 <HowItWorks/>
             </div>
         </WebsiteLayout>
