@@ -27,9 +27,12 @@ class DatabaseSeeder extends Seeder
         // Seed specialists, countries, and destination images
         $this->call([
             CountrySeeder::class,
+            PricingPlanSeeder::class,
+            ProcessStepSeeder::class,
             // SpecialistSeeder::class,
             // DestinationSeeder::class,
             // DestinationImageSeeder::class,
+            // SampleDestinationsSeeder::class, // Creates 100 sample destinations with images, seasons, activities, itineraries
         ]);
     }
 }

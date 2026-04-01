@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('mobile/v1')->group(function () {
     // Public routes
+    Route::get('/who-we-are', [App\Http\Controllers\Api\WhoWeAreController::class, 'index']);
+    Route::get('/pricing', [App\Http\Controllers\Api\PricingController::class, 'index']);
+    Route::get('/process', [App\Http\Controllers\Api\ProcessController::class, 'index']);
     Route::get('/countries', [App\Http\Controllers\Api\CountryController::class, 'index']);
     Route::post('/auth/register', [App\Http\Controllers\Api\AuthController::class, 'register']);
     Route::post('/auth/login', [App\Http\Controllers\Api\AuthController::class, 'login']);
@@ -32,6 +35,8 @@ Route::prefix('mobile/v1')->group(function () {
         
         // Destinations
         Route::get('/destinations', [App\Http\Controllers\Api\DestinationController::class, 'index']);
+        Route::get('/destinations/regions', [App\Http\Controllers\Api\DestinationController::class, 'getRegionsByCountry']);
+        Route::get('/destinations/activities', [App\Http\Controllers\Api\DestinationController::class, 'getActivitiesByCountry']);
         Route::get('/destinations/{id}', [App\Http\Controllers\Api\DestinationController::class, 'show']);
         Route::get('/destinations/country/{country}', [App\Http\Controllers\Api\DestinationController::class, 'getByCountry']);
         Route::get('/destinations/region/{region}', [App\Http\Controllers\Api\DestinationController::class, 'getByRegion']);
@@ -39,6 +44,7 @@ Route::prefix('mobile/v1')->group(function () {
         // Plans
         Route::get('/plans', [App\Http\Controllers\Api\PlanController::class, 'index']);
         Route::post('/plans', [App\Http\Controllers\Api\PlanController::class, 'store']);
+        Route::post('/plans/payment-intent', [App\Http\Controllers\Api\PlanController::class, 'createPaymentIntent']);
         Route::get('/plans/{id}', [App\Http\Controllers\Api\PlanController::class, 'show']);
         Route::put('/plans/{id}', [App\Http\Controllers\Api\PlanController::class, 'update']);
         Route::get('/plans/{id}/availability', [App\Http\Controllers\Api\PlanController::class, 'getAvailability']);
@@ -58,5 +64,24 @@ Route::prefix('mobile/v1')->group(function () {
         Route::get('/user/profile', [App\Http\Controllers\Api\ProfileController::class, 'show']);
         Route::put('/user/profile', [App\Http\Controllers\Api\ProfileController::class, 'update']);
         Route::post('/user/profile/image', [App\Http\Controllers\Api\ProfileController::class, 'uploadImage']);
+        
+        // Specialist application
+        Route::post('/specialist/apply', [App\Http\Controllers\Api\SpecialistController::class, 'apply']);
+        
+        // Specialists
+        Route::get('/specialists', [App\Http\Controllers\Api\SpecialistController::class, 'index']);
+        Route::get('/specialists/{id}/availability', [App\Http\Controllers\Api\SpecialistController::class, 'getAvailability']);
+
+        // Wishlist
+        Route::get('/wishlist', [App\Http\Controllers\Api\WishlistController::class, 'index']);
+        Route::get('/wishlist/ids', [App\Http\Controllers\Api\WishlistController::class, 'ids']);
+        Route::post('/wishlist/toggle', [App\Http\Controllers\Api\WishlistController::class, 'toggle']);
+        Route::delete('/wishlist/{destinationId}', [App\Http\Controllers\Api\WishlistController::class, 'remove']);
+
+        // Bug Reports
+        Route::post('/bug-reports', [App\Http\Controllers\Api\BugReportController::class, 'store']);
+
+        // Contact Us
+        Route::post('/contact-us', [App\Http\Controllers\Api\ContactController::class, 'store']);
     });
 });

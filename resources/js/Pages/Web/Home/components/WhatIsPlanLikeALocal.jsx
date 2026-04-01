@@ -1,128 +1,66 @@
 import React from 'react';
-import { Typography, Box, Container, Grid, Card, CardContent, Button } from '@mui/material';
-import { Landscape } from '@mui/icons-material';
-import { Link } from '@inertiajs/react';
+import {Link} from '@inertiajs/react';
+import {ArrowForward} from '@mui/icons-material';
+import {featureHighlights, statItems} from './homeData';
 
-const WhatIsPlanLikeALocal = ({
-    title = 'What is Plan Like a Local?',
-    subtitle = 'Quod Enchiridion Epictetus stoici',
-    learnMoreLink = '/what-we-do'
-}) => {
-    // Create 4 identical cards
-    const cards = Array(4).fill({
-        icon: <Landscape />,
-        text: 'Text'
-    });
+const WhatIsPlanLikeALocal = () => (
+    <section className="relative z-30 overflow-hidden bg-[#f9f9f9] px-5 py-14 md:px-10 md:py-16 lg:px-16">
+        <div className="mx-auto max-w-[1120px]">
+            <div className="mb-18 grid grid-cols-1 gap-2.5 sm:grid-cols-2 md:mb-24 md:grid-cols-5 md:gap-4">
+                {featureHighlights.map(({label, icon: Icon}) => (
+                    <div key={label} className="group flex items-center gap-2.5 rounded-2xl bg-white/40 px-3 py-2.5">
+                        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#eeeeee] text-[#3f484a] transition-colors group-hover:bg-[#3260FE]/10 group-hover:text-[#3260FE]">
+                            <Icon sx={{fontSize: 18}}/>
+                        </div>
+                        <span className="text-[9px] font-bold uppercase tracking-[0.18em] text-[#3f484a] md:text-[10px]">
+                            {label}
+                        </span>
+                    </div>
+                ))}
+            </div>
 
-    return (
-        <Box sx={{ py: { xs: 6, md: 10 }, backgroundColor: '#FFFFFF' }}>
-            <Container maxWidth="lg">
-                <Box sx={{ textAlign: 'center', mb: 6 }}>
-                    <Typography
-                        variant="h3"
-                        component="h2"
-                        gutterBottom
-                        sx={{
-                            fontWeight: 700,
-                            mb: 2,
-                            fontSize: { xs: '2rem', md: '2.75rem' },
-                            color: 'text.primary'
-                        }}
+            <div className="mb-16 grid grid-cols-1 gap-6 md:mb-24 lg:grid-cols-12 lg:items-start">
+                <div className="pt-1 md:pt-4 lg:col-span-3">
+                    <span className="text-[9px] font-black uppercase tracking-[0.3em] text-[#3f484a]">
+                        Who We Are
+                    </span>
+                </div>
+                <div className="lg:col-span-8 lg:col-start-4">
+                    <h2 className="mb-8 max-w-[760px] text-[2rem] font-extrabold leading-[0.98] tracking-[-0.05em] text-[#1a1c1c] sm:text-[2.35rem] md:mb-10 md:text-[4.1rem]">
+                        This isn&apos;t a travel guide.
+                        <br/>
+                        <span className="font-light italic text-[#EA6D4F]">It&apos;s a one-on-one planning</span>
+                        <br/>
+                        experience designed to help
+                        <br/>
+                        you explore with <span className="font-light italic text-[#EA6D4F]">clarity,</span>
+                        <br/>
+                        <span className="font-light italic text-[#EA6D4F]">confidence, and local</span>
+                        <br/>
+                        <span className="font-light italic text-[#EA6D4F]">knowledge.</span>
+                    </h2>
+                    <Link
+                        href="/who-we-are"
+                        className="inline-flex items-center rounded-lg bg-[#1a1c1c] px-5 py-3 text-[9px] font-bold uppercase tracking-[0.16em] text-[#f9f9f9] shadow-xl transition-all hover:scale-[1.02] md:px-6 md:text-[10px]"
                     >
-                        {title}
-                    </Typography>
-                    <Typography
-                        variant="body1"
-                        color="text.secondary"
-                        sx={{
-                            fontSize: { xs: '1rem', md: '1.125rem' }
-                        }}
-                    >
-                        {subtitle}
-                    </Typography>
-                </Box>
+                        Meet Founders
+                        <ArrowForward sx={{ml: 1, fontSize: 16}}/>
+                    </Link>
+                </div>
+            </div>
 
-                {/* Four cards in a row */}
-                <Grid container spacing={3} sx={{ mb: 6 }}>
-                    {cards.map((card, index) => (
-                        <Grid size={{xs:6, sm: 3}} key={index}>
-                            <Card
-                                sx={{
-                                    height: '100%',
-                                    textAlign: 'center',
-                                    backgroundColor: '#F3F4F6',
-                                    boxShadow: 'none',
-                                    border: 'none'
-                                }}
-                            >
-                                <CardContent sx={{ p: 3 }}>
-                                    <Box
-                                        sx={{
-                                            display: 'flex',
-                                            justifyContent: 'center',
-                                            mb: 2
-                                        }}
-                                    >
-                                        <Box
-                                            sx={{
-                                                width: { xs: '60px', md: '80px' },
-                                                height: { xs: '60px', md: '80px' },
-                                                backgroundColor: '#9CA3AF',
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                justifyContent: 'center',
-                                                borderRadius: 1,
-                                                '& svg': {
-                                                    fontSize: { xs: '2rem', md: '2.5rem' },
-                                                    color: '#4B5563'
-                                                }
-                                            }}
-                                        >
-                                            {card.icon}
-                                        </Box>
-                                    </Box>
-                                    <Typography
-                                        variant="body1"
-                                        sx={{
-                                            fontWeight: 500,
-                                            color: 'text.primary'
-                                        }}
-                                    >
-                                        {card.text}
-                                    </Typography>
-                                </CardContent>
-                            </Card>
-                        </Grid>
+            <div className="rounded-[2rem] bg-[#f3f3f3] px-5 py-7 md:px-8 md:py-10">
+                <div className="grid grid-cols-2 gap-y-6 sm:gap-6 lg:grid-cols-4 lg:gap-0">
+                    {statItems.map(([value, label]) => (
+                        <div key={label} className="text-center lg:border-r lg:border-[#bec8ca]/30 lg:px-6 lg:text-left last:border-r-0">
+                            <div className="mb-1 text-[2.1rem] font-extrabold tracking-[-0.04em] text-[#1a1c1c] sm:text-[2.4rem] md:text-[3.2rem]">{value}</div>
+                            <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[#3f484a]">{label}</div>
+                        </div>
                     ))}
-                </Grid>
-
-                {/* Learn More Button */}
-                <Box sx={{ textAlign: 'center' }}>
-                    <Button
-                        variant="contained"
-                        component={Link}
-                        href={learnMoreLink}
-                        sx={{
-                            backgroundColor: '#4B5563',
-                            color: 'white',
-                            px: 4,
-                            py: 1.5,
-                            fontSize: '0.875rem',
-                            textTransform: 'uppercase',
-                            fontWeight: 600,
-                            borderRadius: 1,
-                            '&:hover': {
-                                backgroundColor: '#374151'
-                            }
-                        }}
-                    >
-                        Learn More
-                    </Button>
-                </Box>
-            </Container>
-        </Box>
-    );
-};
+                </div>
+            </div>
+        </div>
+    </section>
+);
 
 export default WhatIsPlanLikeALocal;
-

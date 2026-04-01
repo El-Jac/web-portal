@@ -31,9 +31,35 @@ class DestinationListResource extends JsonResource
             'banner_image' => $this->banner_image,
             'specialist_ids' => $this->specialist_ids,
             'specialist_count' => $this->specialist_count,
+            'featured_specialist' => $this->getFeaturedSpecialist(),
             'main_image' => $this->main_image?->url,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+        ];
+    }
+
+    private function getFeaturedSpecialist(): ?array
+    {
+        if (empty($this->specialist_ids)) {
+            return null;
+        }
+
+        $specialistId = $this->specialist_ids[0] ?? null;
+        if (!$specialistId) {
+            return null;
+        }
+
+        $specialist = \App\Models\Specialist::find($specialistId);
+        if (!$specialist) {
+            return null;
+        }
+
+        return [
+            'id' => $specialist->id,
+            'full_name' => $specialist->full_name,
+            'profile_pic' => $specialist->profile_pic,
+            'bio' => $specialist->bio,
+            'city' => $specialist->city,
         ];
     }
 }
