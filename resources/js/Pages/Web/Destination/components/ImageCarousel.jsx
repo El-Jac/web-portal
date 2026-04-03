@@ -1,6 +1,4 @@
-import React, { useState, useMemo, useRef, useCallback } from 'react';
-import { Box, IconButton, Typography, Chip, Dialog, DialogContent } from '@mui/material';
-import { ArrowBackIosNew, ArrowForwardIos, ZoomIn, ZoomOut, Close } from '@mui/icons-material';
+import React, { useState, useMemo, useRef, useCallback, useEffect } from 'react';
 
 const ImageCarousel = ({ images }) => {
     const safeImages = useMemo(() => (images || []).filter((img) => !!img?.url), [images]);
@@ -10,135 +8,167 @@ const ImageCarousel = ({ images }) => {
     const [offset, setOffset] = useState({ x: 0, y: 0 });
     const dragRef = useRef({ dragging: false, startX: 0, startY: 0, lastX: 0, lastY: 0 });
 
+    // Close lightbox on Escape
+    useEffect(() => {
+        const onKey = (e) => { if (e.key === 'Escape') setLightboxOpen(false); };
+        if (lightboxOpen) document.addEventListener('keydown', onKey);
+        return () => document.removeEventListener('keydown', onKey);
+    }, [lightboxOpen]);
+
     if (!safeImages.length) {
         return (
-            <Box
-                sx={{
-                    textAlign: 'center',
-                    py: 8,
-                    border: '2px dashed #e0e0e0',
-                    borderRadius: 2,
-                    bgcolor: '#fafafa',
-                }}
-            >
-                <Typography variant="h6" color="text.secondary">
-                    No images available
-                </Typography>
-            </Box>
+            <div className="text-center py-16 border-2 border-dashed border-slate-200 flex items-center justify-center min-h-[260px]">
+                <p className="text-slate-400" style={{ fontSize: '15px' }}>No images available</p>
+            </div>
         );
     }
 
     const goPrev = () => setIndex((i) => (i === 0 ? safeImages.length - 1 : i - 1));
     const goNext = () => setIndex((i) => (i === safeImages.length - 1 ? 0 : i + 1));
-
     const current = safeImages[index];
 
+    const openLightbox = () => {
+        setLightboxOpen(true);
+        setZoom(1);
+        setOffset({ x: 0, y: 0 });
+    };
+
     return (
-        <Box sx={{ position: 'relative', width: '100%', overflow: 'hidden' }}>
-            <Box
-                component="img"
-                src={current.url}
-                alt={current.name || `Image ${index + 1}`}
-                sx={{
-                    width: '100%',
-                    height: { xs: 260, sm: 320, md: 420 },
-                    objectFit: 'cover',
-                    borderRadius: 2,
-                }}
-                onClick={() => {
-                    setLightboxOpen(true);
-                    setZoom(1);
-                    setOffset({ x: 0, y: 0 });
-                }}
-                style={{ cursor: 'zoom-in' }}
-            />
+        <>
+            {/* Main carousel */}
+            <div className="relative w-full overflow-hidden">
+                <img
+                    src={current.url}
+                    alt={current.name || `Image ${index + 1}`}
+                    onClick={openLightbox}
+                    className="w-full object-cover"
+                    style={{ height: 'clamp(260px, 35vw, 420px)', cursor: 'zoom-in' }}
+                />
 
-            <IconButton
-                onClick={goPrev}
-                size="small"
-                sx={{ position: 'absolute', top: '50%', left: 12, transform: 'translateY(-50%)', bgcolor: 'rgba(0,0,0,0.4)', color: 'white', '&:hover': { bgcolor: 'rgba(0,0,0,0.6)' } }}
-                aria-label="Previous image"
-            >
-                <ArrowBackIosNew fontSize="small" />
-            </IconButton>
+                {/* Prev button */}
+                <button
+                    onClick={goPrev}
+                    aria-label="Previous image"
+                    className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full flex items-center justify-center transition-colors"
+                    style={{ backgroundColor: 'rgba(0,0,0,0.45)' }}
+                >
+                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
 
-            <IconButton
-                onClick={goNext}
-                size="small"
-                sx={{ position: 'absolute', top: '50%', right: 12, transform: 'translateY(-50%)', bgcolor: 'rgba(0,0,0,0.4)', color: 'white', '&:hover': { bgcolor: 'rgba(0,0,0,0.6)' } }}
-                aria-label="Next image"
-            >
-                <ArrowForwardIos fontSize="small" />
-            </IconButton>
+                {/* Next button */}
+                <button
+                    onClick={goNext}
+                    aria-label="Next image"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full flex items-center justify-center transition-colors"
+                    style={{ backgroundColor: 'rgba(0,0,0,0.45)' }}
+                >
+                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
 
-            <Box sx={{ position: 'absolute', bottom: 12, left: 12, right: 12, display: 'flex', alignItems: 'center', gap: 1, flexWrap: 'wrap' }}>
-                {current.name && (
-                    <Typography variant="subtitle1" sx={{ px: 1.5, py: 0.5, bgcolor: 'rgba(0,0,0,0.5)', color: 'white', borderRadius: 1 }}>
-                        {current.name}
-                    </Typography>
+                {/* Caption */}
+                {(current.name || current.image_type) && (
+                    <div className="absolute bottom-3 left-3 flex items-center gap-2 flex-wrap">
+                        {current.name && (
+                            <span
+                                className="text-white text-[12px] font-medium px-2.5 py-1 rounded-lg"
+                                style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}
+                            >
+                                {current.name}
+                            </span>
+                        )}
+                        {current.image_type && (
+                            <span className="bg-blue-600 text-white text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">
+                                {current.image_type}
+                            </span>
+                        )}
+                    </div>
                 )}
-                {current.image_type && (
-                    <Chip label={current.image_type} size="small" color="primary" variant="filled" />
-                )}
-            </Box>
 
-            <Box sx={{ position: 'absolute', bottom: 12, right: 12, display: 'flex', gap: 0.75 }}>
-                {safeImages.map((_, i) => (
-                    <Box
-                        key={i}
-                        onClick={() => setIndex(i)}
-                        sx={{
-                            width: 8,
-                            height: 8,
-                            borderRadius: '50%',
-                            bgcolor: i === index ? 'primary.main' : 'rgba(255,255,255,0.7)',
-                            border: i === index ? '1px solid rgba(0,0,0,0.2)' : '1px solid rgba(0,0,0,0.2)',
-                            cursor: 'pointer',
-                        }}
-                    />)
+                {/* Dot indicators */}
+                {safeImages.length > 1 && (
+                    <div className="absolute bottom-3 right-3 flex gap-1.5">
+                        {safeImages.map((_, i) => (
+                            <button
+                                key={i}
+                                onClick={() => setIndex(i)}
+                                aria-label={`Go to image ${i + 1}`}
+                                className="w-2 h-2 rounded-full transition-all"
+                                style={{ backgroundColor: i === index ? '#3260FE' : 'rgba(255,255,255,0.7)' }}
+                            />
+                        ))}
+                    </div>
                 )}
-            </Box>
+            </div>
 
-            <Dialog open={lightboxOpen} onClose={() => setLightboxOpen(false)} fullWidth maxWidth="lg">
-                <Box sx={{ position: 'absolute', top: 8, right: 8, zIndex: 2, display: 'flex', gap: 1 }}>
-                    <IconButton
-                        onClick={() => setZoom((z) => Math.max(1, Number((z - 0.2).toFixed(2))))}
-                        size="small"
-                        aria-label="Zoom out"
+            {/* Lightbox overlay */}
+            {lightboxOpen && (
+                <div
+                    className="fixed inset-0 z-50 flex items-center justify-center"
+                    style={{ backgroundColor: 'rgba(0,0,0,0.95)' }}
+                    onClick={() => setLightboxOpen(false)}
+                >
+                    {/* Controls */}
+                    <div
+                        className="absolute top-4 right-4 z-10 flex items-center gap-2"
+                        onClick={(e) => e.stopPropagation()}
                     >
-                        <ZoomOut />
-                    </IconButton>
-                    <IconButton
-                        onClick={() => setZoom((z) => Math.min(5, Number((z + 0.2).toFixed(2))))}
-                        size="small"
-                        aria-label="Zoom in"
-                    >
-                        <ZoomIn />
-                    </IconButton>
-                    <IconButton
-                        onClick={() => {
-                            setZoom(1);
-                            setOffset({ x: 0, y: 0 });
-                        }}
-                        size="small"
-                        aria-label="Reset"
-                    >
-                        <Close />
-                    </IconButton>
-                </Box>
-                <DialogContent sx={{ p: 0, backgroundColor: 'black' }}>
-                    <PanZoomImage
-                        src={current.url}
-                        alt={current.name || 'Image'}
-                        zoom={zoom}
-                        setZoom={setZoom}
-                        offset={offset}
-                        setOffset={setOffset}
-                        dragRef={dragRef}
-                    />
-                </DialogContent>
-            </Dialog>
-        </Box>
+                        <button
+                            onClick={() => setZoom((z) => Math.max(1, Number((z - 0.2).toFixed(2))))}
+                            className="w-9 h-9 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-colors"
+                            aria-label="Zoom out"
+                        >
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM13 10H7" />
+                            </svg>
+                        </button>
+                        <button
+                            onClick={() => setZoom((z) => Math.min(5, Number((z + 0.2).toFixed(2))))}
+                            className="w-9 h-9 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-colors"
+                            aria-label="Zoom in"
+                        >
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                            </svg>
+                        </button>
+                        <button
+                            onClick={() => { setZoom(1); setOffset({ x: 0, y: 0 }); }}
+                            className="w-9 h-9 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-colors"
+                            aria-label="Reset zoom"
+                        >
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                            </svg>
+                        </button>
+                        <button
+                            onClick={() => setLightboxOpen(false)}
+                            className="w-9 h-9 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-colors"
+                            aria-label="Close lightbox"
+                        >
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    {/* Pan/zoom image */}
+                    <div onClick={(e) => e.stopPropagation()}>
+                        <PanZoomImage
+                            src={current.url}
+                            alt={current.name || 'Image'}
+                            zoom={zoom}
+                            setZoom={setZoom}
+                            offset={offset}
+                            setOffset={setOffset}
+                            dragRef={dragRef}
+                        />
+                    </div>
+                </div>
+            )}
+        </>
     );
 };
 
@@ -176,9 +206,7 @@ const PanZoomImage = ({ src, alt, zoom, setZoom, offset, setOffset, dragRef }) =
         const dy = e.clientY - dragRef.current.startY;
         setOffset({ x: dragRef.current.lastX + dx, y: dragRef.current.lastY + dy });
     };
-    const endDrag = () => {
-        dragRef.current.dragging = false;
-    };
+    const endDrag = () => { dragRef.current.dragging = false; };
 
     const onTouchStart = (e) => {
         if (e.touches.length === 1) {
@@ -197,12 +225,10 @@ const PanZoomImage = ({ src, alt, zoom, setZoom, offset, setOffset, dragRef }) =
         const dy = t.clientY - dragRef.current.startY;
         setOffset({ x: dragRef.current.lastX + dx, y: dragRef.current.lastY + dy });
     };
-    const onTouchEnd = () => {
-        dragRef.current.dragging = false;
-    };
+    const onTouchEnd = () => { dragRef.current.dragging = false; };
 
     return (
-        <Box
+        <div
             ref={containerRef}
             onWheel={onWheel}
             onMouseDown={onMouseDown}
@@ -212,24 +238,19 @@ const PanZoomImage = ({ src, alt, zoom, setZoom, offset, setOffset, dragRef }) =
             onTouchStart={onTouchStart}
             onTouchMove={onTouchMove}
             onTouchEnd={onTouchEnd}
-            sx={{
-                position: 'relative',
-                width: '100%',
-                height: { xs: '70vh', md: '80vh' },
-                overflow: 'hidden',
+            className="relative flex items-center justify-center overflow-hidden"
+            style={{
+                width: '90vw',
+                height: '80vh',
                 cursor: zoom > 1 ? 'grab' : 'zoom-in',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
                 backgroundColor: 'black',
             }}
         >
-            <Box
-                component="img"
+            <img
                 src={src}
                 alt={alt}
                 draggable={false}
-                sx={{
+                style={{
                     userSelect: 'none',
                     pointerEvents: 'none',
                     maxWidth: 'none',
@@ -237,10 +258,8 @@ const PanZoomImage = ({ src, alt, zoom, setZoom, offset, setOffset, dragRef }) =
                     transformOrigin: 'center center',
                 }}
             />
-        </Box>
+        </div>
     );
 };
 
 export default ImageCarousel;
-
-
