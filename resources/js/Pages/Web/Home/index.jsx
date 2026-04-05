@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import {usePage} from '@inertiajs/react';
 import WebsiteLayout from '../../../Layouts/WebsiteLayout.jsx';
 import HomeMeta from './components/HomeMeta.jsx';
-import HomeStyles from './components/HomeStyles.jsx';
-import HomeNavigation from './components/HomeNavigation.jsx';
+import SiteStyles from '../../../Components/SiteStyles.jsx';
+import SiteNavigation from '../../../Components/SiteNavigation.jsx';
 import HomePageHeading from './components/HomePageHeading.jsx';
 import WhatIsPlanLikeALocal from './components/WhatIsPlanLikeALocal.jsx';
 import DestinationsSection from './components/DestinationsSection.jsx';
@@ -16,10 +16,10 @@ const Index = () => {
     return (
         <WebsiteLayout minimalChrome>
             <HomeMeta/>
-            <HomeStyles/>
+            <SiteStyles/>
 
             <div className="stitch-home overflow-x-hidden">
-                <HomeNavigation
+                <SiteNavigation
                     mobileMenuOpen={mobileMenuOpen}
                     setMobileMenuOpen={setMobileMenuOpen}
                 />
