@@ -1,49 +1,40 @@
 import React from 'react';
-import { Typography, Box, Stack } from '@mui/material';
 
-const TeamMembersSection = ({ teamMembers = [] }) => {
-    return (
-        <Stack direction="row" spacing={2} sx={{ mb: 4, px: 4, py: 4 }}>
-            {teamMembers.map((member, index) => (
-                <Box key={index} sx={{ width: '50%' }}>
-                    <Box sx={{ width: "100%", display: 'flex', justifyContent: index === 0 ? 'right' : 'left', textAlign: index === 0 ? 'right' : 'left' }}>
-                        <Box
-                            component="img"
-                            src={member.imageSrc}
-                            alt={member.name}
-                            sx={{
-                                clear: 'both',
-                                width: '50%',
-                                height: 'auto',
-                                objectFit: 'contain',
-                            }}
-                        />
-                    </Box>
-                    <Box sx={{ 
-                        mt: 4, 
-                        textAlign: index === 0 ? 'right' : 'left', 
-                        width: "50%", 
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: index === 0 ? 'flex-end' : 'flex-start',
-                        ml: index === 0 ? 'auto' : 0,
-                        mr: index === 0 ? 0 : 'auto'
-                    }}>
-                        <Typography variant="h6" component="h1" gutterBottom color={"textDisabled"}>
-                            {member.title}
-                        </Typography>
-                        <Typography variant="h4" component="h3" gutterBottom>
-                            {member.name}
-                        </Typography>
-                        <Typography variant="body1">
-                            {member.description}
-                        </Typography>
-                    </Box>
-                </Box>
-            ))}
-        </Stack>
-    );
-};
+const TeamMembersSection = ({ teamMembers = [] }) => (
+    <section className="bg-[#f9f9f9] px-5 py-10 md:px-10 md:py-16 lg:px-16">
+        <div className="mx-auto max-w-[1120px]">
+            <div className="grid gap-8 sm:grid-cols-2">
+                {teamMembers.map((member, index) => (
+                    <div
+                        key={index}
+                        className="group overflow-hidden rounded-[2rem] bg-white editorial-shadow"
+                    >
+                        {/* Photo */}
+                        <div className="h-72 overflow-hidden">
+                            <img
+                                src={member.imageSrc}
+                                alt={member.name}
+                                className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                            />
+                        </div>
+
+                        {/* Info */}
+                        <div className="p-8">
+                            <span className="mb-1 block text-[9px] font-bold uppercase tracking-[0.2em] text-[#3260FE]">
+                                {member.title}
+                            </span>
+                            <h3 className="mb-4 text-2xl font-extrabold tracking-[-0.03em] text-[#1a1c1c]">
+                                {member.name}
+                            </h3>
+                            <p className="text-[14px] leading-[1.7] text-[#3f484a] line-clamp-4">
+                                {member.description}
+                            </p>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+);
 
 export default TeamMembersSection;
-

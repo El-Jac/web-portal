@@ -59,13 +59,6 @@ const WebsiteLayout = ({ children, minimalChrome = false }) => {
                                             {item.label}
                                         </Link>
                                     ))}
-                                    <button
-                                        type="button"
-                                        onClick={() => setContactDialogOpen(true)}
-                                        className="text-[11px] font-medium tracking-[0.18em] uppercase text-white/60 transition-colors hover:text-white bg-transparent border-none cursor-pointer p-0"
-                                    >
-                                        Contact Us
-                                    </button>
                                 </nav>
                             </div>
 

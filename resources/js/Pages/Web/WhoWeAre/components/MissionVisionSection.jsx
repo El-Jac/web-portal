@@ -1,55 +1,46 @@
 import React from 'react';
-import { Typography, Box, Container, Grid } from '@mui/material';
-import CurvedSection from '../../../../Components/CurvedSection.jsx';
 
 const MissionVisionSection = ({
-    missionTitle,
+    missionTitle = 'Our Mission',
     missionDescription,
-    visionTitle ,
-    visionDescription
-}) => {
-    const bottomContent = (
-        <Box sx={{ pb:4 }}>
-            <Container maxWidth="lg">
-                <Grid container spacing={4}>
-                    <Grid size={{xs:12, md: 6}}>
-                        <Box sx={{ textAlign: 'center', mb: 4 }}>
+    visionTitle = 'Our Vision',
+    visionDescription,
+}) => (
+    <section className="bg-[#f9f9f9] px-5 py-20 md:px-10 md:py-28 lg:px-16">
+        <div className="mx-auto max-w-[1120px]">
+            <div className="mb-14 text-center">
+                <span className="mb-4 block text-[10px] font-semibold uppercase tracking-[0.18em] text-[#1a1c1c]">
+                    What Drives Us
+                </span>
+                <h2 className="text-[2.15rem] font-extrabold leading-[0.98] tracking-[-0.05em] text-[#1a1c1c] sm:text-[2.5rem] md:text-[3.8rem]">
+                    Purpose&nbsp;&amp;&nbsp;
+                    <span className="font-light italic text-[#3260FE]">Direction.</span>
+                </h2>
+            </div>
 
-                            <Typography variant="h4" component="h2" gutterBottom sx={{ mb: 2 }}>
-                                {missionTitle}
-                            </Typography>
-                            <Typography variant="body1" color="text.secondary" paragraph>
-                                {missionDescription}
-                            </Typography>
-                        </Box>
-                    </Grid>
-                    <Grid size={{xs:12, md: 6}}>
-                        <Box sx={{ textAlign: 'center', mb: 4 }}>
+            <div className="grid gap-6 md:grid-cols-2">
+                {/* Mission */}
+                <div className="rounded-[2rem] bg-white p-10 editorial-shadow">
+                    <div className="mb-4 inline-flex items-center rounded-full border border-[#3260FE]/30 px-3 py-1 text-[8px] font-bold uppercase tracking-[0.14em] text-[#3260FE]">
+                        {missionTitle}
+                    </div>
+                    <p className="text-[15px] leading-[1.75] text-[#3f484a]">
+                        {missionDescription}
+                    </p>
+                </div>
 
-                        <Typography variant="h4" component="h2" gutterBottom sx={{ mb: 2 }}>
-                            {visionTitle}
-                        </Typography>
-                        <Typography variant="body1" color="text.secondary" paragraph>
-                            {visionDescription}
-                        </Typography>
-                        </Box>
-                    </Grid>
-                </Grid>
-            </Container>
-        </Box>
-    );
-
-    return (
-        <CurvedSection
-            topBgColor="#FFFFFF"
-            bottomBgColor="#CED4DA"
-            curveHeight={150}
-            bottomContent={bottomContent}
-        >
-            <Box />
-        </CurvedSection>
-    );
-};
+                {/* Vision */}
+                <div className="rounded-[2rem] bg-[#1a1c1c] p-10 editorial-shadow">
+                    <div className="mb-4 inline-flex items-center rounded-full border border-white/20 px-3 py-1 text-[8px] font-bold uppercase tracking-[0.14em] text-white/60">
+                        {visionTitle}
+                    </div>
+                    <p className="text-[15px] leading-[1.75] text-white/70">
+                        {visionDescription}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+);
 
 export default MissionVisionSection;
-

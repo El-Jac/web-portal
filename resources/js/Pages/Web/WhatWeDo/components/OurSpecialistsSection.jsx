@@ -1,5 +1,4 @@
 import React from 'react';
-import { Typography, Box, Stack } from '@mui/material';
 import RandomAvatarCloud from '../../../../Components/RandomAvatarCloud.jsx';
 
 const OurSpecialistsSection = ({
@@ -10,25 +9,29 @@ const OurSpecialistsSection = ({
     totalCircles = 20,
     minSize = 40,
     maxSize = 120,
-    spacing = 2
-}) => {
-    return (
-        <Stack direction="row" spacing={2} sx={{ mb: 4, px: 4, py: 4 }}>
-            <Box sx={{ width: '50%', display: 'flex', justifyContent: 'right', textAlign: 'right', pt: 3 }}>
-                <Box sx={{ mt: 4, width: "60%" }}>
-                    <Typography variant="h6" gutterBottom>
+    spacing = 2,
+}) => (
+    <section className="mesh-section bg-[#f9f9f9] px-5 py-20 md:px-10 md:py-28 lg:px-16">
+        <div className="mx-auto max-w-[1120px]">
+            <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
+                {/* Text — min-w-0 prevents grid blowout */}
+                <div className="min-w-0">
+                    <span className="mb-4 block text-[9px] font-black uppercase tracking-[0.3em] text-[#3f484a]">
                         {subtitle}
-                    </Typography>
-                    <Typography variant="h4" gutterBottom>
-                        {title}
-                    </Typography>
-                    <Typography variant="p" gutterBottom>
-                        {description}
-                    </Typography>
-                </Box>
-            </Box>
-            <Box sx={{ width: '50%' }}>
-                <Box sx={{ mt: 4, width: "60%" }}>
+                    </span>
+                    <h2 className="mb-6 text-[2rem] font-extrabold leading-[0.98] tracking-[-0.05em] text-[#1a1c1c] sm:text-[2.5rem] md:text-[3rem]">
+                        Meet the people who know your destination{' '}
+                        <span className="font-light italic text-[#3260FE]">best</span>
+                    </h2>
+                    {description && (
+                        <p className="text-[15px] leading-[1.7] text-[#3f484a]">
+                            {description}
+                        </p>
+                    )}
+                </div>
+
+                {/* Avatar cloud */}
+                <div className="min-w-0 overflow-hidden rounded-[2rem] bg-white p-6 editorial-shadow">
                     <RandomAvatarCloud
                         avatarUrls={avatarUrls}
                         totalCircles={totalCircles}
@@ -36,11 +39,10 @@ const OurSpecialistsSection = ({
                         maxSize={maxSize}
                         spacing={spacing}
                     />
-                </Box>
-            </Box>
-        </Stack>
-    );
-};
+                </div>
+            </div>
+        </div>
+    </section>
+);
 
 export default OurSpecialistsSection;
-
