@@ -1,94 +1,51 @@
 import React from 'react';
-import { Typography, Box, Grid, Card, CardContent, Avatar } from '@mui/material';
 
 const OurProcessSection = ({
     title = 'Our Process',
-    subtitle = "What make our specialist 'special'",
+    subtitle = "What makes our specialists 'special'",
     description,
-    processSteps = []
-}) => {
-    return (
-        <Box sx={{ mb: 4, px: 4, py: 4 }} className={'container, bg-gray-200'}>
-            {/* Header Section */}
-            <Box sx={{ textAlign: 'center', mb: 6 }}>
-                <Typography variant="h3" component="h1" gutterBottom>
-                    {title}
-                </Typography>
-                <Typography variant="h5" component="h2" gutterBottom sx={{ mb: 2 }}>
+    processSteps = [],
+}) => (
+    <section className="bg-[#f9f9f9] px-5 py-20 md:px-10 md:py-28 lg:px-16">
+        <div className="mx-auto max-w-[1120px]">
+            {/* Section header */}
+            <div className="mb-14 text-center md:mb-18">
+                <span className="mb-4 block text-[10px] font-semibold uppercase tracking-[0.18em] text-[#1a1c1c]">
                     {subtitle}
-                </Typography>
+                </span>
+                <h2 className="mb-6 text-[2.15rem] font-extrabold leading-[0.98] tracking-[-0.05em] text-[#1a1c1c] sm:text-[2.5rem] md:text-[3.8rem]">
+                    {title}
+                    <br/>
+                    <span className="font-light italic text-[#3260FE]">Step by Step.</span>
+                </h2>
                 {description && (
-                    <Typography variant="body1" color="text.secondary" sx={{ maxWidth: '800px', mx: 'auto' }}>
+                    <p className="mx-auto max-w-[560px] text-[14px] leading-[1.7] text-[#3f484a] md:text-[15px]">
                         {description}
-                    </Typography>
+                    </p>
                 )}
-            </Box>
+            </div>
 
-            {/* Process Steps Grid */}
-            <Box sx={{ maxWidth: '1200px', mx: 'auto' }}>
-                <Grid container spacing={3}>
-                    {processSteps.map((step, index) => (
-                        <Grid size={{xs:12,sm:6,md:4}} key={index}>
-                            <Card
-                                sx={{
-                                    height: '100%',
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    borderRadius: 2,
-                                    bgcolor: 'grey.100',
-                                    boxShadow: 'none',
-                                }}
-                            >
-                                <CardContent sx={{ flexGrow: 1, textAlign: 'center', pt: 4 }}>
-                                    {/* Avatar Placeholder */}
-                                    <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
-                                        {step.avatarUrl ? (
-                                            <Avatar
-                                                src={step.avatarUrl}
-                                                alt={step.header}
-                                                sx={{ width: 80, height: 80 }}
-                                            />
-                                        ) : (
-                                            <Avatar
-                                                sx={{
-                                                    width: 80,
-                                                    height: 80,
-                                                    bgcolor: 'grey.300',
-                                                }}
-                                            >
-                                                <Box
-                                                    component="svg"
-                                                    sx={{
-                                                        width: 40,
-                                                        height: 40,
-                                                        fill: 'grey.600',
-                                                    }}
-                                                    viewBox="0 0 24 24"
-                                                >
-                                                    <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z" />
-                                                </Box>
-                                            </Avatar>
-                                        )}
-                                    </Box>
-
-                                    {/* Header */}
-                                    <Typography variant="h6" component="h3" gutterBottom sx={{ fontWeight: 600, mb: 2 }}>
-                                        {step.header}
-                                    </Typography>
-
-                                    {/* Description */}
-                                    <Typography variant="body2" color="text.secondary">
-                                        {step.description}
-                                    </Typography>
-                                </CardContent>
-                            </Card>
-                        </Grid>
-                    ))}
-                </Grid>
-            </Box>
-        </Box>
-    );
-};
+            {/* Steps grid */}
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {processSteps.map((step, index) => (
+                    <div
+                        key={index}
+                        className="flex flex-col rounded-[2rem] bg-white p-8 editorial-shadow"
+                    >
+                        <div className="mb-4 inline-flex w-fit items-center rounded-full border border-[#EA6D4F]/40 px-2.5 py-1 text-[8px] font-bold uppercase tracking-[0.14em] text-[#EA6D4F]">
+                            {String(index + 1).padStart(2, '0')}
+                        </div>
+                        <h3 className="mb-2 text-[1.25rem] font-extrabold leading-tight tracking-[-0.03em] text-[#1a1c1c]">
+                            {step.header}
+                        </h3>
+                        <p className="text-[13px] leading-[1.6] text-[#3f484a]">
+                            {step.description}
+                        </p>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+);
 
 export default OurProcessSection;
-

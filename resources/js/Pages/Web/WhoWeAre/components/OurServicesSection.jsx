@@ -1,115 +1,86 @@
 import React from 'react';
-import { Typography, Box, Container, Grid, Card, CardMedia, CardContent } from '@mui/material';
-import { PlayArrow } from '@mui/icons-material';
+import {
+    CalendarMonthOutlined,
+    VideoChatOutlined,
+    MapOutlined,
+    VerifiedOutlined,
+} from '@mui/icons-material';
+
+const defaultServices = [
+    {
+        icon: CalendarMonthOutlined,
+        title: 'Book a Session',
+        description: 'Schedule a one-on-one planning call with a specialist who knows your destination inside out.',
+    },
+    {
+        icon: VideoChatOutlined,
+        title: 'Video Planning',
+        description: 'Connect face-to-face with a local expert and build your trip together in real time.',
+    },
+    {
+        icon: MapOutlined,
+        title: 'Custom Itinerary',
+        description: 'Receive a fully personalised, ready-to-use travel plan crafted around your style and interests.',
+    },
+    {
+        icon: VerifiedOutlined,
+        title: 'Verified Experts',
+        description: 'Every specialist is vetted for local knowledge, communication, and genuine passion for their destination.',
+    },
+];
 
 const OurServicesSection = ({
     title = 'Our Services',
     description = 'From plan to discovery, we\'ve got you covered.',
-    services = []
+    services = [],
 }) => {
-    const defaultServices = [
-        {
-            videoUrl: '',
-            description: 'Si osculantur puer tuus aut uxorem tuam, osculum, non dico quod omnia quae sunt'
-        },
-        {
-            videoUrl: '',
-            description: 'Si osculantur puer tuus aut uxorem tuam, osculum, non dico quod omnia quae sunt'
-        },
-        {
-            videoUrl: '',
-            description: 'Si osculantur puer tuus aut uxorem tuam, osculum, non dico quod omnia quae sunt'
-        },
-        {
-            videoUrl: '',
-            description: 'Si osculantur puer tuus aut uxorem tuam, osculum, non dico quod omnia quae sunt'
-        }
-    ];
-
     const displayServices = services.length > 0 ? services : defaultServices;
 
     return (
-        <Box sx={{ py: 8, px: 4, backgroundColor: '#FFFFFF' }}>
-            <Container maxWidth="lg">
-                <Box sx={{ textAlign: 'center', mb: 6 }}>
-                    <Typography variant="h3" component="h2" gutterBottom>
+        <section className="mesh-section bg-[#f9f9f9] px-5 py-20 md:px-10 md:py-28 lg:px-16">
+            <div className="mx-auto max-w-[1120px]">
+                {/* Header */}
+                <div className="mb-14 text-center md:mb-18">
+                    <span className="mb-4 block text-[10px] font-semibold uppercase tracking-[0.18em] text-[#1a1c1c]">
+                        How We Help
+                    </span>
+                    <h2 className="mb-6 text-[2.15rem] font-extrabold leading-[0.98] tracking-[-0.05em] text-[#1a1c1c] sm:text-[2.5rem] md:text-[3.8rem]">
                         {title}
-                    </Typography>
-                    <Typography variant="body1" color="text.secondary" sx={{ maxWidth: '800px', mx: 'auto', mt: 2 }}>
+                        <br/>
+                        <span className="font-light italic text-[#3260FE]">Built Around You.</span>
+                    </h2>
+                    <p className="mx-auto max-w-[560px] text-[14px] leading-[1.7] text-[#3f484a] md:text-[15px]">
                         {description}
-                    </Typography>
-                </Box>
-                <Grid container spacing={4}>
-                    {displayServices.map((service, index) => (
-                        <Grid size={{ xs: 12, sm: 6, md: 3 }} key={index}>
-                            <Card
-                                sx={{
-                                    height: '100%',
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    boxShadow: 2,
-                                    '&:hover': {
-                                        boxShadow: 4,
-                                    },
-                                }}
-                            >
-                                <Box
-                                    sx={{
-                                        position: 'relative',
-                                        width: '100%',
-                                        paddingTop: '56.25%', // 16:9 aspect ratio
-                                        backgroundColor: '#E5E7EB',
-                                    }}
-                                >
-                                    <CardMedia
-                                        component="div"
-                                        sx={{
-                                            position: 'absolute',
-                                            top: 0,
-                                            left: 0,
-                                            width: '100%',
-                                            height: '100%',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center',
-                                            backgroundColor: '#E5E7EB',
-                                        }}
-                                    >
-                                        <Box
-                                            sx={{
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                justifyContent: 'center',
-                                                width: 64,
-                                                height: 64,
-                                                borderRadius: '50%',
-                                                backgroundColor: 'rgba(0, 0, 0, 0.6)',
-                                                color: 'white',
-                                                cursor: 'pointer',
-                                                transition: 'all 0.3s ease',
-                                                '&:hover': {
-                                                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                                                    transform: 'scale(1.1)',
-                                                },
-                                            }}
-                                        >
-                                            <PlayArrow sx={{ fontSize: 32, ml: 0.5 }} />
-                                        </Box>
-                                    </CardMedia>
-                                </Box>
-                                <CardContent sx={{ flexGrow: 1, pt: 2 }}>
-                                    <Typography variant="body2" color="text.secondary" align="center">
-                                        {service.description}
-                                    </Typography>
-                                </CardContent>
-                            </Card>
-                        </Grid>
-                    ))}
-                </Grid>
-            </Container>
-        </Box>
+                    </p>
+                </div>
+
+                {/* Cards */}
+                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                    {displayServices.map((service, index) => {
+                        const Icon = service.icon;
+                        return (
+                            <div key={index} className="flex flex-col">
+                                <div className="editorial-shadow mb-5 flex h-[92px] items-center justify-center overflow-hidden rounded-[2rem] border border-[#ececec] bg-white">
+                                    <div className="flex h-full w-full items-center justify-center bg-[#f8f8f8] transition-colors duration-500 hover:bg-[#3260FE]/5">
+                                        {Icon
+                                            ? <Icon sx={{ fontSize: 40, color: '#3260FE', opacity: 0.9 }}/>
+                                            : <div className="h-10 w-10 rounded-full bg-[#3260FE]/10"/>
+                                        }
+                                    </div>
+                                </div>
+                                <h3 className="mb-2 text-[1.25rem] font-extrabold leading-tight tracking-[-0.03em] text-[#1a1c1c]">
+                                    {service.title}
+                                </h3>
+                                <p className="max-w-[280px] text-[12px] leading-[1.6] text-[#3f484a]">
+                                    {service.description}
+                                </p>
+                            </div>
+                        );
+                    })}
+                </div>
+            </div>
+        </section>
     );
 };
 
 export default OurServicesSection;
-

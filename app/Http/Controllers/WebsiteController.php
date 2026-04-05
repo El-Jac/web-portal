@@ -44,11 +44,11 @@ class WebsiteController extends Controller
     }
 
     /**
-     * Show the contact page
+     * Show the start planning page
      */
-    public function contact()
+    public function planStart()
     {
-        return Inertia::render('Contact/index');
+        return Inertia::render('Web/Plan/PlanStart');
     }
 
     /**

@@ -1,26 +1,56 @@
 import React from 'react';
-import { Typography, Box } from '@mui/material';
-import CurvedSection from '../../../../Components/CurvedSection.jsx';
+import { Link } from '@inertiajs/react';
+import { ArrowForward } from '@mui/icons-material';
 
-const WhoWeAreHeader = ({ title = 'Who We Are', description }) => {
-    return (
-        <CurvedSection
-            showBottomSection={false}
-            topBgColor="#FFFFFF"
-            bottomBgColor="#CED4DA"
-            curveType="smile"
-        >
-            <Box sx={{ textAlign: 'center', pt: 8, px: 4 }}>
-                <Typography variant="h3" component="h1" gutterBottom>
-                    {title}
-                </Typography>
-                <Typography variant="body1" color="text.secondary" sx={{ mb: 4 }}>
+const WhoWeAreHeader = ({ title = 'Who We Are', description }) => (
+    <section className="relative overflow-hidden -mt-20">
+        {/* Hero image */}
+        <div
+            className="absolute inset-0"
+            style={{
+                backgroundImage: 'url(/images/home/stitch/hero.jpg)',
+                backgroundSize: 'cover',
+                backgroundPosition: '74% center',
+            }}
+        />
+        <div
+            className="absolute inset-0"
+            style={{
+                background: 'linear-gradient(to right, rgba(26,28,28,0.85) 30%, rgba(26,28,28,0.5) 60%, rgba(26,28,28,0.2) 100%)',
+            }}
+        />
+
+        {/* Content */}
+        <div className="relative z-10 mx-auto max-w-[1120px] px-5 pt-40 pb-32 md:px-10 md:pt-48 md:pb-40 lg:px-16">
+            <span className="mb-5 inline-block text-[9px] font-black uppercase tracking-[0.3em] text-white/60">
+                About Us
+            </span>
+            <h1 className="mb-6 max-w-[580px] text-[2.6rem] font-extrabold leading-[0.97] tracking-[-0.05em] text-white sm:text-[3.2rem] md:text-[4.2rem]">
+                {title}
+                <br/>
+                <span className="font-light italic text-[#EA6D4F]">The people behind it.</span>
+            </h1>
+            {description && (
+                <p className="mb-8 max-w-[420px] text-[15px] leading-[1.7] text-white/70">
                     {description}
-                </Typography>
-            </Box>
-        </CurvedSection>
-    );
-};
+                </p>
+            )}
+            <Link
+                href="/what-we-do"
+                className="inline-flex items-center rounded-lg bg-white/10 backdrop-blur border border-white/20 px-5 py-3 text-[10px] font-bold uppercase tracking-[0.16em] text-white transition-all hover:bg-white/20"
+            >
+                What We Do
+                <ArrowForward sx={{ ml: 1, fontSize: 16 }}/>
+            </Link>
+        </div>
+
+        {/* Wave to light sections */}
+        <div className="relative w-full leading-none" style={{ height: '80px' }}>
+            <svg viewBox="0 0 1440 80" preserveAspectRatio="none" className="absolute inset-0 w-full h-full">
+                <path d="M0,80 L1440,80 L1440,60 C1080,0 360,0 0,60 Z" fill="#f9f9f9"/>
+            </svg>
+        </div>
+    </section>
+);
 
 export default WhoWeAreHeader;
-
