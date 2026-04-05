@@ -35,7 +35,7 @@ const WebsiteLayout = ({ children, minimalChrome = false }) => {
                     <footer className="bg-[#1a1c1c] text-white">
                         <div className="max-w-[1120px] mx-auto px-6 py-12">
                             <div className="flex flex-col md:flex-row items-start justify-between gap-8">
-                                <div className="flex flex-col gap-3">
+                                <div className="flex flex-col gap-4 max-w-[260px]">
                                     <Link href="/" className="flex items-center gap-2">
                                         <img src="/images/home/stitch/brand-icon.png"
                                              alt="Plan Like a Local icon"
@@ -44,8 +44,9 @@ const WebsiteLayout = ({ children, minimalChrome = false }) => {
                                              alt="Plan Like a Local"
                                              className="h-5 w-auto object-contain brightness-0 invert hidden sm:block"/>
                                     </Link>
-                                    <p className="text-sm text-white/50 max-w-xs leading-relaxed">
-                                        Discover authentic destinations through hand-picked local experiences.
+                                    <p className="text-[13px] leading-[1.6] text-white/50">
+                                        Travel planned by people who{' '}
+                                        <span className="text-white/80 font-medium">actually live there.</span>
                                     </p>
                                 </div>
 

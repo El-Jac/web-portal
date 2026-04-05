@@ -44,6 +44,14 @@ class WebsiteController extends Controller
     }
 
     /**
+     * Show the start planning page
+     */
+    public function planStart()
+    {
+        return Inertia::render('Web/Plan/PlanStart');
+    }
+
+    /**
      * Show the contact page
      */
     public function contact()

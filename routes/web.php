@@ -35,6 +35,7 @@ Route::post('/contact', [WebsiteController::class, 'contactSubmit'])->name('cont
 Route::post('/specialist-applications', [WebsiteController::class, 'specialistApplicationSubmit'])->name('specialist-applications.submit');
 
 // Plan routes
+Route::get('/plan', [WebsiteController::class, 'planStart'])->name('plan');
 Route::post('/plans', [PlanController::class, 'store'])->name('plans.store');
 Route::get('/plans/{plan}', [PlanController::class, 'show'])->name('plans.show');
 Route::put('/plans/{plan}', [PlanController::class, 'update'])->name('plans.update');
