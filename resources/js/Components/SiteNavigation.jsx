@@ -3,7 +3,7 @@ import { Link } from '@inertiajs/react';
 import { ArrowForward, Close, Menu } from '@mui/icons-material';
 import { navItems } from '../Pages/Web/Home/components/homeData';
 
-const SiteNavigation = ({ mobileMenuOpen, setMobileMenuOpen }) => (
+const SiteNavigation = ({ mobileMenuOpen, setMobileMenuOpen, onContactClick }) => (
     <nav className="fixed inset-x-0 top-0 z-50 px-4 py-4 md:px-10 lg:px-16">
         <div className="mx-auto flex max-w-[1120px] items-center justify-between rounded-full px-3 py-2 md:px-8 md:py-2.5 glass-nav">
             <Link href="/" className="flex items-center gap-2">
@@ -23,6 +23,15 @@ const SiteNavigation = ({ mobileMenuOpen, setMobileMenuOpen }) => (
                         {item.label}
                     </Link>
                 ))}
+                {onContactClick && (
+                    <button
+                        type="button"
+                        onClick={onContactClick}
+                        className="text-[10px] font-medium tracking-[0.22em] text-[#3f484a] transition-colors hover:text-[#3260FE]"
+                    >
+                        Contact Us
+                    </button>
+                )}
             </div>
 
             <div className="flex items-center gap-3">
@@ -57,6 +66,15 @@ const SiteNavigation = ({ mobileMenuOpen, setMobileMenuOpen }) => (
                             {item.label}
                         </Link>
                     ))}
+                    {onContactClick && (
+                        <button
+                            type="button"
+                            onClick={() => { setMobileMenuOpen(false); onContactClick(); }}
+                            className="text-left text-sm font-semibold uppercase tracking-[0.14em] text-[#3f484a]"
+                        >
+                            Contact Us
+                        </button>
+                    )}
                     <Link
                         href="/plan"
                         className="inline-flex items-center justify-center rounded-xl bg-[#3260FE] px-5 py-3 text-sm font-semibold text-white"

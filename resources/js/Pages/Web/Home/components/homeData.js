@@ -14,7 +14,6 @@ export const navItems = [
     {label: 'Who We Are', href: '/who-we-are'},
     {label: 'What We Do', href: '/what-we-do'},
     {label: 'Destinations', href: '/destinations'},
-    {label: 'Contact Us', href: '/contact'},
 ];
 
 export const featureHighlights = [

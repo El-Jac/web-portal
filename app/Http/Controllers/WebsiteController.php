@@ -52,14 +52,6 @@ class WebsiteController extends Controller
     }
 
     /**
-     * Show the contact page
-     */
-    public function contact()
-    {
-        return Inertia::render('Contact/index');
-    }
-
-    /**
      * Handle contact form submission
      */
     public function contactSubmit(ContactFormRequest $request, HandleContactFormSubmissionAction $action)

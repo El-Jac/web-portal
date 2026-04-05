@@ -22,6 +22,7 @@ const WebsiteLayout = ({ children, minimalChrome = false }) => {
                     <SiteNavigation
                         mobileMenuOpen={mobileMenuOpen}
                         setMobileMenuOpen={setMobileMenuOpen}
+                        onContactClick={() => setContactDialogOpen(true)}
                     />
                 )}
 
@@ -60,6 +61,13 @@ const WebsiteLayout = ({ children, minimalChrome = false }) => {
                                             {item.label}
                                         </Link>
                                     ))}
+                                    <button
+                                        type="button"
+                                        onClick={() => setContactDialogOpen(true)}
+                                        className="text-[11px] font-medium tracking-[0.18em] uppercase text-white/60 transition-colors hover:text-white"
+                                    >
+                                        Contact Us
+                                    </button>
                                 </nav>
                             </div>
 

@@ -30,11 +30,11 @@ const MissionVisionSection = ({
                 </div>
 
                 {/* Vision */}
-                <div className="rounded-[2rem] bg-[#1a1c1c] p-10 editorial-shadow">
-                    <div className="mb-4 inline-flex items-center rounded-full border border-white/20 px-3 py-1 text-[8px] font-bold uppercase tracking-[0.14em] text-white/60">
+                <div className="rounded-[2rem] bg-accent p-10 editorial-shadow">
+                    <div className="mb-4 inline-flex items-center rounded-full border border-white/30 px-3 py-1 text-[8px] font-bold uppercase tracking-[0.14em] text-white/70">
                         {visionTitle}
                     </div>
-                    <p className="text-[15px] leading-[1.75] text-white/70">
+                    <p className="text-[15px] leading-[1.75] text-white/90">
                         {visionDescription}
                     </p>
                 </div>
