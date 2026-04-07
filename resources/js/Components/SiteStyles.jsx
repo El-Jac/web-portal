@@ -37,6 +37,35 @@ const SiteStyles = () => (
         .hide-scrollbar::-webkit-scrollbar {
             display: none;
         }
+        .nav-link {
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            color: #3f484a;
+            transition: color 0.15s ease;
+        }
+        .nav-link:hover {
+            color: #3260FE;
+        }
+        .quotes {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.05em;
+            color: #1a1c1c;
+            max-width: 760px;
+            margin-bottom: 2rem;
+        }
+        @media (min-width: 768px) {
+            .quotes { margin-bottom: 2.5rem; }
+        }
+        .ibrow {
+            font-size: 0.9rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: #3f484a;
+        }
         @media (max-width: 1024px) {
             .hero-overlay {
                 background: linear-gradient(to top, rgba(249, 249, 249, 1) 30%, rgba(249, 249, 249, 0.4) 100%);

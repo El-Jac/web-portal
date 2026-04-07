@@ -9,10 +9,10 @@ const WhatIsPlanLikeALocal = () => (
             <div className="mb-18 grid grid-cols-1 gap-2.5 sm:grid-cols-2 md:mb-24 md:grid-cols-5 md:gap-4">
                 {featureHighlights.map(({label, icon: Icon}) => (
                     <div key={label} className="group flex items-center gap-2.5 rounded-2xl bg-white/40 px-3 py-2.5">
-                        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#eeeeee] text-[#3f484a] transition-colors group-hover:bg-[#3260FE]/10 group-hover:text-[#3260FE]">
-                            <Icon sx={{fontSize: 18}}/>
+                        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#eeeeee] text-[#3f484a] transition-colors group-hover:bg-[#3260FE]/10 group-hover:text-[#3260FE] p-2">
+                            <Icon sx={{fontSize: 24}}/>
                         </div>
-                        <span className="text-[9px] font-bold uppercase tracking-[0.18em] text-[#3f484a] md:text-[10px]">
+                        <span className="text-[1rem] font-bold uppercase leading-[1.3rem] tracking-[0.18em] text-[#3f484a]">
                             {label}
                         </span>
                     </div>
@@ -21,12 +21,12 @@ const WhatIsPlanLikeALocal = () => (
 
             <div className="mb-16 grid grid-cols-1 gap-6 md:mb-24 lg:grid-cols-12 lg:items-start">
                 <div className="pt-1 md:pt-4 lg:col-span-3">
-                    <span className="text-[9px] font-black uppercase tracking-[0.3em] text-[#3f484a]">
+                    <span className="ibrow">
                         Who We Are
                     </span>
                 </div>
                 <div className="lg:col-span-8 lg:col-start-4">
-                    <h2 className="mb-8 max-w-[760px] text-[2rem] font-extrabold leading-[0.98] tracking-[-0.05em] text-[#1a1c1c] sm:text-[2.35rem] md:mb-10 md:text-[4.1rem]">
+                    <h2 className="quotes">
                         This isn&apos;t a travel guide.
                         <br/>
                         <span className="font-light italic text-[#EA6D4F]">It&apos;s a one-on-one planning</span>

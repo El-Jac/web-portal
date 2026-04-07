@@ -15,11 +15,11 @@ const HomePageHeading = () => (
 
         <div className="relative z-10 mx-auto flex w-full max-w-[1120px] px-5 py-24 md:px-10 lg:px-0 lg:py-0">
             <div className="max-w-[520px] pt-16 sm:pt-20 md:pt-0">
-                <div className="mb-6 inline-block rounded-full bg-[#3260FE]/10 px-3 py-1.5 text-[8px] font-bold uppercase tracking-[0.2em] text-[#3260FE] backdrop-blur-sm md:mb-7 md:px-4 md:text-[9px] md:tracking-[0.22em]">
+                <div className="mb-6 inline-block rounded-full bg-[#3260FE]/10 px-3 py-1.5 text-[0.8rem] font-bold uppercase tracking-[0.2em] text-[#3260FE] backdrop-blur-sm md:mb-7 md:px-4 md:tracking-[0.22em]">
                     #1 Planning Hub for your Trips
                 </div>
 
-                <h1 className="mb-6 text-[2.75rem] font-extrabold leading-[0.92] tracking-[-0.06em] text-[#1a1c1c] sm:text-[3.2rem] md:mb-7 md:text-[5.2rem]">
+                <h1 className="mb-6 text-[2.75rem] font-extrabold leading-[1.1] tracking-[-0.06em] text-[#1a1c1c] sm:text-[3.2rem] md:mb-7 md:text-[5.2rem]">
                     Your personal
                     <br/>
                     itinerary,
@@ -47,7 +47,7 @@ const HomePageHeading = () => (
                     </Link>
                     <Link
                         href="/destinations"
-                        className="group inline-flex items-center gap-3 text-[9px] font-bold uppercase tracking-[0.18em] text-[#3260FE] sm:text-[10px] sm:tracking-[0.2em]"
+                        className="group inline-flex items-center gap-3 text-[0.8rem] font-bold uppercase tracking-[0.18em] text-[#3260FE]"
                     >
                         <span className="h-px w-12 bg-[#3260FE]/30 transition-all group-hover:w-16"/>
                         View Destinations
