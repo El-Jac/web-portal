@@ -2,9 +2,10 @@ import React from 'react';
 import {Link} from '@inertiajs/react';
 import {ArrowForward} from '@mui/icons-material';
 import {featureHighlights, statItems} from './homeData';
+import BlendedBackground from '@/Components/BlendedBackground';
 
 const WhatIsPlanLikeALocal = () => (
-    <section className="relative z-30 overflow-hidden bg-[#f9f9f9] px-5 py-14 md:px-10 md:py-16 lg:px-16">
+    <BlendedBackground className="z-30 bg-[#f9f9f9] px-5 py-14 md:px-10 md:py-16 lg:px-16">
         <div className="mx-auto max-w-[1120px]">
             <div className="mb-18 grid grid-cols-1 gap-2.5 sm:grid-cols-2 md:mb-24 md:grid-cols-5 md:gap-4">
                 {featureHighlights.map(({label, icon: Icon}) => (
@@ -60,7 +61,7 @@ const WhatIsPlanLikeALocal = () => (
                 </div>
             </div>
         </div>
-    </section>
+    </BlendedBackground>
 );
 
 export default WhatIsPlanLikeALocal;

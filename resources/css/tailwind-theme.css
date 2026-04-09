@@ -104,3 +104,9 @@ h1 {
 .gold-title {
     @apply text-5xl font-bold text-secondary mb-4
 }
+
+.description-text {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #545454;
+}

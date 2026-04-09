@@ -9,6 +9,7 @@ import HomePageHeading from './components/HomePageHeading.jsx';
 import WhatIsPlanLikeALocal from './components/WhatIsPlanLikeALocal.jsx';
 import DestinationsSection from './components/DestinationsSection.jsx';
 import HowItWorks from './components/HowItWorks.jsx';
+import SiteFooter from '../../../Components/SiteFooter.jsx';
 
 const Index = () => {
     const {destinations} = usePage().props;
@@ -30,6 +31,7 @@ const Index = () => {
                 <WhatIsPlanLikeALocal/>
                 <DestinationsSection destinations={destinations}/>
                 <HowItWorks/>
+                <SiteFooter/>
             </div>
 
             <ContactUsDialog

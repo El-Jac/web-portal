@@ -66,6 +66,11 @@ const SiteStyles = () => (
             letter-spacing: 0.3em;
             color: #3f484a;
         }
+        .text-background-on-any-surface {
+            background: #00000040;
+            padding: 5px 10px;
+            border-radius: 100px;
+        }
         @media (max-width: 1024px) {
             .hero-overlay {
                 background: linear-gradient(to top, rgba(249, 249, 249, 1) 30%, rgba(249, 249, 249, 0.4) 100%);

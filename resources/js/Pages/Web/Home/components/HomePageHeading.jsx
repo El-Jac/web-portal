@@ -5,11 +5,14 @@ import {ArrowForward} from '@mui/icons-material';
 const HomePageHeading = () => (
     <header className="relative flex min-h-screen items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-            <img
-                src="/images/home/stitch/hero.jpg"
-                alt="Woman with a straw hat and backpack walking on a coastal path with yellow flowers"
-                className="h-full w-full object-cover object-[74%_center] md:object-[72%_center]"
-            />
+            <picture>
+                <source srcSet="/images/home/stitch/hero.webp" type="image/webp"/>
+                <img
+                    src="/images/home/stitch/hero.jpg"
+                    alt="Woman with a straw hat and backpack walking on a coastal path with yellow flowers"
+                    className="h-full w-full object-cover object-[74%_center] md:object-[72%_center]"
+                />
+            </picture>
             <div className="hero-overlay absolute inset-0"/>
         </div>
 
