@@ -10,7 +10,7 @@ const SiteNavigation = ({ mobileMenuOpen, setMobileMenuOpen, onContactClick }) =
                 <img src="/images/home/stitch/brand-icon.png" alt="Plan Like a Local icon"
                      className="h-7 w-auto object-contain md:h-9"/>
                 <img src="/images/home/stitch/brand-wordmark.png" alt="Plan Like a Local"
-                     className="hidden h-6 w-auto object-contain sm:block"/>
+                     className="hidden h-8 w-auto object-contain sm:block md:h-9"/>
             </Link>
 
             <div className="hidden items-center gap-9 md:flex">
@@ -37,10 +37,10 @@ const SiteNavigation = ({ mobileMenuOpen, setMobileMenuOpen, onContactClick }) =
             <div className="flex items-center gap-3">
                 <Link
                     href="/plan"
-                    className="hidden items-center rounded-lg bg-[#3260FE] px-5 py-2 text-[11px] font-semibold text-white shadow-lg shadow-[#3260FE]/20 transition-transform hover:scale-[1.02] md:inline-flex"
+                    className="hidden items-center rounded-lg bg-[#3260FE] px-5 py-2 text-[13px] font-semibold text-white shadow-lg shadow-[#3260FE]/20 transition-transform hover:scale-[1.02] md:inline-flex md:text-sm"
                 >
                     Start Planning
-                    <ArrowForward className="ml-1 text-[0.8rem]"/>
+                    <ArrowForward className="ml-1 text-[0.85rem] md:text-sm"/>
                 </Link>
                 <button
                     type="button"
@@ -81,7 +81,7 @@ const SiteNavigation = ({ mobileMenuOpen, setMobileMenuOpen, onContactClick }) =
                         onClick={() => setMobileMenuOpen(false)}
                     >
                         Start Planning
-                        <ArrowForward className="ml-1 text-[0.8rem]"/>
+                        <ArrowForward className="ml-1 text-base"/>
                     </Link>
                 </div>
             </div>
