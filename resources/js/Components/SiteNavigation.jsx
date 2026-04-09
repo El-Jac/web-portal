@@ -18,7 +18,7 @@ const SiteNavigation = ({ mobileMenuOpen, setMobileMenuOpen, onContactClick }) =
                     <Link
                         key={item.href}
                         href={item.href}
-                        className="text-[10px] font-medium tracking-[0.22em] text-[#3f484a] transition-colors hover:text-[#3260FE]"
+                        className="nav-link"
                     >
                         {item.label}
                     </Link>
@@ -27,7 +27,7 @@ const SiteNavigation = ({ mobileMenuOpen, setMobileMenuOpen, onContactClick }) =
                     <button
                         type="button"
                         onClick={onContactClick}
-                        className="text-[10px] font-medium tracking-[0.22em] text-[#3f484a] transition-colors hover:text-[#3260FE]"
+                        className="nav-link"
                     >
                         Contact Us
                     </button>
@@ -40,7 +40,7 @@ const SiteNavigation = ({ mobileMenuOpen, setMobileMenuOpen, onContactClick }) =
                     className="hidden items-center rounded-lg bg-[#3260FE] px-5 py-2 text-[11px] font-semibold text-white shadow-lg shadow-[#3260FE]/20 transition-transform hover:scale-[1.02] md:inline-flex"
                 >
                     Start Planning
-                    <ArrowForward sx={{ fontSize: 18, ml: 1 }}/>
+                    <ArrowForward className="ml-1 text-[0.8rem]"/>
                 </Link>
                 <button
                     type="button"
@@ -81,7 +81,7 @@ const SiteNavigation = ({ mobileMenuOpen, setMobileMenuOpen, onContactClick }) =
                         onClick={() => setMobileMenuOpen(false)}
                     >
                         Start Planning
-                        <ArrowForward sx={{ fontSize: 18, ml: 1 }}/>
+                        <ArrowForward className="ml-1 text-[0.8rem]"/>
                     </Link>
                 </div>
             </div>

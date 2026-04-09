@@ -1,8 +1,9 @@
 import React from 'react';
 import {processSteps} from './homeData';
+import BlendedBackground from "../../../../Components/BlendedBackground.jsx";
 
 const HowItWorks = () => (
-    <section className="mesh-section overflow-hidden bg-[#f9f9f9] px-5 py-18 md:px-10 md:py-24 lg:px-16">
+    <BlendedBackground className="z-30 bg-[#f9f9f9] px-5 py-14 md:px-10 md:py-16 lg:px-16">
         <div className="mx-auto max-w-[1120px]">
             <div className="mb-14 text-center md:mb-18">
                 <span className="mb-4 block text-[10px] font-semibold uppercase tracking-[0.18em] text-[#1a1c1c]">
@@ -35,7 +36,7 @@ const HowItWorks = () => (
                 ))}
             </div>
         </div>
-    </section>
+    </BlendedBackground>
 );
 
 export default HowItWorks;
