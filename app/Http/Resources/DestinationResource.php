@@ -5,8 +5,6 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Models\Specialist;
-use Illuminate\Support\Facades\Storage;
-
 class DestinationResource extends JsonResource
 {
     /**
@@ -43,7 +41,7 @@ class DestinationResource extends JsonResource
                     return [
                         'id' => $s->id,
                         'full_name' => $s->full_name,
-                        'avatar_url' => $s->profile_pic ? Storage::url($s->profile_pic) : null,
+                        'avatar_url' => $s->resolvedProfilePicUrl(),
                         'bio' => $s->bio,
                         'location' => trim(implode(', ', array_filter([$s->city, $s->state_province, optional($s->country)->name]))),
                     ];

@@ -26,15 +26,12 @@ class UpdateSpecialistAction extends AbstractSpecialistAction
         // Prepare data
         $preparedData = $this->prepareData($validatedData);
 
-        // Handle profile picture upload and delete old one if necessary
+        // Handle profile picture upload and delete old stored file if necessary (skip remote URLs)
         if (isset($validatedData['profile_pic']) && $validatedData['profile_pic'] instanceof UploadedFile) {
-            // Delete old profile picture if exists
-            if (!empty($specialist->profile_pic)) {
+            if (!empty($specialist->profile_pic) && !filter_var($specialist->profile_pic, FILTER_VALIDATE_URL)) {
                 Storage::disk('public')->delete($specialist->profile_pic);
-                $path = $validatedData['profile_pic']->store('specialists', 'public');
-                $preparedData['profile_pic'] = $path;
             }
-
+            $preparedData['profile_pic'] = $validatedData['profile_pic']->store('specialists', 'public');
         }
 
         // Update specialist

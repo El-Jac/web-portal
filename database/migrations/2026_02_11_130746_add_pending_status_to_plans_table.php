@@ -12,8 +12,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Modify the status enum to include 'pending'
-        DB::statement("ALTER TABLE plans MODIFY COLUMN status ENUM('draft', 'pending', 'in_progress', 'completed') DEFAULT 'draft'");
+        // MySQL: extend ENUM. SQLite stores Laravel enums as varchar; no ALTER needed for new values.
+        if (Schema::getConnection()->getDriverName() === 'mysql') {
+            DB::statement("ALTER TABLE plans MODIFY COLUMN status ENUM('draft', 'pending', 'in_progress', 'completed') DEFAULT 'draft'");
+        }
     }
 
     /**
@@ -21,7 +23,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        // Remove 'pending' from the enum (note: this will fail if any records have 'pending' status)
-        DB::statement("ALTER TABLE plans MODIFY COLUMN status ENUM('draft', 'in_progress', 'completed') DEFAULT 'draft'");
+        if (Schema::getConnection()->getDriverName() === 'mysql') {
+            DB::statement("ALTER TABLE plans MODIFY COLUMN status ENUM('draft', 'in_progress', 'completed') DEFAULT 'draft'");
+        }
     }
 };

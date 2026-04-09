@@ -20,8 +20,7 @@ class DeleteSpecialistAction extends AbstractSpecialistAction
         $result = $this->specialistRepository->delete($specialist);
         
         if ($result) {
-            // Delete profile picture from storage if present
-            if (!empty($specialist->profile_pic)) {
+            if (!empty($specialist->profile_pic) && !filter_var($specialist->profile_pic, FILTER_VALIDATE_URL)) {
                 Storage::disk('public')->delete($specialist->profile_pic);
             }
             $this->logAction('specialist_deleted', ['id' => $specialist->id]);

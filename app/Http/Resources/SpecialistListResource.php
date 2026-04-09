@@ -4,8 +4,6 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\Storage;
-
 class SpecialistListResource extends JsonResource
 {
     static $wrap = false;
@@ -22,7 +20,7 @@ class SpecialistListResource extends JsonResource
             'last_name' => $this->last_name,
             'full_name' => $this->full_name,
             'email' => $this->email,
-            'profile_pic_url' => $this->profile_pic ? Storage::url($this->profile_pic) : null,
+            'profile_pic_url' => $this->resolvedProfilePicUrl(),
             'bio' => $this->bio,
             'contact_no' => $this->contact_no,
             'country_id' => $this->country_id,
