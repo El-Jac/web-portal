@@ -31,6 +31,7 @@ class DestinationResource extends JsonResource
             'home_image' => $this->home_image,
             'grid_image' => $this->grid_image,
             'banner_image' => $this->banner_image,
+            'home_page' => $this->home_page,
             'specialist_ids' => $this->specialist_ids,
             'specialists' => $this->when($this->specialist_ids, function () {
                 $ids = is_array($this->specialist_ids) ? $this->specialist_ids : [];
