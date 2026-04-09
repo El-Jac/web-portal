@@ -17,13 +17,19 @@ class WebsiteController extends Controller
     /**
      * Show the home page
      */
-    public function home()
+    public function home(\Illuminate\Http\Request $request)
     {
-        // Get featured destinations (active only, home_page = true, limit to 6)
-        $destinations = $this->getDestinationsAction->executePaginated(['status' => 'active', 'home_page' => true], 6, 1);
+        $page = max(1, (int) $request->get('page', 1));
+        $destinations = $this->getDestinationsAction->executePaginated(['status' => 'active', 'home_page' => true], 6, $page);
 
         return Inertia::render('Home/index', [
             'destinations' => DestinationListResource::collection($destinations->items()),
+            'pagination' => [
+                'current_page' => $destinations->currentPage(),
+                'last_page'    => $destinations->lastPage(),
+                'total'        => $destinations->total(),
+                'per_page'     => $destinations->perPage(),
+            ],
         ]);
     }
 

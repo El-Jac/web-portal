@@ -12,7 +12,7 @@ import HowItWorks from './components/HowItWorks.jsx';
 import SiteFooter from '../../../Components/SiteFooter.jsx';
 
 const Index = () => {
-    const {destinations} = usePage().props;
+    const {destinations, pagination} = usePage().props;
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [contactDialogOpen, setContactDialogOpen] = useState(false);
 
@@ -29,7 +29,7 @@ const Index = () => {
                 />
                 <HomePageHeading/>
                 <WhatIsPlanLikeALocal/>
-                <DestinationsSection destinations={destinations}/>
+                <DestinationsSection destinations={destinations} pagination={pagination}/>
                 <HowItWorks/>
                 <SiteFooter/>
             </div>

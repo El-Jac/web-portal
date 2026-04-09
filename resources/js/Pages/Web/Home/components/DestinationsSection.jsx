@@ -1,12 +1,20 @@
 import React from 'react';
-import {Link} from '@inertiajs/react';
-import {ArrowBack, ArrowForward, ExpandMore} from '@mui/icons-material';
+import {Link, router} from '@inertiajs/react';
+import {ArrowBack, ArrowForward} from '@mui/icons-material';
 import DestinationCard from './DestinationCard';
 
-const DestinationsSection = ({destinations = []}) => {
+const DestinationsSection = ({destinations = [], pagination = {}}) => {
     if (!destinations || destinations.length === 0) {
         return null;
     }
+
+    const {current_page = 1, last_page = 1} = pagination;
+    const hasPrev = current_page > 1;
+    const hasNext = current_page < last_page;
+
+    const goToPage = (page) => {
+        router.get('/', {page}, {preserveScroll: true, preserveState: true});
+    };
 
     return (
         <section className="relative w-full bg-[#f9f9f9] px-5 py-18 md:px-10 md:py-24 lg:px-16">
@@ -48,12 +56,20 @@ const DestinationsSection = ({destinations = []}) => {
                         <ArrowForward sx={{fontSize: 16}}/>
                     </Link>
                     <div className="hidden gap-4 sm:flex">
-                        <button type="button"
-                                className="flex h-10 w-10 items-center justify-center rounded-full border border-[#bec8ca] text-[#1a1c1c] transition-colors hover:bg-white">
+                        <button
+                            type="button"
+                            onClick={() => goToPage(current_page - 1)}
+                            disabled={!hasPrev}
+                            className="flex h-10 w-10 items-center justify-center rounded-full border border-[#bec8ca] text-[#1a1c1c] transition-colors hover:bg-white disabled:cursor-not-allowed disabled:opacity-30"
+                        >
                             <ArrowBack sx={{fontSize: 18}}/>
                         </button>
-                        <button type="button"
-                                className="flex h-10 w-10 items-center justify-center rounded-full border border-[#bec8ca] text-[#1a1c1c] transition-colors hover:bg-white">
+                        <button
+                            type="button"
+                            onClick={() => goToPage(current_page + 1)}
+                            disabled={!hasNext}
+                            className="flex h-10 w-10 items-center justify-center rounded-full border border-[#bec8ca] text-[#1a1c1c] transition-colors hover:bg-white disabled:cursor-not-allowed disabled:opacity-30"
+                        >
                             <ArrowForward sx={{fontSize: 18}}/>
                         </button>
                     </div>
