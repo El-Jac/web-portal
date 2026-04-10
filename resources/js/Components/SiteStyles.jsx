@@ -71,7 +71,7 @@ const SiteStyles = () => (
         .editorial-shadow {
             box-shadow: 0 20px 40px -10px rgba(26, 28, 28, 0.12);
         }
-        /* Home hero — soft horizontal wash: ~30% solid, fade ~30–62%, photo clear by mid-right */
+        /* Home hero — soft horizontal wash: solid white longer on the left, fade ~32–70%, photo clear on the right */
         .hero-overlay {
             background:
                 radial-gradient(ellipse 90% 75% at 82% 38%, rgba(50, 96, 254, 0.07) 0%, transparent 58%),
@@ -80,12 +80,12 @@ const SiteStyles = () => (
                 linear-gradient(
                     to right,
                     rgba(249, 249, 249, 1) 0%,
-                    rgba(249, 249, 249, 1) 28%,
-                    rgba(249, 249, 249, 0.94) 34%,
-                    rgba(249, 249, 249, 0.72) 42%,
-                    rgba(249, 249, 249, 0.38) 50%,
-                    rgba(249, 249, 249, 0.1) 56%,
-                    rgba(249, 249, 249, 0) 62%,
+                    rgba(249, 249, 249, 1) 32%,
+                    rgba(249, 249, 249, 0.94) 38%,
+                    rgba(249, 249, 249, 0.72) 48%,
+                    rgba(249, 249, 249, 0.38) 56%,
+                    rgba(249, 249, 249, 0.1) 64%,
+                    rgba(249, 249, 249, 0) 70%,
                     rgba(249, 249, 249, 0) 100%
                 );
         }
@@ -106,7 +106,7 @@ const SiteStyles = () => (
             }
         }
         .hero-home-media {
-            transform: scale(1.07);
+            transform: scale(1);
             transform-origin: center center;
             --hero-reveal-x: 100%;
             -webkit-mask-image: linear-gradient(
@@ -172,6 +172,7 @@ const SiteStyles = () => (
             margin-bottom: clamp(0.65rem, 2vw, 1.1rem);
         }
         .stitch-home .hero-home-heading-accent-wrap {
+            position: relative;
             margin-top: 0;
             padding-left: clamp(0.85rem, 2.4vw, 1.35rem);
             border-left: 3px solid rgba(50, 96, 254, 0.38);
@@ -182,13 +183,44 @@ const SiteStyles = () => (
                 border-left-width: 4px;
             }
         }
+        .stitch-home .hero-home-accent-sr {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        .stitch-home .hero-home-typewriter {
+            display: block;
+        }
+        @keyframes hero-typewriter-cursor {
+            0%, 45% {
+                opacity: 1;
+            }
+            50%, 100% {
+                opacity: 0;
+            }
+        }
+        .stitch-home .hero-home-typewriter-cursor {
+            display: inline-block;
+            margin-left: 0.04em;
+            font-style: normal;
+            font-weight: 500;
+            color: #3260fe;
+            animation: hero-typewriter-cursor 0.95s step-end infinite;
+        }
+        /* Raleway only for the blue italic lines (loaded via HomeMeta on home) */
         .stitch-home .hero-home-heading .hero-home-accent {
-            font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+            font-family: 'Raleway', ui-sans-serif, system-ui, sans-serif;
             font-weight: 600;
             font-style: italic;
             letter-spacing: -0.034em;
             color: #3260FE;
-            font-size: clamp(1.85rem, 1.35rem + 2.1vw, 4.35rem);
+            font-size: clamp(1.85rem, 1.35rem + 1.55vw, 3.85rem);
             line-height: 1.12;
             text-shadow:
                 0 1px 0 rgba(255, 255, 255, 0.45),
@@ -225,14 +257,20 @@ const SiteStyles = () => (
             max-width: min(100%, 28rem);
             margin-left: 50px;
             padding-bottom: 0.75rem;
-            /* Float after bubble entrance: 0.75s delay + 0.75s enter = 1.5s */
-            animation: hero-bubble-float 3.5s ease-in-out 1.5s infinite;
+            animation: none;
+        }
+        /* Float starts after entrance (0.75s) when typewriter has finished */
+        .hero-home-bubble.hero-home-bubble--active {
+            animation: hero-bubble-float 3.5s ease-in-out 0.75s infinite;
         }
         .hero-home-bubble-inner {
             position: relative;
             display: block;
-            /* Short stagger after headline begins (tighter than waiting for hero-home-inner to finish) */
-            animation: hero-home-bubble-enter 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.75s both;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .hero-home-bubble-inner.hero-home-bubble-inner--in {
+            animation: hero-home-bubble-enter 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
         }
         .hero-home-lede {
             margin: 0;
@@ -290,12 +328,17 @@ const SiteStyles = () => (
             border-radius: 0 0 0.65rem 0.65rem;
             box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.75) inset;
         }
+        /* Ghost link: no chip — readability from soft light halo on busy hero photo */
         .hero-home-cta-secondary {
             font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
             font-weight: 700;
             font-size: 0.8125rem;
             letter-spacing: 0.11em;
             text-transform: uppercase;
+            text-shadow:
+                0 0 1px rgba(255, 255, 255, 0.95),
+                0 1px 1px rgba(255, 255, 255, 0.85),
+                0 0 10px rgba(255, 255, 255, 0.55);
         }
         @media (min-width: 768px) {
             .hero-home-cta-secondary {
@@ -373,11 +416,11 @@ const SiteStyles = () => (
             display: inline-flex;
             align-items: center;
             font-family: inherit;
-            font-size: 0.9375rem;
+            font-size: 1rem;
             font-weight: 500;
             letter-spacing: 0.02em;
             color: #4b5563;
-            padding: 0.55rem 1rem;
+            padding: 0.625rem 1.125rem;
             border-radius: 9999px;
             transition:
                 background-color 0.22s ease,
@@ -509,13 +552,19 @@ const SiteStyles = () => (
             .hero-cta-primary:hover {
                 transform: none;
             }
-            .hero-home-bubble {
+            .hero-home-bubble,
+            .hero-home-bubble.hero-home-bubble--active {
                 animation: none;
             }
-            .hero-home-bubble-inner {
+            .hero-home-bubble-inner,
+            .hero-home-bubble-inner.hero-home-bubble-inner--in {
                 animation: none;
                 opacity: 1;
                 transform: none;
+            }
+            .hero-home-typewriter-cursor {
+                animation: none;
+                opacity: 0;
             }
         }
         .quotes {

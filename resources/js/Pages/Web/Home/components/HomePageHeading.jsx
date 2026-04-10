@@ -1,45 +1,145 @@
-import React from 'react';
+import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
 import {Link} from '@inertiajs/react';
 import {ArrowForward} from '@mui/icons-material';
 
-const HomePageHeading = () => (
-    <header className="relative flex min-h-[max(100vh,800px)] items-center overflow-hidden">
+const ACCENT_LINE1 = 'planned by real';
+const ACCENT_LINE2 = 'people who live there.';
+const TYPEWRITER_CHAR_MS = 42;
+const TYPEWRITER_GAP_MS = 260;
+const TYPEWRITER_START_MS = 560;
+
+function HomePageHeading() {
+    const [line1, setLine1] = useState('');
+    const [line2, setLine2] = useState('');
+    const [done, setDone] = useState(false);
+    const timersRef = useRef({timeouts: [], intervals: []});
+
+    useLayoutEffect(() => {
+        if (typeof window === 'undefined') {
+            return;
+        }
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            setLine1(ACCENT_LINE1);
+            setLine2(ACCENT_LINE2);
+            setDone(true);
+        }
+    }, []);
+
+    useEffect(() => {
+        if (typeof window === 'undefined') {
+            return undefined;
+        }
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            return undefined;
+        }
+
+        const clear = () => {
+            timersRef.current.timeouts.forEach(clearTimeout);
+            timersRef.current.intervals.forEach(clearInterval);
+            timersRef.current.timeouts = [];
+            timersRef.current.intervals = [];
+        };
+
+        const start = setTimeout(() => {
+            let i = 0;
+            const id1 = setInterval(() => {
+                i += 1;
+                setLine1(ACCENT_LINE1.slice(0, i));
+                if (i >= ACCENT_LINE1.length) {
+                    clearInterval(id1);
+                    const gap = setTimeout(() => {
+                        let j = 0;
+                        const id2 = setInterval(() => {
+                            j += 1;
+                            setLine2(ACCENT_LINE2.slice(0, j));
+                            if (j >= ACCENT_LINE2.length) {
+                                clearInterval(id2);
+                                setDone(true);
+                            }
+                        }, TYPEWRITER_CHAR_MS);
+                        timersRef.current.intervals.push(id2);
+                    }, TYPEWRITER_GAP_MS);
+                    timersRef.current.timeouts.push(gap);
+                }
+            }, TYPEWRITER_CHAR_MS);
+            timersRef.current.intervals.push(id1);
+        }, TYPEWRITER_START_MS);
+        timersRef.current.timeouts.push(start);
+
+        return clear;
+    }, []);
+
+    const showCursorOnLine1 = !done && line1.length < ACCENT_LINE1.length;
+    const showCursorOnLine2 = !done && line1.length >= ACCENT_LINE1.length;
+
+    return (
+    <header className="relative flex min-h-[max(100vh,850px)] items-center overflow-hidden">
         <div className="absolute inset-0 z-0 overflow-hidden bg-[#f9f9f9]">
             <picture className="block h-full w-full">
-                <source srcSet="/images/home/stitch/hero.webp" type="image/webp"/>
+                <source srcSet="/images/home/stitch/ff.webp?v=19" type="image/webp"/>
                 <img
-                    src="/images/home/stitch/hero.jpg"
-                    alt="Woman with a straw hat and backpack walking on a coastal path with yellow flowers"
-                    className="hero-home-media h-full w-full object-cover object-[74%_center] md:object-[72%_center]"
+                    src="/images/home/stitch/ff.jpg?v=19"
+                    alt="Scenic travel photograph"
+                    className="hero-home-media h-full w-full object-cover object-[55%_center] md:object-[52%_center]"
                 />
             </picture>
             <div className="hero-overlay absolute inset-0"/>
         </div>
 
-        <div className="relative z-10 mx-auto flex w-full max-w-[1120px] px-5 py-24 md:px-10 lg:px-0 lg:py-0">
-            <div className="hero-home-inner max-w-[540px] pt-16 sm:pt-20 md:pt-0">
+        <div className="relative z-10 mx-auto flex w-full max-w-[1120px] px-5 py-24 md:px-10 lg:py-0 lg:pl-[65px] lg:pr-0">
+            <div className="hero-home-inner max-w-[540px] pt-16 sm:pt-20 md:pt-0 lg:max-w-[min(580px,100%)] xl:max-w-[min(640px,100%)]">
                 <div className="hero-home-badge mb-6 inline-flex items-center rounded-full px-6 py-1.5 backdrop-blur-md md:mb-7 md:px-9 md:py-2">
                     #1 Planning Hub for your Trips
                 </div>
 
-                <h1 className="hero-home-heading text-balance text-[2.75rem] leading-[1.06] text-[#0f1419] sm:text-[3.25rem] sm:leading-[1.05] md:text-[5.2rem] md:leading-[1.02]">
+                <h1 className="hero-home-heading text-[2.75rem] leading-[1.06] text-[#0f1419] sm:text-[3.25rem] sm:leading-[1.05] md:text-[5.2rem] md:leading-[1.02]">
                     <span className="hero-home-heading-primary block">
                         Your personal
                         <br/>
                         itinerary,
                     </span>
                     <span className="hero-home-heading-accent-wrap block">
-                        <span className="hero-home-accent block">
-                            planned by real
+                        <span className="hero-home-accent-sr">
+                            {ACCENT_LINE1} {ACCENT_LINE2}
                         </span>
-                        <span className="hero-home-accent block">
-                            people who live there.
+                        <span className="hero-home-typewriter" aria-hidden="true">
+                            <span className="hero-home-accent hero-home-accent-line relative block">
+                                <span
+                                    className="invisible block w-full select-none"
+                                    aria-hidden="true"
+                                >
+                                    {ACCENT_LINE1}
+                                </span>
+                                <span className="hero-home-accent-typed absolute inset-x-0 top-0 z-[1] block">
+                                    {line1}
+                                    {showCursorOnLine1 ? (
+                                        <span className="hero-home-typewriter-cursor">|</span>
+                                    ) : null}
+                                </span>
+                            </span>
+                            <span className="hero-home-accent hero-home-accent-line relative block">
+                                <span
+                                    className="invisible block w-full select-none"
+                                    aria-hidden="true"
+                                >
+                                    {ACCENT_LINE2}
+                                </span>
+                                <span className="hero-home-accent-typed absolute inset-x-0 top-0 z-[1] block">
+                                    {line2}
+                                    {showCursorOnLine2 ? (
+                                        <span className="hero-home-typewriter-cursor">|</span>
+                                    ) : null}
+                                </span>
+                            </span>
                         </span>
                     </span>
                 </h1>
 
-                <div className="hero-home-bubble mb-5 md:mb-6">
-                    <div className="hero-home-bubble-inner">
+                <div
+                    className={`hero-home-bubble mb-5 md:mb-6${done ? ' hero-home-bubble--active' : ''}`}
+                    aria-hidden={!done}
+                >
+                    <div className={`hero-home-bubble-inner${done ? ' hero-home-bubble-inner--in' : ''}`}>
                         <p className="hero-home-lede">
                             Connect with local experts to plan your perfect trip. Your priorities, your pace, your local guide.
                         </p>
@@ -59,9 +159,9 @@ const HomePageHeading = () => (
                     </Link>
                     <Link
                         href="/destinations"
-                        className="hero-home-cta-secondary group inline-flex items-center gap-4 rounded-full py-2.5 pl-2 pr-4 text-[#3260FE] transition-colors hover:bg-[rgba(50,96,254,0.07)] sm:py-3 sm:pl-2.5 sm:pr-5 md:gap-5"
+                        className="hero-home-cta-secondary group inline-flex items-center gap-4 rounded-full py-2.5 pl-2 pr-4 text-[#3260FE] transition-colors hover:bg-[rgba(50,96,254,0.08)] sm:py-3 sm:pl-2.5 sm:pr-5 md:gap-5"
                     >
-                        <span className="h-px w-14 bg-[#3260FE]/35 transition-all duration-300 group-hover:w-[4.5rem] group-hover:bg-[#3260FE]/55 sm:w-16 sm:group-hover:w-[5rem]"/>
+                        <span className="h-px w-10 bg-[#3260FE]/45 transition-all duration-300 group-hover:w-[3.25rem] group-hover:bg-[#3260FE]/60 sm:w-12 sm:group-hover:w-[3.75rem]"/>
                         View Destinations
                     </Link>
                 </div>
@@ -84,6 +184,7 @@ const HomePageHeading = () => (
             </svg>
         </div>
     </header>
-);
+    );
+}
 
 export default HomePageHeading;

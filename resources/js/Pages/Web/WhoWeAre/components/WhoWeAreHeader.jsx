@@ -8,9 +8,9 @@ const WhoWeAreHeader = ({ title = 'Who We Are', description }) => (
         <div
             className="absolute inset-0"
             style={{
-                backgroundImage: 'url(/images/home/stitch/hero.jpg)',
+                backgroundImage: 'url(/images/home/stitch/ff.webp?v=19)',
                 backgroundSize: 'cover',
-                backgroundPosition: '74% center',
+                backgroundPosition: '52% center',
             }}
         />
         <div
