@@ -5,7 +5,6 @@ import {
     FavoriteBorder,
     LocalActivityOutlined,
     MapOutlined,
-    SupportAgent,
     VerifiedOutlined,
     VideoChatOutlined,
 } from '@mui/icons-material';
@@ -18,9 +17,8 @@ export const navItems = [
 
 export const featureHighlights = [
     {label: 'Faster Planning', icon: EventAvailableOutlined},
-    {label: 'Expert Guidance', icon: VerifiedOutlined},
+    {label: 'Local expertise', icon: VerifiedOutlined},
     {label: 'Personalized Support', icon: FavoriteBorder},
-    {label: '24/7 Support', icon: SupportAgent},
     {label: 'Authentic Experiences', icon: LocalActivityOutlined},
 ];
 

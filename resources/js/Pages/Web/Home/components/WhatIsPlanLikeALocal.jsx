@@ -7,14 +7,21 @@ import BlendedBackground from '@/Components/BlendedBackground';
 const WhatIsPlanLikeALocal = () => (
     <BlendedBackground className="z-30 bg-[#f9f9f9] px-5 py-14 md:px-10 md:py-16 lg:px-16">
         <div className="mx-auto max-w-[1120px]">
-            <div className="mb-18 grid grid-cols-1 gap-2.5 sm:grid-cols-2 md:mb-24 md:grid-cols-5 md:gap-4">
+            <div className="mb-16 grid grid-cols-1 gap-2.5 sm:grid-cols-2 sm:gap-3 md:mb-24 md:grid-cols-4 md:gap-3">
                 {featureHighlights.map(({label, icon: Icon}) => (
-                    <div key={label} className="group flex items-center gap-2.5 rounded-2xl bg-white/40 px-3 py-2.5">
-                        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#eeeeee] text-[#3f484a] transition-colors group-hover:bg-[#3260FE]/10 group-hover:text-[#3260FE] p-2">
-                            <Icon sx={{fontSize: 24}}/>
+                    <div
+                        key={label}
+                        className="group flex min-h-[4.75rem] flex-col items-center justify-center gap-2 rounded-2xl border border-slate-200/60 bg-white/85 px-3 py-3.5 shadow-[0_1px_0_0_rgba(255,255,255,0.9)_inset,0_4px_14px_-6px_rgba(15,23,42,0.08)] transition-[border-color,box-shadow,background-color] duration-300 hover:border-[#3260FE]/28 hover:bg-white hover:shadow-[0_8px_24px_-12px_rgba(50,96,254,0.18)] sm:min-h-0 sm:flex-row sm:justify-start sm:gap-3 sm:py-3 md:min-h-[7rem] md:flex-col md:justify-center md:gap-2.5 md:px-2.5 md:py-4 md:text-center"
+                    >
+                        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-slate-50 to-slate-100/90 text-[#3f484a] shadow-inner ring-1 ring-slate-200/80 transition-[background,box-shadow,color,ring-color] duration-300 group-hover:from-[#3260FE]/12 group-hover:to-[#3260FE]/6 group-hover:text-[#3260FE] group-hover:ring-[#3260FE]/25">
+                            <Icon sx={{fontSize: 28}}/>
                         </div>
-                        <span className="text-[1rem] font-bold uppercase leading-[1.3rem] tracking-[0.18em] text-[#3f484a]">
-                            {label}
+                        <span className="flex max-w-[11rem] flex-col items-center gap-0 text-center text-[11px] font-bold uppercase leading-none tracking-[0.11em] text-[#3f484a] sm:items-start sm:text-left sm:text-xs sm:tracking-[0.12em] md:max-w-[9.5rem] md:items-center md:text-center md:tracking-[0.1em]">
+                            {label.split(/\s+/).map((word, idx) => (
+                                <span key={idx} className="block">
+                                    {word}
+                                </span>
+                            ))}
                         </span>
                     </div>
                 ))}
