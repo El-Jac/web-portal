@@ -64,7 +64,7 @@ const SiteNavigation = ({ mobileMenuOpen, setMobileMenuOpen, onContactClick }) =
                 <div className="flex items-center gap-3">
                     <Link
                         href="/plan"
-                        className="nav-cta-start-planning hidden items-center rounded-[12px] px-4 py-2 text-[12px] font-semibold text-white shadow-md shadow-[#3260FE]/28 md:inline-flex md:text-[13px]"
+                        className="nav-cta-start-planning hidden items-center rounded-[12px] px-4 py-2 text-[12px] font-semibold text-white md:inline-flex md:text-[13px]"
                     >
                         <span className="relative z-[1] inline-flex items-center gap-1.5 pl-1">
                             Start Planning
@@ -113,7 +113,7 @@ const SiteNavigation = ({ mobileMenuOpen, setMobileMenuOpen, onContactClick }) =
                         <div className="my-2 border-t border-slate-200/90"/>
                         <Link
                             href="/plan"
-                            className="nav-cta-start-planning inline-flex items-center justify-center rounded-[12px] px-4 py-2.5 text-[13px] font-semibold text-white shadow-md shadow-[#3260FE]/24"
+                            className="nav-cta-start-planning inline-flex items-center justify-center rounded-[12px] px-4 py-2.5 text-[13px] font-semibold text-white"
                             onClick={() => setMobileMenuOpen(false)}
                         >
                             <span className="relative z-[1] inline-flex items-center gap-1.5 pl-1">
