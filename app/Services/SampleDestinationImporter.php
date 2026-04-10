@@ -23,8 +23,6 @@ class SampleDestinationImporter
         '/images/home/stitch/hero.jpg',
         '/images/home/stitch/hero.png',
         '/images/home/stitch/hero.webp',
-        '/images/home/stitch/ff.jpg',
-        '/images/home/stitch/ff.webp',
         '/images/home/stitch/what-is-plan-bg.webp',
         '/web/our-story-image.webp',
         '/web/Jerry_resized.jpeg',

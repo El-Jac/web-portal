@@ -1,13 +1,13 @@
 import {
     AccountBalanceWalletOutlined,
     CalendarMonthOutlined,
-    EventAvailableOutlined,
-    FavoriteBorder,
     LocalActivityOutlined,
     MapOutlined,
-    VerifiedOutlined,
     VideoChatOutlined,
 } from '@mui/icons-material';
+import FasterPlanningCalendarIcon from '@/Components/icons/FasterPlanningCalendarIcon';
+import TourGuideIcon from '@/Components/icons/TourGuideIcon';
+import PersonalizedItineraryListIcon from '@/Components/icons/PersonalizedItineraryListIcon';
 
 export const navItems = [
     {label: 'Who We Are', href: '/who-we-are'},
@@ -16,9 +16,9 @@ export const navItems = [
 ];
 
 export const featureHighlights = [
-    {label: 'Faster Planning', icon: EventAvailableOutlined},
-    {label: 'Local expertise', icon: VerifiedOutlined},
-    {label: 'Personalized Support', icon: FavoriteBorder},
+    {label: 'Faster Planning', icon: FasterPlanningCalendarIcon},
+    {label: 'Built by\nlocals', icon: TourGuideIcon},
+    {label: 'Personalized Itinerary', icon: PersonalizedItineraryListIcon},
     {label: 'Authentic Experiences', icon: LocalActivityOutlined},
 ];
 

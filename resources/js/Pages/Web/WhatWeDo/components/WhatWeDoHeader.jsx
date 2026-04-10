@@ -8,7 +8,7 @@ const WhatWeDoHeader = ({ title = 'What We Do', description }) => (
         <div
             className="absolute inset-0"
             style={{
-                backgroundImage: 'url(/images/home/stitch/ff.webp?v=19)',
+                backgroundImage: 'url(/images/home/stitch/hero.webp?v=20)',
                 backgroundSize: 'cover',
                 backgroundPosition: '52% center',
             }}

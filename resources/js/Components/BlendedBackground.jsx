@@ -6,8 +6,14 @@ const BlendedBackground = ({
     blendColor = '#f9f9f9',
     blendSize = '8rem',
     className = '',
+    /** When false, vertical overflow is visible so children can animate with transform without clipping. */
+    clipOverflow = true,
 }) => (
-    <div className={`relative overflow-hidden ${className}`}>
+    <div
+        className={`relative ${
+            clipOverflow ? 'overflow-hidden' : 'overflow-x-hidden overflow-y-visible'
+        } ${className}`}
+    >
         <div
             className="pointer-events-none absolute inset-0 -z-10"
             style={{backgroundImage: `url(${image})`, backgroundSize: 'cover', backgroundPosition: 'center'}}

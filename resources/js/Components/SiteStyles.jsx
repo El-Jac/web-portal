@@ -145,6 +145,10 @@ const SiteStyles = () => (
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
+        /* Scroll parallax lives on inner wrapper so it stacks with hero-home-enter transform */
+        .hero-home-inner-parallax {
+            backface-visibility: hidden;
+        }
         .hero-home-badge {
             background-color: #3260fe1a;
             font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
@@ -234,6 +238,20 @@ const SiteStyles = () => (
         }
         .stitch-home .hero-home-heading .hero-home-accent + .hero-home-accent {
             margin-top: 0.06em;
+        }
+        /* Feature cards: orange segment runs around the icon (stroke-dashoffset), not a spinning fill */
+        @keyframes feature-highlight-icon-orbit-dash {
+            to {
+                stroke-dashoffset: -100;
+            }
+        }
+        .stitch-home .feature-highlight-icon-orbit-stroke {
+            stroke-dashoffset: 0;
+            animation: feature-highlight-icon-orbit-dash 1.35s linear infinite;
+            animation-play-state: paused;
+        }
+        .stitch-home .group:hover .feature-highlight-icon-orbit-stroke {
+            animation-play-state: running;
         }
         @keyframes hero-bubble-float {
             0%, 100% {
@@ -549,6 +567,10 @@ const SiteStyles = () => (
             .hero-home-inner {
                 animation: none;
             }
+            .hero-home-inner-parallax {
+                will-change: auto !important;
+                transform: none !important;
+            }
             .hero-cta-primary:hover {
                 transform: none;
             }
@@ -565,6 +587,10 @@ const SiteStyles = () => (
             .hero-home-typewriter-cursor {
                 animation: none;
                 opacity: 0;
+            }
+            .stitch-home .feature-highlight-icon-orbit-stroke {
+                animation: none;
+                stroke-dashoffset: 0;
             }
         }
         .quotes {
