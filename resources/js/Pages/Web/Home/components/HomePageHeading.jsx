@@ -4,7 +4,7 @@ import {ArrowForward} from '@mui/icons-material';
 
 const HomePageHeading = () => (
     <header className="relative flex min-h-[max(100vh,800px)] items-center overflow-hidden">
-        <div className="absolute inset-0 z-0 overflow-hidden">
+        <div className="absolute inset-0 z-0 overflow-hidden bg-[#f9f9f9]">
             <picture className="block h-full w-full">
                 <source srcSet="/images/home/stitch/hero.webp" type="image/webp"/>
                 <img
@@ -22,17 +22,19 @@ const HomePageHeading = () => (
                     #1 Planning Hub for your Trips
                 </div>
 
-                <h1 className="hero-home-heading text-[2.75rem] leading-[1.08] text-[#111418] sm:text-[3.2rem] md:text-[5.2rem] md:leading-[1.05]">
-                    Your personal
-                    <br/>
-                    itinerary,
-                    <br/>
-                    <span className="hero-home-accent text-[1.95rem] leading-[0.96] text-[#3260FE] sm:text-[2.4rem] md:text-[4.25rem] md:leading-[1.04]">
-                        planned by real
+                <h1 className="hero-home-heading text-balance text-[2.75rem] leading-[1.06] text-[#0f1419] sm:text-[3.25rem] sm:leading-[1.05] md:text-[5.2rem] md:leading-[1.02]">
+                    <span className="hero-home-heading-primary block">
+                        Your personal
+                        <br/>
+                        itinerary,
                     </span>
-                    <br/>
-                    <span className="hero-home-accent text-[1.95rem] leading-[0.96] text-[#3260FE] sm:text-[2.4rem] md:text-[4.25rem] md:leading-[1.04]">
-                        people who live there.
+                    <span className="hero-home-heading-accent-wrap block">
+                        <span className="hero-home-accent block">
+                            planned by real
+                        </span>
+                        <span className="hero-home-accent block">
+                            people who live there.
+                        </span>
                     </span>
                 </h1>
 

@@ -89,9 +89,45 @@ const SiteStyles = () => (
                     rgba(249, 249, 249, 0) 100%
                 );
         }
+        /* R→L reveal with feather: --hero-reveal-x = left edge of full-opacity (moves 100% → 0%) */
+        @property --hero-reveal-x {
+            syntax: '<percentage>';
+            inherits: false;
+            initial-value: 100%;
+        }
+        @keyframes hero-home-media-reveal-rl {
+            from {
+                --hero-reveal-x: 100%;
+                opacity: 0.92;
+            }
+            to {
+                --hero-reveal-x: 0%;
+                opacity: 1;
+            }
+        }
         .hero-home-media {
             transform: scale(1.07);
             transform-origin: center center;
+            --hero-reveal-x: 100%;
+            -webkit-mask-image: linear-gradient(
+                to right,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0) max(0%, calc(var(--hero-reveal-x) - 18%)),
+                rgba(255, 255, 255, 0.35) max(0%, calc(var(--hero-reveal-x) - 11%)),
+                rgba(255, 255, 255, 0.78) max(0%, calc(var(--hero-reveal-x) - 4%)),
+                #fff var(--hero-reveal-x),
+                #fff 100%
+            );
+            mask-image: linear-gradient(
+                to right,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0) max(0%, calc(var(--hero-reveal-x) - 18%)),
+                rgba(255, 255, 255, 0.35) max(0%, calc(var(--hero-reveal-x) - 11%)),
+                rgba(255, 255, 255, 0.78) max(0%, calc(var(--hero-reveal-x) - 4%)),
+                #fff var(--hero-reveal-x),
+                #fff 100%
+            );
+            animation: hero-home-media-reveal-rl 1.45s cubic-bezier(0.22, 1, 0.36, 1) both;
         }
         @keyframes hero-home-enter {
             from {
@@ -104,7 +140,8 @@ const SiteStyles = () => (
             }
         }
         .hero-home-inner {
-            animation: hero-home-enter 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+            /* Quick stagger after hero image starts revealing */
+            animation: hero-home-enter 1s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
@@ -121,21 +158,50 @@ const SiteStyles = () => (
         .stitch-home .hero-home-heading {
             font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
             font-weight: 800;
-            letter-spacing: -0.048em;
-            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.85);
+            letter-spacing: -0.052em;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.88);
             margin-bottom: 2rem;
         }
         @media (min-width: 768px) {
             .stitch-home .hero-home-heading {
+                letter-spacing: -0.048em;
                 margin-bottom: 2.75rem;
+            }
+        }
+        .stitch-home .hero-home-heading-primary {
+            margin-bottom: clamp(0.65rem, 2vw, 1.1rem);
+        }
+        .stitch-home .hero-home-heading-accent-wrap {
+            margin-top: 0;
+            padding-left: clamp(0.85rem, 2.4vw, 1.35rem);
+            border-left: 3px solid rgba(50, 96, 254, 0.38);
+        }
+        @media (min-width: 768px) {
+            .stitch-home .hero-home-heading-accent-wrap {
+                padding-left: 1.5rem;
+                border-left-width: 4px;
             }
         }
         .stitch-home .hero-home-heading .hero-home-accent {
             font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
-            font-weight: 500;
+            font-weight: 600;
             font-style: italic;
-            letter-spacing: -0.038em;
-            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+            letter-spacing: -0.034em;
+            color: #3260FE;
+            font-size: clamp(1.85rem, 1.35rem + 2.1vw, 4.35rem);
+            line-height: 1.12;
+            text-shadow:
+                0 1px 0 rgba(255, 255, 255, 0.45),
+                0 0 40px rgba(255, 255, 255, 0.35);
+        }
+        @media (min-width: 768px) {
+            .stitch-home .hero-home-heading .hero-home-accent {
+                line-height: 1.08;
+                letter-spacing: -0.03em;
+            }
+        }
+        .stitch-home .hero-home-heading .hero-home-accent + .hero-home-accent {
+            margin-top: 0.06em;
         }
         @keyframes hero-bubble-float {
             0%, 100% {
@@ -407,6 +473,11 @@ const SiteStyles = () => (
             }
             .hero-home-media {
                 transform: none;
+                animation: none;
+                opacity: 1;
+                --hero-reveal-x: 0%;
+                -webkit-mask-image: none;
+                mask-image: none;
             }
             .hero-home-inner {
                 animation: none;
