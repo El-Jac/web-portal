@@ -79,9 +79,9 @@ export const processSteps = [
     },
 ];
 
+/** `target` is the numeric value; `suffix` is appended after formatting (e.g. "+") */
 export const statItems = [
-    ['100+', 'Destinations'],
-    ['500+', 'Local Experts'],
-    ['10,000+', 'Happy Travelers'],
-    ['200+', 'Hidden Gems'],
+    {target: 100, suffix: '+', label: 'Destinations'},
+    {target: 500, suffix: '+', label: 'Local Experts'},
+    {target: 200, suffix: '+', label: 'Hidden Gems'},
 ];

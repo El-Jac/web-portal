@@ -20,16 +20,50 @@ const FEATURE_HIGHLIGHT_REVEAL_MS = 1200;
 /** Starting offset for fade-down (rem); keep in sync with translate in card style */
 const FEATURE_HIGHLIGHT_DROP_REM = 6;
 
+const WHO_WE_ARE_TITLE = 'Who We Are';
+const WHO_WE_ARE_TYPE_MS = 46;
+/** Pause after “Who We Are” finishes typing, before the quote block fades in */
+const WHO_WE_ARE_QUOTES_AFTER_TYPE_MS = 400;
+const WHO_WE_ARE_QUOTES_REVEAL_MS = 1050;
+
+/** Home stats counter: full run when section enters view */
+const STAT_COUNT_DURATION_MS = 1500;
+
+function easeOutCubic(t) {
+    return 1 - (1 - t) ** 3;
+}
+
+function formatStatCount(n, suffix) {
+    const rounded = Math.round(n);
+    const body = rounded >= 1000 ? rounded.toLocaleString('en-US') : String(rounded);
+    return body + suffix;
+}
+
 const WhatIsPlanLikeALocal = () => {
     const [featureHighlightsVisible, setFeatureHighlightsVisible] = useState(false);
     const featureHighlightsGridRef = useRef(null);
+
+    const [whoWeAreInView, setWhoWeAreInView] = useState(false);
+    const [whoWeAreTitleTyped, setWhoWeAreTitleTyped] = useState('');
+    const [whoWeAreQuotesVisible, setWhoWeAreQuotesVisible] = useState(false);
+    const [reduceMotion, setReduceMotion] = useState(false);
+    const whoWeAreSectionRef = useRef(null);
+    const statsSectionRef = useRef(null);
+    const statsCountStartedRef = useRef(false);
+    const [statCounts, setStatCounts] = useState(() => statItems.map(() => 0));
 
     useLayoutEffect(() => {
         if (typeof window === 'undefined') {
             return;
         }
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const mqReduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+        if (mqReduce.matches) {
             setFeatureHighlightsVisible(true);
+            setReduceMotion(true);
+            setWhoWeAreInView(true);
+            setWhoWeAreTitleTyped(WHO_WE_ARE_TITLE);
+            setWhoWeAreQuotesVisible(true);
+            setStatCounts(statItems.map((s) => s.target));
         }
     }, []);
 
@@ -53,6 +87,94 @@ const WhatIsPlanLikeALocal = () => {
         io.observe(el);
         return () => io.disconnect();
     }, [featureHighlightsVisible]);
+
+    useEffect(() => {
+        if (typeof window === 'undefined' || whoWeAreInView || reduceMotion) {
+            return undefined;
+        }
+        const el = whoWeAreSectionRef.current;
+        if (!el) {
+            return undefined;
+        }
+        const io = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setWhoWeAreInView(true);
+                    io.disconnect();
+                }
+            },
+            {root: null, rootMargin: '0px 0px -6% 0px', threshold: 0.18},
+        );
+        io.observe(el);
+        return () => io.disconnect();
+    }, [whoWeAreInView, reduceMotion]);
+
+    useEffect(() => {
+        if (!whoWeAreInView || reduceMotion) {
+            return undefined;
+        }
+        let i = 0;
+        const id = setInterval(() => {
+            i += 1;
+            setWhoWeAreTitleTyped(WHO_WE_ARE_TITLE.slice(0, i));
+            if (i >= WHO_WE_ARE_TITLE.length) {
+                clearInterval(id);
+            }
+        }, WHO_WE_ARE_TYPE_MS);
+        return () => clearInterval(id);
+    }, [whoWeAreInView, reduceMotion]);
+
+    useEffect(() => {
+        if (reduceMotion || !whoWeAreInView) {
+            return undefined;
+        }
+        if (whoWeAreTitleTyped !== WHO_WE_ARE_TITLE) {
+            return undefined;
+        }
+        const t = setTimeout(() => {
+            setWhoWeAreQuotesVisible(true);
+        }, WHO_WE_ARE_QUOTES_AFTER_TYPE_MS);
+        return () => clearTimeout(t);
+    }, [whoWeAreTitleTyped, whoWeAreInView, reduceMotion]);
+
+    useEffect(() => {
+        if (reduceMotion) {
+            return undefined;
+        }
+        const el = statsSectionRef.current;
+        if (!el) {
+            return undefined;
+        }
+        const targets = statItems.map((s) => s.target);
+        const io = new IntersectionObserver(
+            ([entry]) => {
+                if (!entry.isIntersecting || statsCountStartedRef.current) {
+                    return;
+                }
+                statsCountStartedRef.current = true;
+                io.disconnect();
+                const start = performance.now();
+                const tick = (now) => {
+                    const elapsed = now - start;
+                    const t = Math.min(1, elapsed / STAT_COUNT_DURATION_MS);
+                    const eased = easeOutCubic(t);
+                    setStatCounts(targets.map((tgt) => tgt * eased));
+                    if (t < 1) {
+                        requestAnimationFrame(tick);
+                    } else {
+                        setStatCounts([...targets]);
+                    }
+                };
+                requestAnimationFrame(tick);
+            },
+            {root: null, rootMargin: '0px 0px -10% 0px', threshold: 0.15},
+        );
+        io.observe(el);
+        return () => io.disconnect();
+    }, [reduceMotion]);
+
+    const whoWeAreShowCursor =
+        whoWeAreInView && !reduceMotion && whoWeAreTitleTyped.length < WHO_WE_ARE_TITLE.length;
 
     return (
     <BlendedBackground clipOverflow={false} className="z-30 bg-[#f9f9f9] px-5 py-14 md:px-10 md:py-16 lg:px-16">
@@ -171,42 +293,90 @@ const WhatIsPlanLikeALocal = () => {
                 })}
             </div>
 
-            <div className="mb-16 grid grid-cols-1 gap-6 md:mb-24 lg:grid-cols-12 lg:items-start">
+            <div
+                ref={whoWeAreSectionRef}
+                className="mb-16 grid grid-cols-1 gap-6 md:mb-24 lg:grid-cols-12 lg:items-start"
+            >
                 <div className="pt-1 md:pt-4 lg:col-span-3">
-                    <span className="ibrow">
-                        Who We Are
+                    <span
+                        className="ibrow block min-h-[1.4em]"
+                        aria-label={WHO_WE_ARE_TITLE}
+                    >
+                        <span aria-hidden="true">
+                            {whoWeAreTitleTyped}
+                            {whoWeAreShowCursor ? (
+                                <span className="who-we-are-typewriter-cursor">|</span>
+                            ) : null}
+                        </span>
                     </span>
                 </div>
-                <div className="lg:col-span-8 lg:col-start-4">
-                    <h2 className="quotes">
-                        This isn&apos;t a travel guide.
-                        <br/>
-                        <span className="font-light italic text-[#EA6D4F]">It&apos;s a one-on-one planning</span>
-                        <br/>
-                        experience designed to help
-                        <br/>
-                        you explore with <span className="font-light italic text-[#EA6D4F]">clarity,</span>
-                        <br/>
-                        <span className="font-light italic text-[#EA6D4F]">confidence, and local</span>
-                        <br/>
-                        <span className="font-light italic text-[#EA6D4F]">knowledge.</span>
-                    </h2>
-                    <Link
-                        href="/who-we-are"
-                        className="inline-flex items-center rounded-lg bg-[#1a1c1c] px-5 py-3 text-[9px] font-bold uppercase tracking-[0.16em] text-[#f9f9f9] shadow-xl transition-all hover:scale-[1.02] md:px-6 md:text-[10px]"
+                <div
+                    className="lg:col-span-8 lg:col-start-4"
+                    aria-hidden={!whoWeAreQuotesVisible}
+                    style={{
+                        opacity: whoWeAreQuotesVisible ? 1 : 0,
+                        transition: reduceMotion
+                            ? 'none'
+                            : `opacity ${WHO_WE_ARE_QUOTES_REVEAL_MS}ms cubic-bezier(0.22, 1, 0.36, 1)`,
+                        pointerEvents: whoWeAreQuotesVisible ? 'auto' : 'none',
+                    }}
+                >
+                    <div
+                        style={{
+                            transform: whoWeAreQuotesVisible
+                                ? 'translate3d(0, 0, 0)'
+                                : 'translate3d(0, 1.75rem, 0)',
+                            transition: reduceMotion
+                                ? 'none'
+                                : `transform ${WHO_WE_ARE_QUOTES_REVEAL_MS}ms cubic-bezier(0.22, 1, 0.36, 1)`,
+                        }}
                     >
-                        Meet Founders
-                        <ArrowForward sx={{ml: 1, fontSize: 16}}/>
-                    </Link>
+                        <h2 className="quotes">
+                            This isn&apos;t a travel guide.
+                            <br/>
+                            <span className="font-light italic text-[#EA6D4F]">It&apos;s a one-on-one planning</span>
+                            <br/>
+                            experience designed to help
+                            <br/>
+                            you explore with <span className="font-light italic text-[#EA6D4F]">clarity,</span>
+                            <br/>
+                            <span className="font-light italic text-[#EA6D4F]">confidence, and local</span>
+                            <br/>
+                            <span className="font-light italic text-[#EA6D4F]">knowledge.</span>
+                        </h2>
+                        <Link
+                            href="/who-we-are"
+                            className="hero-cta-primary hero-cta-primary--dark inline-flex items-center rounded-xl px-6 py-3.5 text-[13px] text-white md:px-7 md:py-4 md:text-[14px]"
+                        >
+                            <span className="relative z-[1] inline-flex items-center">
+                                Meet Founders
+                                <ArrowForward sx={{ml: 1, fontSize: 18}}/>
+                            </span>
+                        </Link>
+                    </div>
                 </div>
             </div>
 
-            <div className="rounded-[2rem] bg-[#f3f3f3] px-5 py-7 md:px-8 md:py-10">
-                <div className="grid grid-cols-2 gap-y-6 sm:gap-6 lg:grid-cols-4 lg:gap-0">
-                    {statItems.map(([value, label]) => (
-                        <div key={label} className="text-center lg:border-r lg:border-[#bec8ca]/30 lg:px-6 lg:text-left last:border-r-0">
-                            <div className="mb-1 text-[2.1rem] font-extrabold tracking-[-0.04em] text-[#1a1c1c] sm:text-[2.4rem] md:text-[3.2rem]">{value}</div>
-                            <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[#3f484a]">{label}</div>
+            <div
+                ref={statsSectionRef}
+                className="relative overflow-hidden rounded-[2rem] border border-slate-200/80 bg-[#f0f0f0] px-6 py-10 md:px-11 md:py-12"
+            >
+                <div
+                    className="pointer-events-none absolute inset-x-0 top-0 h-0.5 bg-[#EA6D4F]"
+                    aria-hidden
+                />
+                <div className="grid grid-cols-2 gap-x-8 gap-y-10 sm:gap-x-10 sm:gap-y-11 lg:grid-cols-3 lg:gap-x-0 lg:gap-y-0">
+                    {statItems.map((item, index) => (
+                        <div
+                            key={item.label}
+                            className="text-center max-lg:[&:nth-child(3)]:col-span-2 lg:border-r lg:border-slate-300/45 lg:px-8 lg:last:border-r-0"
+                        >
+                            <div className="tabular-nums text-[2.15rem] font-extrabold leading-none tracking-[-0.045em] text-[#1a1c1c] sm:text-[2.5rem] md:text-[3.2rem]">
+                                {formatStatCount(statCounts[index] ?? 0, item.suffix)}
+                            </div>
+                            <div className="mt-2.5 text-[11px] font-semibold uppercase leading-snug tracking-[0.14em] text-slate-600">
+                                {item.label}
+                            </div>
                         </div>
                     ))}
                 </div>

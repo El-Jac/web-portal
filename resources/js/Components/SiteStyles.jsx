@@ -217,6 +217,14 @@ const SiteStyles = () => (
             color: #3260fe;
             animation: hero-typewriter-cursor 0.95s step-end infinite;
         }
+        .stitch-home .who-we-are-typewriter-cursor {
+            display: inline-block;
+            margin-left: 0.06em;
+            font-style: normal;
+            font-weight: 600;
+            color: #3f484a;
+            animation: hero-typewriter-cursor 0.95s step-end infinite;
+        }
         /* Raleway only for the blue italic lines (loaded via HomeMeta on home) */
         .stitch-home .hero-home-heading .hero-home-accent {
             font-family: 'Raleway', ui-sans-serif, system-ui, sans-serif;
@@ -418,6 +426,25 @@ const SiteStyles = () => (
             outline: 2px solid rgba(255, 255, 255, 0.95);
             outline-offset: 3px;
         }
+        /* Same treatment as .hero-cta-primary; base fill stays near-black */
+        .hero-cta-primary.hero-cta-primary--dark {
+            box-shadow:
+                0 14px 40px -6px rgba(0, 0, 0, 0.38),
+                0 6px 18px -4px rgba(0, 0, 0, 0.2);
+        }
+        .hero-cta-primary.hero-cta-primary--dark::after {
+            background: #1a1c1c;
+            box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.1) inset;
+        }
+        /* Lighter than base so the left-to-right sweep reads on hover */
+        .hero-cta-primary.hero-cta-primary--dark::before {
+            background-color: #3d434c;
+        }
+        .hero-cta-primary.hero-cta-primary--dark:hover {
+            box-shadow:
+                0 20px 52px -4px rgba(0, 0, 0, 0.45),
+                0 8px 24px -4px rgba(0, 0, 0, 0.22);
+        }
         .mesh-section {
             background-image:
                 radial-gradient(at 100% 0%, rgba(50, 96, 254, 0.05) 0px, transparent 50%),
@@ -585,6 +612,10 @@ const SiteStyles = () => (
                 transform: none;
             }
             .hero-home-typewriter-cursor {
+                animation: none;
+                opacity: 0;
+            }
+            .stitch-home .who-we-are-typewriter-cursor {
                 animation: none;
                 opacity: 0;
             }
