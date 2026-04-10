@@ -141,7 +141,7 @@ const SiteStyles = () => (
         }
         .hero-home-inner {
             /* Quick stagger after hero image starts revealing */
-            animation: hero-home-enter 1s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both;
+            animation: hero-home-enter 1s cubic-bezier(0.22, 1, 0.36, 1) 0.25s both;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
@@ -211,15 +211,28 @@ const SiteStyles = () => (
                 transform: translate3d(0, -8px, 0);
             }
         }
+        @keyframes hero-home-bubble-enter {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
         .hero-home-bubble {
             max-width: min(100%, 28rem);
             margin-left: 50px;
             padding-bottom: 0.75rem;
-            animation: hero-bubble-float 3.5s ease-in-out infinite;
+            /* Float after bubble entrance: 0.75s delay + 0.75s enter = 1.5s */
+            animation: hero-bubble-float 3.5s ease-in-out 1.5s infinite;
         }
         .hero-home-bubble-inner {
             position: relative;
             display: block;
+            /* Short stagger after headline begins (tighter than waiting for hero-home-inner to finish) */
+            animation: hero-home-bubble-enter 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.75s both;
         }
         .hero-home-lede {
             margin: 0;
@@ -242,9 +255,12 @@ const SiteStyles = () => (
             border: 1px solid rgba(226, 232, 240, 0.85);
             box-shadow:
                 0 1px 0 0 rgba(255, 255, 255, 0.65) inset,
-                0 10px 36px -14px rgba(15, 23, 42, 0.1);
+                0 1px 2px rgba(15, 23, 42, 0.05),
+                0 6px 16px -4px rgba(15, 23, 42, 0.08),
+                0 14px 36px -10px rgba(15, 23, 42, 0.1),
+                0 28px 56px -18px rgba(50, 96, 254, 0.09);
         }
-        /* Speech tail: same fill as bubble */
+        /* Speech tail: matches bubble glass; drop-shadow follows clipped triangle */
         .hero-home-bubble-tail {
             position: absolute;
             left: 1.5rem;
@@ -252,6 +268,15 @@ const SiteStyles = () => (
             margin-top: -1px;
             width: 3.25rem;
             height: 1.5rem;
+            display: block;
+            filter: drop-shadow(0 2px 3px rgba(15, 23, 42, 0.12))
+                drop-shadow(0 1px 1px rgba(15, 23, 42, 0.06));
+        }
+        .hero-home-bubble-tail::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            clip-path: polygon(4% 0, 96% 0, 50% 100%);
             background: linear-gradient(
                 155deg,
                 rgba(255, 255, 255, 0.86) 0%,
@@ -260,11 +285,10 @@ const SiteStyles = () => (
             );
             -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(226, 232, 240, 0.85);
+            border: 1px solid rgba(148, 163, 184, 0.55);
             border-top: none;
             border-radius: 0 0 0.65rem 0.65rem;
-            clip-path: polygon(4% 0, 96% 0, 50% 100%);
-            box-shadow: 0 1px 0 0 #ffffff inset;
+            box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.75) inset;
         }
         .hero-home-cta-secondary {
             font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
@@ -487,6 +511,11 @@ const SiteStyles = () => (
             }
             .hero-home-bubble {
                 animation: none;
+            }
+            .hero-home-bubble-inner {
+                animation: none;
+                opacity: 1;
+                transform: none;
             }
         }
         .quotes {
