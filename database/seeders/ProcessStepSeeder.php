@@ -23,7 +23,7 @@ class ProcessStepSeeder extends Seeder
                 'is_active' => true,
             ],
             [
-                'title' => 'Payment',
+                'title' => 'Choose Package & Complete Payment',
                 'description' => 'Confirm your booking securely and easily.',
                 'icon' => 'cash',
                 'background_color' => '#E5E7EB',
@@ -31,7 +31,7 @@ class ProcessStepSeeder extends Seeder
                 'is_active' => true,
             ],
             [
-                'title' => 'Video Meeting (Planning)',
+                'title' => 'Video Planning Meeting',
                 'description' => 'Discuss your style, needs, and preferences with a local.',
                 'icon' => 'videocam',
                 'background_color' => '#3B82F6',

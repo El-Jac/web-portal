@@ -1,10 +1,4 @@
-import {
-    AccountBalanceWalletOutlined,
-    CalendarMonthOutlined,
-    LocalActivityOutlined,
-    MapOutlined,
-    VideoChatOutlined,
-} from '@mui/icons-material';
+import {LocalActivityOutlined} from '@mui/icons-material';
 import FasterPlanningCalendarIcon from '@/Components/icons/FasterPlanningCalendarIcon';
 import TourGuideIcon from '@/Components/icons/TourGuideIcon';
 import PersonalizedItineraryListIcon from '@/Components/icons/PersonalizedItineraryListIcon';
@@ -52,30 +46,33 @@ export const destinationCards = [
     },
 ];
 
+/** Bump when replacing files under `public/images/home/stitch/home-page/` so browsers load the new asset. */
+const HOME_PAGE_STEP_IMAGE_V = '9';
+
 export const processSteps = [
     {
         step: 'Step 01',
-        title: 'Schedule Appointment.',
+        title: 'Schedule Appointment',
         description: "Choose a time that works best for you and share your travel ideas, and any specific interests or experiences you'd like to include.",
-        icon: CalendarMonthOutlined,
+        image: `/images/home/stitch/home-page/step-1.jpg?v=${HOME_PAGE_STEP_IMAGE_V}`,
     },
     {
         step: 'Step 02',
-        title: 'Complete Payment.',
+        title: 'Choose Package & Complete Payment',
         description: 'Secure your appointment with a smooth and transparent payment process.',
-        icon: AccountBalanceWalletOutlined,
+        image: `/images/home/stitch/home-page/step-2.jpg?v=${HOME_PAGE_STEP_IMAGE_V}`,
     },
     {
         step: 'Step 03',
-        title: 'Video Meeting (Planning).',
+        title: 'Video Planning Meeting',
         description: 'Connect one-on-one with a local expert to craft your perfect trip, tailored to your style, budget, and must-see spots.',
-        icon: VideoChatOutlined,
+        image: `/images/home/stitch/home-page/step-3.jpg?v=${HOME_PAGE_STEP_IMAGE_V}`,
     },
     {
         step: 'Step 04',
-        title: 'Personalized Itinerary Delivery.',
+        title: 'Personalized Itinerary Delivery',
         description: 'Get a personalized, ready-to-use travel plan with expert recommendations and practical guidance for a confident journey.',
-        icon: MapOutlined,
+        image: `/images/home/stitch/home-page/step-4.jpg?v=${HOME_PAGE_STEP_IMAGE_V}`,
     },
 ];
 

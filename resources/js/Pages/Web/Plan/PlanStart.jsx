@@ -51,12 +51,15 @@ const PlanStart = () => (
                 </div>
 
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-                    {processSteps.map(({ step, title, description, icon: Icon }) => (
+                    {processSteps.map(({ step, title, description, image }) => (
                         <div key={step} className="flex flex-col">
-                            <div className="editorial-shadow mb-5 flex h-[92px] items-center justify-center overflow-hidden rounded-[2rem] border border-[#ececec] bg-white">
-                                <div className="flex h-full w-full items-center justify-center bg-[#f8f8f8] transition-colors duration-500 hover:bg-[#3260FE]/5">
-                                    <Icon sx={{ fontSize: 40, color: '#3260FE', opacity: 0.9 }}/>
-                                </div>
+                            <div className="editorial-shadow relative mb-5 h-[92px] overflow-hidden rounded-[2rem] border border-[#ececec] bg-white">
+                                <img
+                                    src={image}
+                                    alt=""
+                                    className="h-full w-full object-cover"
+                                    loading="lazy"
+                                />
                             </div>
                             <div className="mb-3 inline-flex w-fit items-center rounded-full border border-[#EA6D4F]/40 px-2.5 py-1 text-[8px] font-bold uppercase tracking-[0.14em] text-[#EA6D4F]">
                                 {step}

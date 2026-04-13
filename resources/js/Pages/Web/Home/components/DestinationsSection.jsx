@@ -132,7 +132,7 @@ const DestinationsSection = ({destinations = [], pagination = {}}) => {
     return (
         <section ref={sectionRef} className="relative w-full bg-[#f9f9f9] px-5 py-18 md:px-10 md:py-24 lg:px-16">
             <div className="mx-auto max-w-[1120px]">
-                <div className="mb-12">
+                <div className="mb-8 md:mb-10">
                     <span
                         className="ibrow block min-h-[1.4em] pb-2 md:pb-3"
                         aria-label={DESTINATIONS_TITLE}
@@ -165,7 +165,7 @@ const DestinationsSection = ({destinations = [], pagination = {}}) => {
                             }}
                         >
                             <div className="max-w-[620px]">
-                                <h2 className="quotes">
+                                <h2 className="quotes !mb-0">
                                     Our{' '}
                                     <span className="mr-1.5 inline-block font-light italic text-[#EA6D4F] md:mr-2">
                                         Most Popular
@@ -174,8 +174,8 @@ const DestinationsSection = ({destinations = [], pagination = {}}) => {
                                     Destinations
                                 </h2>
                             </div>
-                            <div className="mt-6 flex w-full flex-col items-stretch gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
-                                <p className="max-w-[470px] text-[14px] text-[#3f484a] md:text-[16px]">
+                            <div className="mt-4 flex w-full flex-col items-stretch gap-4 sm:mt-5 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
+                                <p className="max-w-[470px] text-[14px] leading-relaxed text-[#3f484a] md:text-[16px]">
                                     Explore cities, towns, and hidden gems loved by travelers.
                                 </p>
                                 <DestinationsPageArrows
