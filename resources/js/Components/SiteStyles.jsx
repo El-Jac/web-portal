@@ -11,7 +11,7 @@ const SiteStyles = () => (
         .stitch-home h2,
         .stitch-home h3,
         .stitch-home h4 {
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
         }
         /* Nav: Manrope — warm, modern UI type (loaded in app.blade.php) */
         .site-nav {
@@ -436,14 +436,40 @@ const SiteStyles = () => (
             background: #1a1c1c;
             box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.1) inset;
         }
-        /* Lighter than base so the left-to-right sweep reads on hover */
+        /* Hover sweep: strong contrast vs near-black base (#1a1c1c) */
         .hero-cta-primary.hero-cta-primary--dark::before {
-            background-color: #3d434c;
+            background-color: #EA6D4F;
         }
         .hero-cta-primary.hero-cta-primary--dark:hover {
             box-shadow:
-                0 20px 52px -4px rgba(0, 0, 0, 0.45),
-                0 8px 24px -4px rgba(0, 0, 0, 0.22);
+                0 20px 52px -4px rgba(234, 109, 79, 0.42),
+                0 8px 24px -4px rgba(234, 109, 79, 0.28);
+        }
+        /* White fill — same sweep + lift as primary; dark label */
+        .hero-cta-primary.hero-cta-primary--white {
+            color: #1a1c1c;
+            box-shadow:
+                0 14px 40px -6px rgba(15, 23, 42, 0.08),
+                0 6px 18px -4px rgba(15, 23, 42, 0.06);
+        }
+        .hero-cta-primary.hero-cta-primary--white::after {
+            background: #ffffff;
+            box-shadow:
+                0 1px 0 0 rgba(255, 255, 255, 1) inset,
+                0 0 0 1px rgba(15, 23, 42, 0.08);
+        }
+        .hero-cta-primary.hero-cta-primary--white::before {
+            background-color: rgba(50, 96, 254, 0.14);
+        }
+        .hero-cta-primary.hero-cta-primary--white:hover {
+            color: #1a1c1c;
+            box-shadow:
+                0 20px 52px -4px rgba(15, 23, 42, 0.12),
+                0 8px 24px -4px rgba(50, 96, 254, 0.18);
+        }
+        .hero-cta-primary.hero-cta-primary--white:focus-visible {
+            outline: 2px solid #3260FE;
+            outline-offset: 3px;
         }
         .mesh-section {
             background-image:

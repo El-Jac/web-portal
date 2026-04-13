@@ -11,7 +11,7 @@ const HomeStyles = () => (
         .stitch-home h2,
         .stitch-home h3,
         .stitch-home h4 {
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
         }
         .glass-nav {
             background: rgba(255, 255, 255, 0.85);

@@ -8,6 +8,10 @@ const BlendedBackground = ({
     className = '',
     /** When false, vertical overflow is visible so children can animate with transform without clipping. */
     clipOverflow = true,
+    /** e.g. `cover` (fills area, may crop) or `contain` (full image visible, no zoom crop) */
+    backgroundSize = 'cover',
+    backgroundPosition = 'center',
+    backgroundRepeat = 'no-repeat',
 }) => (
     <div
         className={`relative ${
@@ -16,7 +20,12 @@ const BlendedBackground = ({
     >
         <div
             className="pointer-events-none absolute inset-0 -z-10"
-            style={{backgroundImage: `url(${image})`, backgroundSize: 'cover', backgroundPosition: 'center'}}
+            style={{
+                backgroundImage: `url(${image})`,
+                backgroundSize,
+                backgroundPosition,
+                backgroundRepeat,
+            }}
         />
         <div className="pointer-events-none absolute inset-0 -z-10">
             <div className="absolute inset-x-0 top-0"

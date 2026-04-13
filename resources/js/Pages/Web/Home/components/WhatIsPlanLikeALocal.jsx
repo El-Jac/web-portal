@@ -177,7 +177,11 @@ const WhatIsPlanLikeALocal = () => {
         whoWeAreInView && !reduceMotion && whoWeAreTitleTyped.length < WHO_WE_ARE_TITLE.length;
 
     return (
-    <BlendedBackground clipOverflow={false} className="z-30 bg-[#f9f9f9] px-5 py-14 md:px-10 md:py-16 lg:px-16">
+    <BlendedBackground
+        clipOverflow={false}
+        image="/images/home/stitch/who-we-are-bg.jpg"
+        className="z-30 bg-[#f9f9f9] px-5 py-14 md:px-10 md:py-16 lg:px-16"
+    >
         <div className="mx-auto max-w-[1120px]">
             <div
                 ref={featureHighlightsGridRef}
