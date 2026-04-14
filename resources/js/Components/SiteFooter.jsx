@@ -47,7 +47,7 @@ const SiteFooter = () => {
     return (
         <>
             <footer
-                className="relative rounded-t-[100px] bg-[#0f131a] text-white"
+                className="relative overflow-x-hidden rounded-t-[100px] bg-[#0f131a] text-white"
                 style={{
                     /* Rounded top without `overflow:hidden`, so `background-attachment: fixed` works */
                     clipPath: 'inset(0 round 100px 100px 0 0)',
