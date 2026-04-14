@@ -4,6 +4,7 @@ import TourGuideIcon from '@/Components/icons/TourGuideIcon';
 import PersonalizedItineraryListIcon from '@/Components/icons/PersonalizedItineraryListIcon';
 
 export const navItems = [
+    {label: 'Home', href: '/'},
     {label: 'Who We Are', href: '/who-we-are'},
     {label: 'What We Do', href: '/what-we-do'},
     {label: 'Destinations', href: '/destinations'},
