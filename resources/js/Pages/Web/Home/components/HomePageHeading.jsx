@@ -119,7 +119,7 @@ function HomePageHeading() {
     const showCursorOnLine2 = !done && line1.length >= ACCENT_LINE1.length;
 
     return (
-    <header className="relative flex min-h-[max(100vh,850px)] items-center overflow-hidden">
+    <header className="relative flex min-h-[max(90vh,700px)] items-center overflow-hidden md:min-h-[max(100vh,850px)]">
         <div className="absolute inset-0 z-0 overflow-hidden bg-[#f9f9f9]">
             <picture className="block h-full w-full">
                 <source srcSet="/images/home/stitch/hero.webp?v=20" type="image/webp"/>
