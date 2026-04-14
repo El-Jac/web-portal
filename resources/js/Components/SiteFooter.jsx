@@ -1,19 +1,59 @@
 import React, {useState} from 'react';
-import {Link} from '@inertiajs/react';
+import {Link, usePage} from '@inertiajs/react';
 import {ArrowForward} from '@mui/icons-material';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import InstagramIcon from '@mui/icons-material/Instagram';
 import ContactUsDialog from './ContactUsDialog';
 import {navItems} from '../Pages/Web/Home/components/homeData';
 
+function normalizePath(path) {
+    if (!path) return '/';
+    const clean = path.split('?')[0];
+    if (clean === '/') return '/';
+    return clean.replace(/\/$/, '') || '/';
+}
+
+/** Replace `#` with real profile URLs when available. */
+const FOOTER_SOCIAL = [
+    {label: 'Facebook', href: '#', Icon: FacebookIcon},
+    {label: 'Instagram', href: '#', Icon: InstagramIcon},
+];
+
+const FOOTER_LEGAL = [
+    {label: 'Privacy Policy', href: '#'},
+    {label: 'Terms of Service', href: '#'},
+    {label: 'Cookie Policy', href: '#'},
+];
+
 const SiteFooter = () => {
     const [contactDialogOpen, setContactDialogOpen] = useState(false);
+    const {url} = usePage();
+    const currentPath = normalizePath(url);
+
+    const linkBase =
+        "font-['Manrope',ui-sans-serif,sans-serif] text-[16px] font-medium text-white/55 transition-colors duration-200 hover:text-white";
+
+    const siteMapLinkClass = (href) => {
+        const active = normalizePath(href) === currentPath;
+        return [
+            'w-fit border-b border-transparent pb-0.5 text-left transition-colors duration-200',
+            linkBase,
+            active ? 'border-white/50 text-white' : '',
+        ]
+            .filter(Boolean)
+            .join(' ');
+    };
 
     return (
         <>
-            <footer className="relative overflow-hidden rounded-t-[100px] bg-[#0f131a] text-white">
-                <div
-                    className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
-                    aria-hidden
-                >
+            <footer
+                className="relative rounded-t-[100px] bg-[#0f131a] text-white"
+                style={{
+                    /* Rounded top without `overflow:hidden`, so `background-attachment: fixed` works */
+                    clipPath: 'inset(0 round 100px 100px 0 0)',
+                }}
+            >
+                <div className="pointer-events-none absolute inset-0 z-0" aria-hidden>
                     <div
                         className="absolute inset-0"
                         style={{
@@ -26,6 +66,7 @@ const SiteFooter = () => {
                             backgroundImage: 'url(/images/home/stitch/footer-bg.jpg)',
                             backgroundSize: 'cover',
                             backgroundPosition: 'center',
+                            backgroundAttachment: 'fixed',
                             filter: 'saturate(0.87) contrast(0.91) brightness(0.8)',
                         }}
                     />
@@ -41,8 +82,9 @@ const SiteFooter = () => {
                 </div>
 
                 <div className="relative z-10 mx-auto max-w-[1120px] px-6 py-16 md:px-10 md:py-20 lg:px-12">
-                    <div className="grid grid-cols-1 gap-12 md:grid-cols-12 md:gap-10 lg:gap-14">
-                        <div className="md:col-span-5">
+                    <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-10 lg:gap-y-14">
+                        {/* Brand + tagline + social + Start planning */}
+                        <div className="lg:col-span-5">
                             <Link
                                 href="/"
                                 className="group mb-6 inline-flex items-center gap-2 sm:gap-2.5"
@@ -58,43 +100,30 @@ const SiteFooter = () => {
                                     className="hidden h-9 w-auto object-contain brightness-0 invert transition-[filter] duration-300 ease-out group-hover:filter-none sm:block sm:h-10 md:h-12"
                                 />
                             </Link>
-                            <p className="max-w-[320px] text-[15px] leading-[1.7] text-white/62">
+                            <p className="mb-8 max-w-[320px] text-[15px] leading-[1.7] text-white/62">
                                 Travel planned by people who{' '}
                                 <span className="font-medium text-white/[0.92]">actually live there.</span>
                             </p>
-                        </div>
-
-                        <div className="flex flex-col gap-8 md:col-span-4 md:flex-row md:gap-12">
-                            <nav
-                                className="flex flex-col gap-3.5 font-['Manrope',ui-sans-serif,sans-serif]"
-                                aria-label="Footer"
-                            >
-                                {navItems.map((item) => (
-                                    <Link
-                                        key={item.href}
-                                        href={item.href}
-                                        className="w-fit text-[16px] font-medium text-white/55 transition-colors duration-200 hover:text-white"
+                            <div className="mb-6 flex flex-wrap items-center gap-4">
+                                {FOOTER_SOCIAL.map(({label, href, Icon}) => (
+                                    <a
+                                        key={label}
+                                        href={href}
+                                        aria-label={label}
+                                        onClick={
+                                            href === '#'
+                                                ? (e) => e.preventDefault()
+                                                : undefined
+                                        }
+                                        className="text-white/55 transition-colors duration-200 hover:text-white"
                                     >
-                                        {item.label}
-                                    </Link>
+                                        <Icon sx={{fontSize: 22}}/>
+                                    </a>
                                 ))}
-                                <button
-                                    type="button"
-                                    onClick={() => setContactDialogOpen(true)}
-                                    className="w-fit text-left text-[16px] font-medium text-white/55 transition-colors duration-200 hover:text-white"
-                                >
-                                    Contact Us
-                                </button>
-                            </nav>
-                        </div>
-
-                        <div className="flex flex-col justify-start md:col-span-3 md:items-end md:text-right">
-                            <p className="mb-4 text-[11px] font-medium uppercase tracking-[0.22em] text-white/45">
-                                Get started
-                            </p>
+                            </div>
                             <Link
                                 href="/plan"
-                                className="hero-cta-primary hero-cta-primary--bright-hover group inline-flex items-center rounded-xl px-6 py-3.5 text-[13px] text-white md:px-7 md:py-4 md:text-[14px]"
+                                className="hero-cta-primary hero-cta-primary--bright-hover group inline-flex w-fit items-center rounded-xl px-6 py-3.5 text-[13px] text-white md:px-7 md:py-4 md:text-[14px]"
                             >
                                 <span className="relative z-[1] inline-flex items-center gap-2">
                                     Start planning
@@ -105,27 +134,67 @@ const SiteFooter = () => {
                                 </span>
                             </Link>
                         </div>
+
+                        {/* Site map */}
+                        <div className="lg:col-span-4">
+                            <h2 className="mb-5 font-['Manrope',ui-sans-serif,sans-serif] text-[12px] font-bold uppercase tracking-[0.14em] text-white/75">
+                                Site Map
+                            </h2>
+                            <nav
+                                className="flex flex-col gap-3.5"
+                                aria-label="Site map"
+                            >
+                                <Link href="/" className={siteMapLinkClass('/')}>
+                                    Homepage
+                                </Link>
+                                {navItems.map((item) => (
+                                    <Link
+                                        key={item.href}
+                                        href={item.href}
+                                        className={siteMapLinkClass(item.href)}
+                                    >
+                                        {item.label}
+                                    </Link>
+                                ))}
+                                <button
+                                    type="button"
+                                    onClick={() => setContactDialogOpen(true)}
+                                    className={`${linkBase} w-fit text-left`}
+                                >
+                                    Contact Us
+                                </button>
+                            </nav>
+                        </div>
+
+                        {/* Legal */}
+                        <div className="lg:col-span-3">
+                            <h2 className="mb-5 font-['Manrope',ui-sans-serif,sans-serif] text-[12px] font-bold uppercase tracking-[0.14em] text-white/75">
+                                Legal
+                            </h2>
+                            <ul className="flex flex-col gap-3.5">
+                                {FOOTER_LEGAL.map(({label, href}) => (
+                                    <li key={label}>
+                                        <a
+                                            href={href}
+                                            onClick={
+                                                href === '#'
+                                                    ? (e) => e.preventDefault()
+                                                    : undefined
+                                            }
+                                            className={`${linkBase} inline-block`}
+                                        >
+                                            {label}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
                     </div>
 
-                    <div className="mt-14 flex flex-col items-center justify-between gap-5 border-t border-white/[0.09] pt-9 sm:flex-row sm:gap-6">
-                        <p className="text-center text-[12px] leading-relaxed text-white/38 sm:text-left">
+                    <div className="mt-14 border-t border-white/[0.09] pt-9">
+                        <p className="text-center font-['Manrope',ui-sans-serif,sans-serif] text-[12px] leading-relaxed text-white/38">
                             &copy; {new Date().getFullYear()} Plan Like a Local. All rights reserved.
                         </p>
-                        <div className="flex flex-wrap items-center justify-center gap-5 font-['Manrope',ui-sans-serif,sans-serif] sm:justify-end">
-                            <Link
-                                href="/destinations"
-                                className="text-[12px] font-medium text-white/55 transition-colors hover:text-white"
-                            >
-                                Destinations
-                            </Link>
-                            <span className="hidden h-3 w-px bg-white/15 sm:block" aria-hidden/>
-                            <Link
-                                href="/plan"
-                                className="text-[12px] font-medium text-[#7ea3ff] transition-colors hover:text-[#a8c0ff]"
-                            >
-                                Plan a trip
-                            </Link>
-                        </div>
                     </div>
                 </div>
             </footer>
