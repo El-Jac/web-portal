@@ -98,6 +98,12 @@ const SiteStyles = () => (
                     rgba(249, 249, 249, 0) 100%
                 );
         }
+        @media (max-width: 767px) {
+            .hero-overlay {
+                /* Tablet/mobile: dark overlay over photo for readability (no white gradient wash) */
+                background: rgba(15, 20, 25, 0.42);
+            }
+        }
         /* R→L reveal with feather: --hero-reveal-x = left edge of full-opacity (moves 100% → 0%) */
         @property --hero-reveal-x {
             syntax: '<percentage>';
@@ -167,6 +173,13 @@ const SiteStyles = () => (
             text-transform: uppercase;
             color: #3260FE;
         }
+        @media (max-width: 767px) {
+            .hero-home-badge {
+                color: #ffffff;
+                background-color: rgba(255, 255, 255, 0.16);
+                font-size: 0.8rem;
+            }
+        }
         /* Manrope + tight tracking: editorial, modern (overrides .stitch-home h1) */
         .stitch-home .hero-home-heading {
             font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
@@ -174,6 +187,12 @@ const SiteStyles = () => (
             letter-spacing: -0.052em;
             text-shadow: 0 1px 0 rgba(255, 255, 255, 0.88);
             margin-bottom: 2rem;
+        }
+        @media (max-width: 767px) {
+            .stitch-home .hero-home-heading {
+                color: #ffffff;
+                text-shadow: 0 2px 18px rgba(0, 0, 0, 0.35);
+            }
         }
         @media (min-width: 768px) {
             .stitch-home .hero-home-heading {
@@ -189,6 +208,11 @@ const SiteStyles = () => (
             margin-top: 0;
             padding-left: clamp(0.85rem, 2.4vw, 1.35rem);
             border-left: 3px solid rgba(50, 96, 254, 0.38);
+        }
+        @media (max-width: 767px) {
+            .stitch-home .hero-home-heading-accent-wrap {
+                border-left-color: rgba(255, 255, 255, 0.75);
+            }
         }
         @media (min-width: 768px) {
             .stitch-home .hero-home-heading-accent-wrap {
@@ -246,6 +270,12 @@ const SiteStyles = () => (
             text-shadow:
                 0 1px 0 rgba(255, 255, 255, 0.45),
                 0 0 40px rgba(255, 255, 255, 0.35);
+        }
+        @media (max-width: 767px) {
+            .stitch-home .hero-home-heading .hero-home-accent {
+                color: #ffffff;
+                text-shadow: 0 2px 18px rgba(0, 0, 0, 0.35);
+            }
         }
         @media (min-width: 768px) {
             .stitch-home .hero-home-heading .hero-home-accent {
@@ -363,22 +393,23 @@ const SiteStyles = () => (
             border-radius: 0 0 0.65rem 0.65rem;
             box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.75) inset;
         }
-        /* Ghost link: no chip — readability from soft light halo on busy hero photo */
+        /* Ghost link: no chip — on md+ light halo helps blue label on photo; on mobile label is white */
         .hero-home-cta-secondary {
             font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
             font-weight: 700;
             font-size: 0.8125rem;
             letter-spacing: 0.11em;
             text-transform: uppercase;
-            text-shadow:
-                0 0 1px rgba(255, 255, 255, 0.95),
-                0 1px 1px rgba(255, 255, 255, 0.85),
-                0 0 10px rgba(255, 255, 255, 0.55);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
         }
         @media (min-width: 768px) {
             .hero-home-cta-secondary {
                 font-size: 0.875rem;
                 letter-spacing: 0.1em;
+                text-shadow:
+                    0 0 1px rgba(255, 255, 255, 0.95),
+                    0 1px 1px rgba(255, 255, 255, 0.85),
+                    0 0 10px rgba(255, 255, 255, 0.55);
             }
         }
         /* Solid fill + hover sweep — matches .nav-cta-start-planning */
@@ -396,6 +427,14 @@ const SiteStyles = () => (
                 0 14px 40px -6px rgba(18, 42, 105, 0.42),
                 0 6px 18px -4px rgba(50, 96, 254, 0.22);
             transition: box-shadow 0.3s ease, transform 0.25s ease;
+        }
+        @media (max-width: 767px) {
+            .hero-cta-primary {
+                box-shadow:
+                    0px 0px 17px 5px #ffffffbf,
+                    0 14px 40px -6px rgba(18, 42, 105, 0.42),
+                    0 6px 18px -4px rgba(50, 96, 254, 0.22);
+            }
         }
         .hero-cta-primary::after {
             content: '';
@@ -500,6 +539,16 @@ const SiteStyles = () => (
         }
         .hide-scrollbar::-webkit-scrollbar {
             display: none;
+        }
+        /* Destinations carousel: native bar hidden < sm — custom HTML track sits below */
+        @media (max-width: 639px) {
+            .destinations-carousel-strip {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+            .destinations-carousel-strip::-webkit-scrollbar {
+                display: none;
+            }
         }
         .nav-link {
             display: inline-flex;
@@ -631,6 +680,19 @@ const SiteStyles = () => (
         .site-nav-bar-enter .nav-cta-start-planning::before {
             border-radius: 10px;
         }
+        /* Tight bar: nav links + CTA barely fit between md and ~784px */
+        @media (min-width: 768px) and (max-width: 784px) {
+            .site-nav-bar-enter .nav-cta-start-planning {
+                font-size: 0.6875rem;
+                letter-spacing: 0.035em;
+                padding: 0.4rem 0.65rem;
+                border-radius: 9px;
+            }
+            .site-nav-bar-enter .nav-cta-start-planning::after,
+            .site-nav-bar-enter .nav-cta-start-planning::before {
+                border-radius: 9px;
+            }
+        }
         @media (min-width: 1280px) {
             .site-nav-bar-enter .nav-cta-start-planning {
                 font-size: 0.875rem;
@@ -710,6 +772,18 @@ const SiteStyles = () => (
         @media (min-width: 768px) {
             .quotes { margin-bottom: 2.5rem; }
         }
+        @media (max-width: 767px) {
+            .stitch-home h2.who-we-are-quotes.quotes {
+                font-size: 2.125rem;
+                line-height: 1.09;
+                letter-spacing: -0.048em;
+            }
+            .stitch-home h2.destinations-headline-quotes.quotes {
+                font-size: 2.25rem;
+                line-height: 1.08;
+                letter-spacing: -0.045em;
+            }
+        }
         .ibrow {
             font-size: 0.9rem;
             font-weight: 900;
@@ -721,39 +795,6 @@ const SiteStyles = () => (
             background: #00000040;
             padding: 5px 10px;
             border-radius: 100px;
-        }
-        @media (max-width: 1024px) {
-            .hero-overlay {
-                background:
-                    radial-gradient(ellipse 95% 60% at 50% 8%, rgba(50, 96, 254, 0.06) 0%, transparent 55%),
-                    radial-gradient(ellipse 70% 45% at 50% 28%, rgba(255, 255, 255, 0.12) 0%, transparent 50%),
-                    linear-gradient(
-                        to top,
-                        rgba(249, 249, 249, 1) 0%,
-                        rgba(249, 249, 249, 1) 22%,
-                        rgba(249, 249, 249, 0.9) 36%,
-                        rgba(249, 249, 249, 0.55) 52%,
-                        rgba(249, 249, 249, 0.12) 64%,
-                        rgba(249, 249, 249, 0) 72%,
-                        rgba(249, 249, 249, 0) 100%
-                    );
-            }
-        }
-        @media (max-width: 767px) {
-            .hero-overlay {
-                background:
-                    radial-gradient(ellipse 85% 50% at 50% 22%, rgba(255, 255, 255, 0.12) 0%, transparent 48%),
-                    linear-gradient(
-                        to top,
-                        rgba(249, 249, 249, 1) 0%,
-                        rgba(249, 249, 249, 1) 20%,
-                        rgba(249, 249, 249, 0.92) 32%,
-                        rgba(249, 249, 249, 0.55) 48%,
-                        rgba(249, 249, 249, 0.12) 58%,
-                        rgba(249, 249, 249, 0) 66%,
-                        rgba(249, 249, 249, 0) 100%
-                    );
-            }
         }
     `}</style>
 );

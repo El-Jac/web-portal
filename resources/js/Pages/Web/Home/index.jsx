@@ -6,6 +6,7 @@ import HomePageHeading from './components/HomePageHeading.jsx';
 import WhatIsPlanLikeALocal from './components/WhatIsPlanLikeALocal.jsx';
 import DestinationsSection from './components/DestinationsSection.jsx';
 import HowItWorks from './components/HowItWorks.jsx';
+import HomeSectionDivider from './components/HomeSectionDivider.jsx';
 import ReadyToPlanSection from './components/ReadyToPlanSection.jsx';
 
 const Index = () => {
@@ -18,9 +19,12 @@ const Index = () => {
             <div className="stitch-home overflow-x-hidden">
                 <HomePageHeading/>
                 <WhatIsPlanLikeALocal/>
+                <HomeSectionDivider/>
                 <DestinationsSection destinations={destinations} pagination={pagination}/>
+                <HomeSectionDivider/>
                 <HowItWorks/>
             </div>
+            <HomeSectionDivider/>
             <ReadyToPlanSection/>
         </WebsiteLayout>
     );

@@ -84,27 +84,27 @@ const SiteFooter = () => {
                 <div className="relative z-10 mx-auto max-w-[1120px] px-6 py-16 md:px-10 md:py-20 lg:px-12">
                     <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-10 lg:gap-y-14">
                         {/* Brand + tagline + social + Start planning */}
-                        <div className="lg:col-span-5">
+                        <div className="flex flex-col items-center text-center lg:col-span-5 lg:items-start lg:text-left">
                             <Link
                                 href="/"
                                 className="group mb-6 inline-flex items-center gap-2 sm:gap-2.5"
                             >
                                 <img
-                                    src="/images/home/stitch/brand-icon.png"
+                                    src="/images/home/stitch/brand-icon.png?v=3"
                                     alt="Plan Like a Local icon"
                                     className="h-14 w-auto object-contain brightness-0 invert transition-[filter] duration-300 ease-out group-hover:filter-none sm:h-16 md:h-[4.5rem]"
                                 />
                                 <img
                                     src="/images/home/stitch/brand-wordmark.png"
                                     alt="Plan Like a Local"
-                                    className="hidden h-9 w-auto object-contain brightness-0 invert transition-[filter] duration-300 ease-out group-hover:filter-none sm:block sm:h-10 md:h-12"
+                                    className="h-10 w-auto object-contain brightness-0 invert transition-[filter] duration-300 ease-out group-hover:filter-none md:h-12"
                                 />
                             </Link>
                             <p className="mb-8 max-w-[320px] text-[15px] leading-[1.7] text-white/62">
                                 Travel planned by people who{' '}
                                 <span className="font-medium text-white/[0.92]">actually live there.</span>
                             </p>
-                            <div className="mb-6 flex flex-wrap items-center gap-4">
+                            <div className="mb-6 flex flex-wrap items-center justify-center gap-4 lg:justify-start">
                                 {FOOTER_SOCIAL.map(({label, href, Icon}) => (
                                     <a
                                         key={label}
@@ -117,7 +117,7 @@ const SiteFooter = () => {
                                         }
                                         className="text-white/55 transition-colors duration-200 hover:text-white"
                                     >
-                                        <Icon sx={{fontSize: 22}}/>
+                                        <Icon sx={{fontSize: 28}}/>
                                     </a>
                                 ))}
                             </div>

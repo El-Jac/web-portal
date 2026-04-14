@@ -126,23 +126,23 @@ function HomePageHeading() {
                 <img
                     src="/images/home/stitch/hero.jpg?v=20"
                     alt="Scenic travel photograph"
-                    className="hero-home-media h-full w-full object-cover object-[55%_center] md:object-[52%_center]"
+                    className="hero-home-media h-full w-full object-cover object-right md:object-[52%_center]"
                 />
             </picture>
             <div className="hero-overlay absolute inset-0"/>
         </div>
 
-        <div className="relative z-10 mx-auto flex w-full max-w-[1120px] px-5 py-24 md:px-10 lg:py-0 lg:pl-[65px] lg:pr-0">
+        <div className="relative z-10 mx-auto flex w-full max-w-[1120px] pl-8 pr-5 py-24 md:px-10 lg:py-0 lg:pl-[65px] lg:pr-0">
             <div className="hero-home-inner max-w-[540px] pt-16 sm:pt-20 md:pt-0 lg:max-w-[min(580px,100%)] xl:max-w-[min(640px,100%)]">
                 <div
                     ref={heroInnerParallaxRef}
                     className="hero-home-inner-parallax will-change-transform"
                 >
-                    <div className="hero-home-badge mb-6 inline-flex items-center rounded-full px-6 py-1.5 backdrop-blur-md md:mb-7 md:px-9 md:py-2">
+                    <div className="hero-home-badge mb-6 inline-flex items-center rounded-full px-6 py-1.5 text-white backdrop-blur-md md:mb-7 md:px-9 md:py-2">
                         #1 Planning Hub for your Trips
                     </div>
 
-                    <h1 className="hero-home-heading text-[2.75rem] leading-[1.06] text-[#0f1419] sm:text-[3.25rem] sm:leading-[1.05] md:text-[5.2rem] md:leading-[1.02]">
+                    <h1 className="hero-home-heading text-[2.75rem] leading-[1.06] text-white md:text-[#0f1419] sm:text-[3.25rem] sm:leading-[1.05] md:text-[5.2rem] md:leading-[1.02]">
                         <span className="hero-home-heading-primary block">
                             Your personal
                             <br/>
@@ -209,9 +209,9 @@ function HomePageHeading() {
                         </Link>
                         <Link
                             href="/destinations"
-                            className="hero-home-cta-secondary group inline-flex items-center gap-4 rounded-full py-2.5 pl-2 pr-4 text-[#3260FE] transition-colors hover:bg-[rgba(50,96,254,0.08)] sm:py-3 sm:pl-2.5 sm:pr-5 md:gap-5"
+                            className="hero-home-cta-secondary group inline-flex items-center gap-4 rounded-full py-2.5 pl-2 pr-4 text-white transition-colors hover:bg-white/12 md:text-[#3260FE] md:hover:bg-[rgba(50,96,254,0.08)] sm:py-3 sm:pl-2.5 sm:pr-5 md:gap-5"
                         >
-                            <span className="h-px w-10 bg-[#3260FE]/45 transition-all duration-300 group-hover:w-[3.25rem] group-hover:bg-[#3260FE]/60 sm:w-12 sm:group-hover:w-[3.75rem]"/>
+                            <span className="h-px w-10 bg-white/55 transition-all duration-300 group-hover:w-[3.25rem] group-hover:bg-white/80 sm:w-12 sm:group-hover:w-[3.75rem] md:bg-[#3260FE]/45 md:group-hover:bg-[#3260FE]/60"/>
                             View Destinations
                         </Link>
                     </div>

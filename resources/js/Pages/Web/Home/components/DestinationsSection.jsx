@@ -1,4 +1,4 @@
-import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useLayoutEffect, useRef, useState} from 'react';
 import {Link, router} from '@inertiajs/react';
 import {ArrowBack, ArrowForward} from '@mui/icons-material';
 import DestinationCard from './DestinationCard';
@@ -17,7 +17,7 @@ const DestinationsPageArrows = ({currentPage, lastPage, goToPage, className = ''
     const hasNext = currentPage < lastPage;
     return (
         <div
-            className={`hidden shrink-0 gap-4 sm:flex ${className}`}
+            className={`max-sm:hidden shrink-0 gap-4 sm:flex ${className}`}
             role="group"
             aria-label="Browse destination pages"
         >
@@ -50,12 +50,69 @@ const DestinationsSection = ({destinations = [], pagination = {}}) => {
     const [reduceMotion, setReduceMotion] = useState(false);
     /** Whole section — observe this so scrolling up triggers when cards enter, not only the header */
     const sectionRef = useRef(null);
+    const destinationsCarouselRef = useRef(null);
+    const destinationsScrollTrackRef = useRef(null);
+    const [carouselScrollUi, setCarouselScrollUi] = useState({
+        thumbWidthPct: 100,
+        thumbLeftPct: 0,
+        overflow: false,
+    });
 
     const {current_page = 1, last_page = 1} = pagination;
 
     const goToPage = (page) => {
         router.get('/', {page}, {preserveScroll: true, preserveState: true});
     };
+
+    const updateCarouselScrollUi = useCallback(() => {
+        const el = destinationsCarouselRef.current;
+        if (!el) {
+            return;
+        }
+        const {scrollLeft, scrollWidth, clientWidth} = el;
+        if (scrollWidth <= clientWidth + 2) {
+            setCarouselScrollUi({thumbWidthPct: 100, thumbLeftPct: 0, overflow: false});
+            return;
+        }
+        const thumbWidthPct = Math.max(14, Math.min(100, (clientWidth / scrollWidth) * 100));
+        const maxScroll = scrollWidth - clientWidth;
+        const travelPct = 100 - thumbWidthPct;
+        const thumbLeftPct = maxScroll <= 0 ? 0 : (scrollLeft / maxScroll) * travelPct;
+        setCarouselScrollUi({thumbWidthPct, thumbLeftPct, overflow: true});
+    }, []);
+
+    const onDestinationsScrollTrackPointerDown = (e) => {
+        const el = destinationsCarouselRef.current;
+        const track = destinationsScrollTrackRef.current;
+        if (!el || !track) {
+            return;
+        }
+        const {scrollWidth, clientWidth} = el;
+        const maxScroll = scrollWidth - clientWidth;
+        if (maxScroll <= 0) {
+            return;
+        }
+        const rect = track.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const ratio = Math.max(0, Math.min(1, x / rect.width));
+        el.scrollLeft = ratio * maxScroll;
+        requestAnimationFrame(updateCarouselScrollUi);
+    };
+
+    useEffect(() => {
+        const el = destinationsCarouselRef.current;
+        if (!el) {
+            return undefined;
+        }
+        updateCarouselScrollUi();
+        el.addEventListener('scroll', updateCarouselScrollUi, {passive: true});
+        const ro = new ResizeObserver(() => updateCarouselScrollUi());
+        ro.observe(el);
+        return () => {
+            el.removeEventListener('scroll', updateCarouselScrollUi);
+            ro.disconnect();
+        };
+    }, [destinations, updateCarouselScrollUi, contentVisible]);
 
     useLayoutEffect(() => {
         if (typeof window === 'undefined') {
@@ -130,9 +187,9 @@ const DestinationsSection = ({destinations = [], pagination = {}}) => {
     }
 
     return (
-        <section ref={sectionRef} className="relative w-full bg-[#f9f9f9] px-5 py-18 md:px-10 md:py-24 lg:px-16">
+        <section ref={sectionRef} className="relative w-full bg-[#f9f9f9] px-5 pb-16 pt-10 md:px-10 md:pb-20 md:pt-18 lg:px-16">
             <div className="mx-auto max-w-[1120px]">
-                <div className="mb-8 md:mb-10">
+                <div className="mb-8 text-center md:mb-10 md:text-left">
                     <span
                         className="ibrow block min-h-[1.4em] pb-2 md:pb-3"
                         aria-label={DESTINATIONS_TITLE}
@@ -164,8 +221,8 @@ const DestinationsSection = ({destinations = [], pagination = {}}) => {
                                     : `transform ${DESTINATIONS_CONTENT_REVEAL_MS}ms cubic-bezier(0.22, 1, 0.36, 1)`,
                             }}
                         >
-                            <div className="max-w-[620px]">
-                                <h2 className="quotes !mb-0">
+                            <div className="mx-auto max-w-[620px] md:mx-0">
+                                <h2 className="quotes destinations-headline-quotes !mb-0">
                                     Our{' '}
                                     <span className="mr-1.5 inline-block font-light italic text-[#EA6D4F] md:mr-2">
                                         Most Popular
@@ -174,15 +231,15 @@ const DestinationsSection = ({destinations = [], pagination = {}}) => {
                                     Destinations
                                 </h2>
                             </div>
-                            <div className="mt-4 flex w-full flex-col items-stretch gap-4 sm:mt-5 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
-                                <p className="max-w-[470px] text-[14px] leading-relaxed text-[#3f484a] md:text-[16px]">
+                            <div className="mt-4 flex w-full flex-col items-center gap-4 text-center sm:mt-5 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:text-left md:gap-6">
+                                <p className="max-w-[470px] px-[20px] text-[1rem] leading-relaxed text-[#3f484a] md:text-[16px]">
                                     Explore cities, towns, and hidden gems loved by travelers.
                                 </p>
                                 <DestinationsPageArrows
                                     currentPage={current_page}
                                     lastPage={last_page}
                                     goToPage={goToPage}
-                                    className="w-full justify-end sm:ml-auto sm:w-auto sm:shrink-0"
+                                    className="w-full justify-center sm:w-auto sm:shrink-0 md:ml-auto md:justify-end"
                                 />
                             </div>
                         </div>
@@ -200,18 +257,36 @@ const DestinationsSection = ({destinations = [], pagination = {}}) => {
                     }}
                 >
                     <div
-                        className="hide-scrollbar grid auto-cols-[88vw] grid-flow-col gap-5 overflow-x-auto pb-8 sm:auto-cols-[minmax(0,22rem)] lg:grid-flow-row lg:grid-cols-3 lg:auto-cols-auto lg:overflow-visible">
+                        ref={destinationsCarouselRef}
+                        className="destinations-carousel-strip grid auto-cols-[88vw] grid-flow-col gap-5 overflow-x-auto pb-2 sm:auto-cols-auto sm:grid-flow-row sm:grid-cols-2 sm:overflow-visible sm:pb-8 lg:grid-cols-3"
+                    >
                         {destinations.map((destination) => (
                             <DestinationCard key={destination.id} destination={destination}/>
                         ))}
                     </div>
+                    <div className="mt-1 block px-1 sm:hidden" aria-hidden>
+                        <div
+                            ref={destinationsScrollTrackRef}
+                            className="relative h-2 w-full cursor-pointer rounded-full bg-slate-200/90 shadow-[inset_0_1px_2px_rgba(15,23,42,0.08)]"
+                            onPointerDown={onDestinationsScrollTrackPointerDown}
+                        >
+                            <div
+                                className="pointer-events-none absolute top-0 h-full rounded-full bg-gradient-to-r from-[#3260fe] via-[#5b8cff] to-[#7aa3ff] shadow-[0_1px_3px_rgba(50,96,254,0.35)]"
+                                style={{
+                                    width: `${carouselScrollUi.thumbWidthPct}%`,
+                                    left: `${carouselScrollUi.thumbLeftPct}%`,
+                                    transition: reduceMotion ? 'none' : 'left 90ms ease-out, width 90ms ease-out',
+                                }}
+                            />
+                        </div>
+                    </div>
 
                     <div
-                        className="pointer-events-none absolute bottom-8 right-0 top-0 hidden w-28 bg-gradient-to-l from-[#f9f9f9] to-transparent md:block lg:hidden"/>
+                        className="pointer-events-none absolute bottom-8 right-0 top-0 hidden w-28 bg-gradient-to-l from-[#f9f9f9] to-transparent max-sm:block sm:hidden"/>
                 </div>
 
                 <div
-                    className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between"
+                    className="mt-8 flex flex-col items-center gap-4 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left"
                     style={{
                         opacity: contentVisible ? 1 : 0,
                         transition: reduceMotion
@@ -233,7 +308,7 @@ const DestinationsSection = ({destinations = [], pagination = {}}) => {
                         currentPage={current_page}
                         lastPage={last_page}
                         goToPage={goToPage}
-                        className="w-full justify-end sm:w-auto sm:shrink-0"
+                        className="w-full justify-center sm:w-auto sm:shrink-0 md:ml-auto md:justify-end"
                     />
                 </div>
             </div>

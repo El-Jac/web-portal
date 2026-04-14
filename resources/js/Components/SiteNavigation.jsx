@@ -12,6 +12,9 @@ import {
 } from '@mui/icons-material';
 import {navItems} from '../Pages/Web/Home/components/homeData';
 
+/** Home is only listed in the mobile drawer; md+ nav hides it (logo links home). */
+const desktopNavItems = navItems.filter((item) => item.href !== '/');
+
 const MOBILE_NAV_ICONS = [HomeOutlined, GroupsOutlined, WorkOutline, MapOutlined];
 
 function normalizePath(path) {
@@ -49,10 +52,10 @@ const SiteNavigation = ({mobileMenuOpen, setMobileMenuOpen, onContactClick}) => 
     const drawerLinkClass = (href) => {
         const active = normalizePath(href) === currentPath;
         return [
-            'group site-nav-mobile-drawer-link flex items-center gap-4 rounded-2xl px-2 py-5 text-left text-[15px] font-medium leading-snug transition-[color,background-color,transform] duration-150 ease-out active:scale-[0.99]',
+            'group site-nav-mobile-drawer-link flex items-center gap-4 rounded-2xl py-5 text-left text-[15px] font-medium leading-snug transition-[color,background-color,transform] duration-150 ease-out active:scale-[0.99]',
             active
-                ? 'site-nav-mobile-drawer-link--active'
-                : 'text-[#4b5563] hover:bg-[rgba(50,96,254,0.1)] hover:text-[#3260FE] active:bg-[rgba(50,96,254,0.16)] active:text-[#1d4ed8]',
+                ? 'site-nav-mobile-drawer-link--active pl-[20px] pr-2'
+                : 'px-2 text-[#4b5563] hover:bg-[rgba(50,96,254,0.1)] hover:text-[#3260FE] active:bg-[rgba(50,96,254,0.16)] active:text-[#1d4ed8]',
         ]
             .filter(Boolean)
             .join(' ');
@@ -69,19 +72,19 @@ const SiteNavigation = ({mobileMenuOpen, setMobileMenuOpen, onContactClick}) => 
                         className="flex shrink-0 items-center gap-1.5 rounded-full py-0.5 pl-0.5 pr-1.5 transition-opacity duration-300 hover:opacity-[0.92] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#3260FE]/40 sm:gap-2 sm:pr-2"
                     >
                         <img
-                            src="/images/home/stitch/brand-icon.png"
+                            src="/images/home/stitch/brand-icon.png?v=3"
                             alt="Plan Like a Local icon"
-                            className="h-9 w-auto shrink-0 object-contain md:h-10 xl:h-11"
+                            className="h-[35px] w-auto shrink-0 object-contain md:h-9 lg:h-10 xl:h-11"
                         />
                         <img
                             src="/images/home/stitch/brand-wordmark.png"
                             alt="Plan Like a Local"
-                            className="block h-11 w-auto shrink-0 object-contain md:h-12"
+                            className="block h-auto w-[75px] shrink-0 object-contain md:h-11 md:w-auto lg:h-auto lg:w-[80px]"
                         />
                     </Link>
 
                     <div className="hidden min-w-0 items-center gap-1 md:flex md:gap-1.5 lg:gap-2 xl:gap-2.5">
-                        {navItems.map((item) => (
+                        {desktopNavItems.map((item) => (
                             <Link
                                 key={item.href}
                                 href={item.href}
@@ -140,9 +143,9 @@ const SiteNavigation = ({mobileMenuOpen, setMobileMenuOpen, onContactClick}) => 
                 aria-hidden={!mobileMenuOpen}
             />
             <aside
-                className={`site-nav site-nav-mobile-drawer fixed left-0 top-0 z-[110] flex h-dvh w-[min(90vw,21rem)] max-w-[340px] flex-col border-r border-slate-200/90 bg-white transition-transform duration-300 ease-out md:hidden ${
+                className={`site-nav site-nav-mobile-drawer fixed left-0 top-0 z-[110] flex h-dvh w-[min(90vw,21rem)] max-w-[340px] flex-col overflow-hidden rounded-[0_40px_0_0] border-r border-slate-200/90 bg-white transition-transform duration-300 ease-out md:hidden ${
                     mobileMenuOpen
-                        ? 'translate-x-0 shadow-[8px_0_40px_-12px_rgba(15,23,42,0.12)]'
+                        ? 'translate-x-0 shadow-[10px_0_32px_-6px_rgba(15,23,42,0.32),22px_0_56px_-10px_rgba(15,23,42,0.24),36px_0_80px_-14px_rgba(15,23,42,0.14),44px_0_96px_-20px_rgba(50,96,254,0.16)]'
                         : '-translate-x-full shadow-none pointer-events-none'
                 }`}
                 aria-hidden={!mobileMenuOpen}
@@ -157,7 +160,7 @@ const SiteNavigation = ({mobileMenuOpen, setMobileMenuOpen, onContactClick}) => 
                         onClick={closeMenu}
                     >
                         <img
-                            src="/images/home/stitch/brand-icon.png"
+                            src="/images/home/stitch/brand-icon.png?v=3"
                             alt="Plan Like a Local icon"
                             className="h-11 w-auto shrink-0 object-contain sm:h-12"
                         />

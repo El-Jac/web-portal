@@ -37,16 +37,6 @@ const HomeStyles = () => (
         .hide-scrollbar::-webkit-scrollbar {
             display: none;
         }
-        @media (max-width: 1024px) {
-            .hero-overlay {
-                background: linear-gradient(to top, rgba(249, 249, 249, 1) 30%, rgba(249, 249, 249, 0.4) 100%);
-            }
-        }
-        @media (max-width: 767px) {
-            .hero-overlay {
-                background: linear-gradient(to top, rgba(249, 249, 249, 1) 18%, rgba(249, 249, 249, 0.9) 42%, rgba(249, 249, 249, 0.15) 100%);
-            }
-        }
     `}</style>
 );
 

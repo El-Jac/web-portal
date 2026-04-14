@@ -180,12 +180,12 @@ const WhatIsPlanLikeALocal = () => {
     <BlendedBackground
         clipOverflow={false}
         image="/images/home/stitch/who-we-are-bg.jpg"
-        className="z-30 bg-[#f9f9f9] px-5 py-14 md:px-10 md:py-16 lg:px-16"
+        className="z-30 bg-[#f9f9f9] px-5 pb-7 pt-14 md:px-10 md:pb-12 md:pt-16 lg:px-16"
     >
         <div className="mx-auto max-w-[1120px]">
             <div
                 ref={featureHighlightsGridRef}
-                className="mb-16 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 md:mb-24 md:grid-cols-4 md:gap-6"
+                className="mb-16 grid grid-cols-2 gap-3 sm:gap-5 md:mb-24 md:grid-cols-4 md:gap-6"
             >
                 {featureHighlights.map(({label, icon: Icon}, index) => {
                     const staggerMs = featureHighlightsVisible ? index * FEATURE_HIGHLIGHT_STAGGER_MS : 0;
@@ -204,11 +204,11 @@ const WhatIsPlanLikeALocal = () => {
                             transition: `opacity ${FEATURE_HIGHLIGHT_REVEAL_MS}ms ${easing} ${staggerMs}ms, transform ${FEATURE_HIGHLIGHT_REVEAL_MS}ms ${easing} ${staggerMs}ms, box-shadow 300ms ease-out, background-color 300ms ease-out`,
                             willChange: featureHighlightsVisible ? 'auto' : 'opacity, transform',
                         }}
-                        className={`group flex min-h-[5.75rem] flex-col items-center justify-center gap-4 rounded-[1.375rem] bg-gradient-to-b from-white to-slate-50/40 px-4 py-5 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.98),inset_0_-1px_0_0_rgba(148,163,184,0.06),0_1px_2px_rgba(15,23,42,0.05),0_8px_20px_-10px_rgba(30,41,59,0.1),0_20px_48px_-24px_rgba(15,23,42,0.11),0_0_40px_-12px_rgba(59,130,246,0.06)] hover:bg-white hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,1),inset_0_-1px_0_0_rgba(234,109,79,0.08),0_2px_6px_rgba(15,23,42,0.06),0_12px_32px_-12px_rgba(234,109,79,0.22),0_28px_56px_-22px_rgba(15,23,42,0.14),0_44px_88px_-32px_rgba(30,41,59,0.1),0_0_60px_-16px_rgba(234,109,79,0.12)] sm:min-h-0 sm:flex-row sm:justify-start sm:gap-5 sm:py-5 md:min-h-[9.5rem] md:flex-col md:justify-center md:gap-4 md:px-6 md:py-8 md:text-center ${
+                        className={`group flex min-h-[4.75rem] flex-col items-center justify-center gap-2 rounded-[1.125rem] bg-gradient-to-b from-white to-slate-50/40 px-2 py-3 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.98),inset_0_-1px_0_0_rgba(148,163,184,0.06),0_1px_2px_rgba(15,23,42,0.05),0_8px_20px_-10px_rgba(30,41,59,0.1),0_20px_48px_-24px_rgba(15,23,42,0.11),0_0_40px_-12px_rgba(59,130,246,0.06)] hover:bg-white hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,1),inset_0_-1px_0_0_rgba(234,109,79,0.08),0_2px_6px_rgba(15,23,42,0.06),0_12px_32px_-12px_rgba(234,109,79,0.22),0_28px_56px_-22px_rgba(15,23,42,0.14),0_44px_88px_-32px_rgba(30,41,59,0.1),0_0_60px_-16px_rgba(234,109,79,0.12)] sm:min-h-0 sm:flex-row sm:justify-start sm:gap-5 sm:rounded-[1.375rem] sm:px-4 sm:py-5 md:min-h-[9.5rem] md:flex-col md:justify-center md:gap-4 md:px-6 md:py-8 md:text-center ${
                             featureHighlightsVisible ? '' : 'pointer-events-none'
                         }`}
                     >
-                        <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-[1.125rem]">
+                        <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-[0.85rem] sm:h-14 sm:w-14 sm:rounded-[1rem] md:h-16 md:w-16 md:rounded-[1.125rem]">
                             {/* Orange segment travels around the icon edge (stroke-dash animation, not a spinning disk) */}
                             <svg
                                 className="feature-highlight-icon-orbit-svg pointer-events-none absolute inset-0 h-full w-full opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100"
@@ -278,11 +278,11 @@ const WhatIsPlanLikeALocal = () => {
                                 {FEATURE_CUSTOM_SVG_ICONS.includes(Icon) ? (
                                     <Icon/>
                                 ) : (
-                                    <Icon sx={{fontSize: 34}}/>
+                                    <Icon sx={{fontSize: {xs: 22, sm: 28, md: 34}}} />
                                 )}
                             </div>
                         </div>
-                        <span className="flex max-w-[13rem] flex-col items-center gap-1 text-center text-xs font-semibold uppercase leading-[1.1] tracking-[0.1em] text-slate-700 antialiased sm:items-start sm:text-left sm:text-sm sm:tracking-[0.09em] md:max-w-[12rem] md:items-center md:text-[15px] md:text-center md:tracking-[0.08em]">
+                        <span className="flex max-w-[9.5rem] flex-col items-center gap-0.5 text-center text-[0.625rem] font-semibold uppercase leading-[1.15] tracking-[0.08em] text-slate-700 antialiased sm:max-w-[13rem] sm:gap-1 sm:items-start sm:text-left sm:text-sm sm:tracking-[0.09em] md:max-w-[12rem] md:items-center md:text-[15px] md:text-center md:tracking-[0.08em]">
                             {(label.includes('\n')
                                 ? label.split('\n').map((line) => line.trim())
                                 : label.split(/\s+/)
@@ -299,7 +299,7 @@ const WhatIsPlanLikeALocal = () => {
 
             <div
                 ref={whoWeAreSectionRef}
-                className="mb-16 grid grid-cols-1 gap-6 md:mb-24 lg:grid-cols-12 lg:items-start"
+                className="mb-16 grid grid-cols-1 gap-6 px-3 text-center md:mb-24 md:px-0 md:text-left lg:grid-cols-12 lg:items-start"
             >
                 <div className="pt-1 md:pt-4 lg:col-span-3">
                     <span
@@ -315,7 +315,7 @@ const WhatIsPlanLikeALocal = () => {
                     </span>
                 </div>
                 <div
-                    className="lg:col-span-8 lg:col-start-4"
+                    className="flex flex-col items-center md:items-start lg:col-span-8 lg:col-start-4"
                     aria-hidden={!whoWeAreQuotesVisible}
                     style={{
                         opacity: whoWeAreQuotesVisible ? 1 : 0,
@@ -335,17 +335,14 @@ const WhatIsPlanLikeALocal = () => {
                                 : `transform ${WHO_WE_ARE_QUOTES_REVEAL_MS}ms cubic-bezier(0.22, 1, 0.36, 1)`,
                         }}
                     >
-                        <h2 className="quotes">
-                            This isn&apos;t a travel guide.
-                            <br/>
-                            <span className="font-light italic text-[#EA6D4F]">It&apos;s a one-on-one planning</span>
-                            <br/>
-                            experience designed to help
-                            <br/>
-                            you explore with <span className="font-light italic text-[#EA6D4F]">clarity,</span>
-                            <br/>
-                            <span className="font-light italic text-[#EA6D4F]">confidence, and local</span>
-                            <br/>
+                        <h2 className="quotes who-we-are-quotes">
+                            This isn&apos;t a travel guide.{' '}
+                            <span className="pr-[0.2em] font-light italic text-[#EA6D4F]">
+                                It&apos;s a one-on-one planning
+                            </span>{' '}
+                            experience designed to help you explore with{' '}
+                            <span className="font-light italic text-[#EA6D4F]">clarity,</span>{' '}
+                            <span className="font-light italic text-[#EA6D4F]">confidence, and local</span>{' '}
                             <span className="font-light italic text-[#EA6D4F]">knowledge.</span>
                         </h2>
                         <Link

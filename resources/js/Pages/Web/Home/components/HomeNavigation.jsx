@@ -7,7 +7,7 @@ const HomeNavigation = ({mobileMenuOpen, setMobileMenuOpen}) => (
     <nav className="fixed inset-x-0 top-0 z-50 px-4 py-4 md:px-10 lg:px-16">
         <div className="mx-auto flex max-w-[1120px] items-center justify-between rounded-full px-3 py-2 md:px-8 md:py-2.5 glass-nav">
             <Link href="/" className="flex items-center gap-2">
-                <img src="/images/home/stitch/brand-icon.png" alt="Plan Like a Local icon"
+                <img src="/images/home/stitch/brand-icon.png?v=3" alt="Plan Like a Local icon"
                      className="h-7 w-auto object-contain md:h-9"/>
                 <img src="/images/home/stitch/brand-wordmark.png" alt="Plan Like a Local"
                      className="hidden h-6 w-auto object-contain sm:block"/>

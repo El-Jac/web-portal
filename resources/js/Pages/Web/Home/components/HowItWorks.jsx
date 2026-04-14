@@ -108,7 +108,7 @@ const HowItWorks = () => {
 
     return (
         <BlendedBackground
-            className="z-30 bg-[#f9f8f8] px-5 pb-20 pt-10 md:px-10 md:pb-28 md:pt-12 lg:px-16"
+            className="z-30 bg-[#f9f8f8] px-5 pb-6 pt-8 md:px-10 md:pb-24 md:pt-10 lg:px-16"
             image="/images/home/stitch/what-we-do-bg.jpg"
             backgroundSize="cover"
             backgroundPosition="center"
@@ -151,7 +151,7 @@ const HowItWorks = () => {
                                 <br/>
                                 <span className="font-light italic text-[#EA6D4F]">Personalized.</span>
                             </h2>
-                            <p className="mx-auto max-w-[560px] text-[15px] leading-[1.7] text-[#3f484a] md:text-[17px]">
+                            <p className="mx-auto max-w-[560px] text-[1rem] leading-[1.7] text-[#3f484a] md:text-[17px]">
                                 We bridge the gap between travelers and locals, turning ideas into thoughtfully
                                 planned journeys tailored to you.
                             </p>
@@ -161,7 +161,7 @@ const HowItWorks = () => {
 
                 <div
                     ref={cardsGridRef}
-                    className="grid grid-cols-1 gap-5 overflow-visible sm:grid-cols-2 sm:gap-6 lg:grid-cols-4 lg:gap-5 xl:gap-6"
+                    className="grid grid-cols-2 gap-3 overflow-visible sm:gap-6 lg:grid-cols-4 lg:gap-5 xl:gap-6"
                     style={{perspective: '1100px'}}
                 >
                     {processSteps.map(({step, title, description, image}, index) => {
@@ -187,10 +187,10 @@ const HowItWorks = () => {
                                 }}
                             >
                                 <article
-                                    className="group relative flex h-full flex-col overflow-visible rounded-3xl border border-slate-200/60 bg-white shadow-[0_1px_2px_rgba(15,23,42,0.04),0_20px_44px_-22px_rgba(15,23,42,0.1),0_40px_80px_-32px_rgba(50,96,254,0.06)] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:border-slate-200/80 hover:shadow-[0_2px_6px_rgba(15,23,42,0.05),0_24px_52px_-20px_rgba(15,23,42,0.13),0_48px_96px_-36px_rgba(50,96,254,0.09)]"
+                                    className="group relative flex h-full flex-col overflow-visible rounded-2xl border border-slate-200/60 bg-white shadow-[0_1px_2px_rgba(15,23,42,0.04),0_20px_44px_-22px_rgba(15,23,42,0.1),0_40px_80px_-32px_rgba(50,96,254,0.06)] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:border-slate-200/80 hover:shadow-[0_2px_6px_rgba(15,23,42,0.05),0_24px_52px_-20px_rgba(15,23,42,0.13),0_48px_96px_-36px_rgba(50,96,254,0.09)] sm:rounded-3xl"
                                 >
                                     <div className="relative flex w-full shrink-0 flex-col">
-                                        <div className="relative h-52 w-full shrink-0 overflow-hidden rounded-t-3xl sm:h-[15rem]">
+                                        <div className="relative h-36 w-full shrink-0 overflow-hidden rounded-t-2xl sm:h-[15rem] sm:rounded-t-3xl">
                                             <img
                                                 src={image}
                                                 alt=""
@@ -199,15 +199,15 @@ const HowItWorks = () => {
                                             />
                                             <div className="absolute inset-0 ring-1 ring-inset ring-white/10"/>
                                         </div>
-                                        <div className="relative z-0 flex flex-1 flex-col overflow-visible rounded-b-3xl bg-white px-5 pb-6 pt-9 sm:px-6 sm:pt-10">
-                                        <h3 className="mb-3 text-xl font-bold leading-tight tracking-tight text-slate-900">
+                                        <div className="relative z-0 flex flex-1 flex-col overflow-visible rounded-b-2xl bg-white px-2.5 pb-4 pt-7 text-center sm:text-left sm:rounded-b-3xl sm:px-6 sm:pb-6 sm:pt-10">
+                                        <h3 className="mb-1.5 text-[1rem] font-bold leading-snug tracking-tight text-slate-900 sm:mb-3 sm:text-xl sm:leading-tight">
                                             {title}
                                         </h3>
-                                        <p className="min-h-[5.5rem] text-[15px] leading-[1.65] text-slate-600 antialiased">
+                                        <p className="min-h-0 text-[1rem] leading-[1.55] text-slate-600 antialiased sm:min-h-[5.5rem] sm:text-[15px] sm:leading-[1.65]">
                                             {description}
                                         </p>
                                         </div>
-                                        <p className="absolute left-1/2 top-[13rem] z-20 inline-flex -translate-x-1/2 -translate-y-1/2 items-center rounded-full border-[3px] border-solid border-[#eb6b50] bg-slate-900/90 px-5 py-2.5 text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-white shadow-[0_8px_28px_-6px_rgba(15,23,42,0.35),0_2px_6px_rgba(0,0,0,0.15)] backdrop-blur-md backdrop-saturate-150 sm:top-[15rem] sm:px-6 sm:py-2.5 sm:text-xs">
+                                        <p className="absolute left-1/2 top-[9rem] z-20 inline-flex w-max max-w-none -translate-x-1/2 -translate-y-1/2 items-center whitespace-nowrap rounded-full border-2 border-solid border-[#eb6b50] bg-slate-900/90 px-3 py-1 text-[0.8rem] font-semibold tracking-[0.02em] text-white shadow-[0_8px_28px_-6px_rgba(15,23,42,0.35),0_2px_6px_rgba(0,0,0,0.15)] backdrop-blur-md backdrop-saturate-150 sm:top-[15rem] sm:border-[3px] sm:px-6 sm:py-2.5 md:text-[1rem]">
                                             {step}
                                         </p>
                                     </div>

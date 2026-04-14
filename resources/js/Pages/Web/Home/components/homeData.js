@@ -52,25 +52,25 @@ const HOME_PAGE_STEP_IMAGE_V = '9';
 
 export const processSteps = [
     {
-        step: 'Step 01',
+        step: 'Step 1',
         title: 'Schedule Appointment',
         description: "Choose a time that works best for you and share your travel ideas, and any specific interests or experiences you'd like to include.",
         image: `/images/home/stitch/home-page/step-1.jpg?v=${HOME_PAGE_STEP_IMAGE_V}`,
     },
     {
-        step: 'Step 02',
+        step: 'Step 2',
         title: 'Choose Package & Complete Payment',
         description: 'Secure your appointment with a smooth and transparent payment process.',
         image: `/images/home/stitch/home-page/step-2.jpg?v=${HOME_PAGE_STEP_IMAGE_V}`,
     },
     {
-        step: 'Step 03',
+        step: 'Step 3',
         title: 'Video Planning Meeting',
         description: 'Connect one-on-one with a local expert to craft your perfect trip, tailored to your style, budget, and must-see spots.',
         image: `/images/home/stitch/home-page/step-3.jpg?v=${HOME_PAGE_STEP_IMAGE_V}`,
     },
     {
-        step: 'Step 04',
+        step: 'Step 4',
         title: 'Personalized Itinerary Delivery',
         description: 'Get a personalized, ready-to-use travel plan with expert recommendations and practical guidance for a confident journey.',
         image: `/images/home/stitch/home-page/step-4.jpg?v=${HOME_PAGE_STEP_IMAGE_V}`,
