@@ -108,12 +108,12 @@ const HowItWorks = () => {
 
     return (
         <BlendedBackground
-            className="z-30 bg-[#f9f9f9] px-5 pt-10 pb-14 md:px-10 md:pt-12 md:pb-16 lg:px-16"
+            className="z-30 bg-[#f9f8f8] px-5 pb-20 pt-10 md:px-10 md:pb-28 md:pt-12 lg:px-16"
             image="/images/home/stitch/what-we-do-bg.jpg"
             backgroundSize="cover"
             backgroundPosition="center"
         >
-            <div className="mx-auto max-w-[1120px]">
+            <div className="relative z-[1] mx-auto max-w-[1120px]">
                 <div ref={headerRef} className="mb-12 text-center md:mb-16">
                     <span
                         className="ibrow block min-h-[1.4em] pb-2 text-center md:pb-3"
@@ -217,6 +217,10 @@ const HowItWorks = () => {
                     })}
                 </div>
             </div>
+            <div
+                className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent to-[#f9f8f8] md:h-32"
+                aria-hidden
+            />
         </BlendedBackground>
     );
 };

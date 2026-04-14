@@ -471,6 +471,15 @@ const SiteStyles = () => (
             outline: 2px solid #3260FE;
             outline-offset: 3px;
         }
+        /* Brighter coral hover sweep on dark panels — base stays #3260FE */
+        .hero-cta-primary.hero-cta-primary--bright-hover::before {
+            background-color: #EA6D4F;
+        }
+        .hero-cta-primary.hero-cta-primary--bright-hover:hover {
+            box-shadow:
+                0 20px 52px -4px rgba(234, 109, 79, 0.42),
+                0 8px 24px -4px rgba(255, 154, 130, 0.26);
+        }
         .mesh-section {
             background-image:
                 radial-gradient(at 100% 0%, rgba(50, 96, 254, 0.05) 0px, transparent 50%),
