@@ -81,7 +81,7 @@ Route::prefix('mobile/v1')->group(function () {
         // Bug Reports
         Route::post('/bug-reports', [App\Http\Controllers\Api\BugReportController::class, 'store']);
 
-        // Contact Us
+        // Become a Planner (contact)
         Route::post('/contact-us', [App\Http\Controllers\Api\ContactController::class, 'store']);
     });
 });

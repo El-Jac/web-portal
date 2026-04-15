@@ -550,6 +550,51 @@ const SiteStyles = () => (
                 display: none;
             }
         }
+        /* Become a Planner — gradient fill (red → orange → green → blue) */
+        .become-planner-gradient {
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(105deg, #3492c3 0%, #6d6ad5 55%, #9d5fc6 100%);
+        }
+        /* Top bar: same type metrics as other .nav-link items; only 600 + gradient */
+        .site-nav .nav-link > .become-planner-gradient {
+            font-weight: 600;
+            letter-spacing: inherit;
+            line-height: inherit;
+            font-size: inherit;
+        }
+        /* Mobile drawer: match other row links */
+        .site-nav-mobile-drawer nav a .become-planner-gradient {
+            font-weight: 600;
+            letter-spacing: inherit;
+            line-height: inherit;
+            font-size: inherit;
+        }
+        /* md–~tablet narrow band: fit bar without wrapping */
+        @media (min-width: 768px) and (max-width: 830px) {
+            .site-nav .site-nav-inner-bar {
+                padding-left: 0.75rem;
+                padding-right: 0.75rem;
+                gap: 0.375rem;
+            }
+            .site-nav img.site-nav-logo-icon {
+                height: 2rem !important;
+                max-height: 2rem;
+            }
+            .site-nav img.site-nav-logo-wordmark {
+                width: 4.25rem !important;
+                max-width: 4.25rem !important;
+                height: auto !important;
+            }
+            .site-nav .site-nav-desktop-links {
+                gap: 0.25rem !important;
+            }
+            .site-nav .nav-link {
+                padding-left: 0.4rem !important;
+                padding-right: 0.4rem !important;
+            }
+        }
         .nav-link {
             display: inline-flex;
             align-items: center;

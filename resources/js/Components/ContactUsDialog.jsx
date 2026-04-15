@@ -104,8 +104,8 @@ const ContactUsDialog = ({ open, onClose }) => {
                     <p className="mb-1 text-[9px] font-black uppercase tracking-[0.3em] text-[#3260FE]">
                         Get In Touch
                     </p>
-                    <h2 className="text-2xl font-extrabold tracking-[-0.04em] text-[#1a1c1c]">
-                        Contact Us
+                    <h2 className="become-planner-gradient text-2xl font-extrabold tracking-[-0.04em]">
+                        Become a Planner
                     </h2>
                     <p className="mt-1.5 text-[13px] leading-relaxed text-[#3f484a]">
                         We'd love to hear from you. Send us a message and we'll get back to you soon.

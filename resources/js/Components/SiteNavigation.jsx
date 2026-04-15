@@ -66,7 +66,7 @@ const SiteNavigation = ({mobileMenuOpen, setMobileMenuOpen, onContactClick}) => 
     return (
         <>
             <nav className="site-nav fixed inset-x-0 top-0 z-50 px-4 py-4 sm:py-5 md:px-6 lg:px-10 xl:px-16">
-                <div className="site-nav-bar-enter mx-auto flex min-w-0 max-w-[1120px] items-center justify-between gap-2 rounded-full px-3 py-2 sm:px-4 sm:py-2.5 md:gap-2 md:px-4 md:py-2.5 lg:gap-2.5 lg:px-6 lg:py-3 xl:px-7 glass-nav">
+                <div className="site-nav-inner-bar site-nav-bar-enter mx-auto flex min-w-0 max-w-[1120px] items-center justify-between gap-2 rounded-full px-3 py-2 sm:px-4 sm:py-2.5 md:gap-2 md:px-4 md:py-2.5 lg:gap-2.5 lg:px-6 lg:py-3 xl:px-7 glass-nav">
                     <Link
                         href="/"
                         className="flex shrink-0 items-center gap-1.5 rounded-full py-0.5 pl-0.5 pr-1.5 transition-opacity duration-300 hover:opacity-[0.92] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#3260FE]/40 sm:gap-2 sm:pr-2"
@@ -74,16 +74,16 @@ const SiteNavigation = ({mobileMenuOpen, setMobileMenuOpen, onContactClick}) => 
                         <img
                             src="/images/home/stitch/brand-icon.png?v=3"
                             alt="Plan Like a Local icon"
-                            className="h-[35px] w-auto shrink-0 object-contain md:h-9 lg:h-10 xl:h-11"
+                            className="site-nav-logo-icon h-[35px] w-auto shrink-0 object-contain md:h-9 lg:h-10 xl:h-11"
                         />
                         <img
                             src="/images/home/stitch/brand-wordmark.png"
                             alt="Plan Like a Local"
-                            className="block h-auto w-[75px] shrink-0 object-contain md:h-11 md:w-auto lg:h-auto lg:w-[80px]"
+                            className="site-nav-logo-wordmark block h-auto w-[75px] shrink-0 object-contain md:h-11 md:w-auto lg:h-auto lg:w-[80px]"
                         />
                     </Link>
 
-                    <div className="hidden min-w-0 items-center gap-1 md:flex md:gap-1.5 lg:gap-2 xl:gap-2.5">
+                    <div className="site-nav-desktop-links hidden min-w-0 items-center gap-1 md:flex md:gap-1.5 lg:gap-2 xl:gap-2.5">
                         {desktopNavItems.map((item) => (
                             <Link
                                 key={item.href}
@@ -104,7 +104,7 @@ const SiteNavigation = ({mobileMenuOpen, setMobileMenuOpen, onContactClick}) => 
                                     onContactClick();
                                 }}
                             >
-                                Contact Us
+                                <span className="become-planner-gradient">Become a Planner</span>
                             </a>
                         )}
                     </div>
@@ -224,7 +224,7 @@ const SiteNavigation = ({mobileMenuOpen, setMobileMenuOpen, onContactClick}) => 
                                 className="shrink-0 text-[#4b5563] transition-colors duration-150 group-hover:text-[#3260FE] group-active:text-[#1d4ed8]"
                                 sx={{fontSize: 24}}
                             />
-                            <span>Contact Us</span>
+                            <span className="become-planner-gradient">Become a Planner</span>
                         </a>
                     )}
                 </nav>

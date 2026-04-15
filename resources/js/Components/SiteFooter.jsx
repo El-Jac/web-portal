@@ -159,9 +159,11 @@ const SiteFooter = () => {
                                 <button
                                     type="button"
                                     onClick={() => setContactDialogOpen(true)}
-                                    className={`${linkBase} w-fit text-left`}
+                                    className="group w-fit border-b border-transparent pb-0.5 text-left font-['Manrope',ui-sans-serif,sans-serif] text-[16px] text-white/55 transition-[opacity,filter] duration-200 hover:text-white"
                                 >
-                                    Contact Us
+                                    <span className="become-planner-gradient font-bold transition-[filter] duration-200 group-hover:brightness-110">
+                                        Become a Planner
+                                    </span>
                                 </button>
                             </nav>
                         </div>
