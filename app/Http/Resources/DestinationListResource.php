@@ -45,12 +45,12 @@ class DestinationListResource extends JsonResource
         }
 
         $specialistId = $this->specialist_ids[0] ?? null;
-        if (!$specialistId) {
+        if (! $specialistId) {
             return null;
         }
 
         $specialist = \App\Models\Specialist::find($specialistId);
-        if (!$specialist) {
+        if (! $specialist) {
             return null;
         }
 

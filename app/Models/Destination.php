@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Destination extends Model
 {
@@ -45,6 +45,7 @@ class Destination extends Model
     {
         return $this->hasMany(Plan::class);
     }
+
     /**
      * Get the images for the destination.
      */
@@ -91,7 +92,7 @@ class Destination extends Model
     public function wishlistedByUsers(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'destination_wishlist')
-                    ->withTimestamps();
+            ->withTimestamps();
     }
 
     /**
@@ -124,6 +125,7 @@ class Destination extends Model
     public function getFullLocationAttribute(): string
     {
         $parts = array_filter([$this->city, $this->state_province, $this->country]);
+
         return implode(', ', $parts);
     }
 
@@ -132,7 +134,7 @@ class Destination extends Model
      */
     public function getSpecialistCountAttribute(): int
     {
-        if (!$this->specialist_ids || !is_array($this->specialist_ids)) {
+        if (! $this->specialist_ids || ! is_array($this->specialist_ids)) {
             return 0;
         }
 

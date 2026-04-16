@@ -26,7 +26,7 @@ const AuthLayout = ({ title, subtitle, children, backHref, backLabel = 'Back' })
             <header className="w-full px-6 py-5">
                 <div className="max-w-[1120px] mx-auto">
                     <Link href="/" className="inline-flex items-center gap-2">
-                        <img src="/images/home/stitch/brand-icon.png"
+                        <img src="/images/home/stitch/brand-icon.png?v=3"
                              alt="Plan Like a Local icon"
                              className="h-7 w-auto object-contain"/>
                         <img src="/images/home/stitch/brand-wordmark.png"

@@ -86,8 +86,8 @@ class GetPlanDataAction extends AbstractPlanAction
                 'specialist' => $plan->specialist ? [
                     'id' => $plan->specialist->id,
                     'full_name' => $plan->specialist->full_name,
-                    'avatar_url' => $plan->specialist->profile_pic ? asset('storage/' . $plan->specialist->profile_pic) : null,
-                    'profile_pic_url' => $plan->specialist->profile_pic ? asset('storage/' . $plan->specialist->profile_pic) : null,
+                    'avatar_url' => $plan->specialist->resolvedProfilePicUrl(),
+                    'profile_pic_url' => $plan->specialist->resolvedProfilePicUrl(),
                     'bio' => $plan->specialist->bio,
                     'country' => $plan->specialist->country ? $plan->specialist->country->name : null,
                     'state_province' => $plan->specialist->state_province,

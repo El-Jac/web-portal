@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Storage;
 
 class Specialist extends Model
 {
@@ -77,5 +78,20 @@ class Specialist extends Model
     public function workingHours(): HasMany
     {
         return $this->hasMany(WorkingHour::class);
+    }
+
+    /**
+     * Public URL for profile_pic: storage path or remote URL (e.g. Unsplash) stored in DB.
+     */
+    public function resolvedProfilePicUrl(): ?string
+    {
+        if (!$this->profile_pic) {
+            return null;
+        }
+        if (filter_var($this->profile_pic, FILTER_VALIDATE_URL)) {
+            return $this->profile_pic;
+        }
+
+        return Storage::url($this->profile_pic);
     }
 }

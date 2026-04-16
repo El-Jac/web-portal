@@ -11,7 +11,7 @@ const HomeStyles = () => (
         .stitch-home h2,
         .stitch-home h3,
         .stitch-home h4 {
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
         }
         .glass-nav {
             background: rgba(255, 255, 255, 0.85);
@@ -36,16 +36,6 @@ const HomeStyles = () => (
         }
         .hide-scrollbar::-webkit-scrollbar {
             display: none;
-        }
-        @media (max-width: 1024px) {
-            .hero-overlay {
-                background: linear-gradient(to top, rgba(249, 249, 249, 1) 30%, rgba(249, 249, 249, 0.4) 100%);
-            }
-        }
-        @media (max-width: 767px) {
-            .hero-overlay {
-                background: linear-gradient(to top, rgba(249, 249, 249, 1) 18%, rgba(249, 249, 249, 0.9) 42%, rgba(249, 249, 249, 0.15) 100%);
-            }
         }
     `}</style>
 );

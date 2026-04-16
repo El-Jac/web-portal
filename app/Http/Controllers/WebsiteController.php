@@ -20,7 +20,7 @@ class WebsiteController extends Controller
     public function home(\Illuminate\Http\Request $request)
     {
         $page = max(1, (int) $request->get('page', 1));
-        $destinations = $this->getDestinationsAction->executePaginated(['status' => 'active', 'home_page' => true], 6, $page);
+        $destinations = $this->getDestinationsAction->executePaginated(['status' => 'active'], 6, $page);
 
         return Inertia::render('Home/index', [
             'destinations' => DestinationListResource::collection($destinations->items()),

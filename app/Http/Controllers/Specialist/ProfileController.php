@@ -46,7 +46,7 @@ class ProfileController extends Controller
                 'first_name' => $specialist->first_name,
                 'last_name' => $specialist->last_name,
                 'email' => $specialist->email,
-                'profile_pic_url' => $specialist->profile_pic ? asset('storage/' . $specialist->profile_pic) : null,
+                'profile_pic_url' => $specialist->resolvedProfilePicUrl(),
                 'bio' => $specialist->bio,
                 'contact_no' => $specialist->contact_no,
                 'country_id' => $specialist->country_id,
