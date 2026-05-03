@@ -104,7 +104,7 @@ const SiteNavigation = ({mobileMenuOpen, setMobileMenuOpen, onContactClick}) => 
                                     onContactClick();
                                 }}
                             >
-                                <span className="become-planner-gradient">Become a Planner</span>
+                                <span className="become-planner-gradient">Become a Specialist</span>
                             </a>
                         )}
                     </div>
@@ -224,7 +224,7 @@ const SiteNavigation = ({mobileMenuOpen, setMobileMenuOpen, onContactClick}) => 
                                 className="shrink-0 text-[#4b5563] transition-colors duration-150 group-hover:text-[#3260FE] group-active:text-[#1d4ed8]"
                                 sx={{fontSize: 24}}
                             />
-                            <span className="become-planner-gradient">Become a Planner</span>
+                            <span className="become-planner-gradient">Become a Specialist</span>
                         </a>
                     )}
                 </nav>

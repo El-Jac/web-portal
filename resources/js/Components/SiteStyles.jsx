@@ -258,6 +258,47 @@ const SiteStyles = () => (
             color: #3f484a;
             animation: hero-typewriter-cursor 0.95s step-end infinite;
         }
+        .who-we-are-bubble-tail-top {
+            position: absolute;
+            left: 1.5rem;
+            bottom: 100%;
+            margin-bottom: -1px;
+            width: 3.25rem;
+            height: 1.5rem;
+            display: block;
+            filter: drop-shadow(0 -2px 3px rgba(15, 23, 42, 0.12))
+                drop-shadow(0 -1px 1px rgba(15, 23, 42, 0.06));
+        }
+        .who-we-are-bubble-tail-top::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            clip-path: polygon(50% 0, 4% 100%, 96% 100%);
+            background: linear-gradient(
+                155deg,
+                rgba(255, 255, 255, 0.86) 0%,
+                rgba(248, 250, 252, 0.8) 45%,
+                rgba(241, 245, 249, 0.76) 100%
+            );
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(148, 163, 184, 0.55);
+            border-bottom: none;
+            border-radius: 0.65rem 0.65rem 0 0;
+            box-shadow: 0 -1px 0 0 rgba(255, 255, 255, 0.75) inset;
+        }
+        @keyframes who-we-are-bg-enter {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .who-we-are-bg {
+            animation: who-we-are-bg-enter 1.4s ease both;
+        }
+        .who-we-are-heading-enter {
+            animation: hero-home-enter 1s cubic-bezier(0.22, 1, 0.36, 1) 0.5s both;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
         /* Raleway only for the blue italic lines (loaded via HomeMeta on home) */
         .stitch-home .hero-home-heading .hero-home-accent {
             font-family: 'Raleway', ui-sans-serif, system-ui, sans-serif;
@@ -471,6 +512,58 @@ const SiteStyles = () => (
             width: 100%;
         }
         .hero-cta-primary:focus-visible {
+            outline: 2px solid rgba(255, 255, 255, 0.95);
+            outline-offset: 3px;
+        }
+        /* Who We Are hero — pill CTA; base gradient + darker sweep on hover (matches .nav-cta-start-planning) */
+        .who-we-are-hero-start-planning {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            color: #fff;
+            background: transparent;
+            border-radius: 9999px;
+            font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            box-shadow:
+                0 14px 40px -8px rgba(67, 56, 202, 0.42),
+                0 8px 24px -6px rgba(99, 102, 241, 0.32);
+            transition: box-shadow 0.3s ease, transform 0.25s ease;
+            text-decoration: none;
+        }
+        .who-we-are-hero-start-planning::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 9999px;
+            background: linear-gradient(95deg, #c4b5fd 0%, #818cf8 38%, #6366f1 72%, #4f46e5 100%);
+            box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.22) inset;
+            z-index: -2;
+        }
+        .who-we-are-hero-start-planning::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            border-radius: 9999px;
+            background: linear-gradient(95deg, #5b21b6 0%, #4338ca 38%, #3730a3 72%, #312e81 100%);
+            transition: width 0.3s ease;
+            z-index: -1;
+        }
+        .who-we-are-hero-start-planning:hover {
+            color: #fff;
+            box-shadow:
+                0 22px 52px -8px rgba(30, 27, 75, 0.52),
+                0 10px 28px -6px rgba(79, 70, 229, 0.42);
+            transform: translateY(-1px);
+        }
+        .who-we-are-hero-start-planning:hover::before {
+            width: 100%;
+        }
+        .who-we-are-hero-start-planning:focus-visible {
             outline: 2px solid rgba(255, 255, 255, 0.95);
             outline-offset: 3px;
         }
@@ -782,6 +875,12 @@ const SiteStyles = () => (
             .hero-cta-primary:hover {
                 transform: none;
             }
+            .who-we-are-hero-start-planning::before {
+                transition: none;
+            }
+            .who-we-are-hero-start-planning:hover {
+                transform: none;
+            }
             .hero-home-bubble,
             .hero-home-bubble.hero-home-bubble--active {
                 animation: none;
@@ -799,6 +898,15 @@ const SiteStyles = () => (
             .stitch-home .who-we-are-typewriter-cursor {
                 animation: none;
                 opacity: 0;
+            }
+            .who-we-are-bg {
+                animation: none;
+                opacity: 1;
+            }
+            .who-we-are-heading-enter {
+                animation: none;
+                opacity: 1;
+                transform: none;
             }
             .stitch-home .feature-highlight-icon-orbit-stroke {
                 animation: none;
