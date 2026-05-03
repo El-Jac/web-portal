@@ -515,14 +515,14 @@ const SiteStyles = () => (
             outline: 2px solid rgba(255, 255, 255, 0.95);
             outline-offset: 3px;
         }
-        /* Who We Are hero — pill CTA; base gradient + darker sweep on hover (matches .nav-cta-start-planning) */
+        /* Who We Are hero — gradient + sweep match nav; corner radius matches .site-nav-bar-enter .nav-cta-start-planning */
         .who-we-are-hero-start-planning {
             position: relative;
             overflow: hidden;
             z-index: 1;
             color: #fff;
             background: transparent;
-            border-radius: 9999px;
+            border-radius: 12px;
             font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
             font-weight: 700;
             letter-spacing: 0.02em;
@@ -531,13 +531,14 @@ const SiteStyles = () => (
                 0 8px 24px -6px rgba(99, 102, 241, 0.32);
             transition: box-shadow 0.3s ease, transform 0.25s ease;
             text-decoration: none;
+            text-shadow: 0px 0px 10px #00000052;
         }
         .who-we-are-hero-start-planning::after {
             content: '';
             position: absolute;
             inset: 0;
-            border-radius: 9999px;
-            background: linear-gradient(95deg, #c4b5fd 0%, #818cf8 38%, #6366f1 72%, #4f46e5 100%);
+            border-radius: 12px;
+            background: linear-gradient(95deg, #b5a5f0 0%, #818cf8 38%, #6366f1 72%, #4f46e5 100%);
             box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.22) inset;
             z-index: -2;
         }
@@ -548,13 +549,14 @@ const SiteStyles = () => (
             left: 0;
             width: 0%;
             height: 100%;
-            border-radius: 9999px;
+            border-radius: 12px;
             background: linear-gradient(95deg, #5b21b6 0%, #4338ca 38%, #3730a3 72%, #312e81 100%);
             transition: width 0.3s ease;
             z-index: -1;
         }
         .who-we-are-hero-start-planning:hover {
             color: #fff;
+            text-shadow: 0px 0px 10px #00000052;
             box-shadow:
                 0 22px 52px -8px rgba(30, 27, 75, 0.52),
                 0 10px 28px -6px rgba(79, 70, 229, 0.42);
@@ -566,6 +568,27 @@ const SiteStyles = () => (
         .who-we-are-hero-start-planning:focus-visible {
             outline: 2px solid rgba(255, 255, 255, 0.95);
             outline-offset: 3px;
+        }
+        @media (min-width: 768px) {
+            .who-we-are-hero-start-planning,
+            .who-we-are-hero-start-planning::after,
+            .who-we-are-hero-start-planning::before {
+                border-radius: 10px;
+            }
+        }
+        @media (min-width: 768px) and (max-width: 784px) {
+            .who-we-are-hero-start-planning,
+            .who-we-are-hero-start-planning::after,
+            .who-we-are-hero-start-planning::before {
+                border-radius: 9px;
+            }
+        }
+        @media (min-width: 1280px) {
+            .who-we-are-hero-start-planning,
+            .who-we-are-hero-start-planning::after,
+            .who-we-are-hero-start-planning::before {
+                border-radius: 12px;
+            }
         }
         /* Same treatment as .hero-cta-primary; base fill stays near-black */
         .hero-cta-primary.hero-cta-primary--dark {
@@ -752,7 +775,7 @@ const SiteStyles = () => (
             color: #1e40af;
             box-shadow: 0 2px 10px -4px rgba(50, 96, 254, 0.35);
         }
-        /* Solid fill + hover sweep (pseudo-elements) */
+        /* Nav Start Planning — same gradient + sweep as .who-we-are-hero-start-planning; compact for bar */
         .nav-cta-start-planning {
             position: relative;
             overflow: hidden;
@@ -761,12 +784,13 @@ const SiteStyles = () => (
             background: transparent;
             border-radius: 12px;
             font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
-            font-weight: 600;
+            font-weight: 700;
             letter-spacing: 0.045em;
             box-shadow:
-                0 14px 40px -6px rgba(18, 42, 105, 0.42),
-                0 6px 18px -4px rgba(50, 96, 254, 0.22);
+                0 10px 26px -8px rgba(67, 56, 202, 0.38),
+                0 4px 14px -6px rgba(99, 102, 241, 0.26);
             transition: box-shadow 0.3s ease, transform 0.25s ease;
+            text-shadow: 0px 0px 10px #00000052;
         }
         .nav-cta-start-planning::after {
             content: '';
@@ -775,7 +799,7 @@ const SiteStyles = () => (
             left: 0;
             width: 100%;
             height: 100%;
-            background: #3260FE;
+            background: linear-gradient(95deg, #b5a5f0 0%, #818cf8 38%, #6366f1 72%, #4f46e5 100%);
             border-radius: 12px;
             box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.22) inset;
             z-index: -2;
@@ -787,16 +811,17 @@ const SiteStyles = () => (
             left: 0;
             width: 0%;
             height: 100%;
-            background-color: #0f2f8c;
+            background: linear-gradient(95deg, #5b21b6 0%, #4338ca 38%, #3730a3 72%, #312e81 100%);
             transition: width 0.3s ease;
             border-radius: 12px;
             z-index: -1;
         }
         .nav-cta-start-planning:hover {
             color: #fff;
+            text-shadow: 0px 0px 10px #00000052;
             box-shadow:
-                0 20px 52px -4px rgba(15, 36, 92, 0.48),
-                0 8px 24px -4px rgba(50, 96, 254, 0.28);
+                0 14px 36px -8px rgba(30, 27, 75, 0.45),
+                0 6px 18px -6px rgba(79, 70, 229, 0.36);
             transform: translateY(-1px);
         }
         .nav-cta-start-planning:hover::before {

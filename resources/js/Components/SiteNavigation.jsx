@@ -112,11 +112,18 @@ const SiteNavigation = ({mobileMenuOpen, setMobileMenuOpen, onContactClick}) => 
                     <div className="flex shrink-0 items-center gap-2 md:gap-3">
                         <Link
                             href="/plan"
-                            className="nav-cta-start-planning hidden items-center font-semibold text-white md:inline-flex"
+                            className="nav-cta-start-planning group hidden items-center text-white md:inline-flex"
                         >
-                            <span className="relative z-[1] inline-flex items-center gap-1.5 pl-1">
+                            <span className="relative z-[1] inline-flex items-center gap-1 lg:gap-1.5">
                                 Start Planning
-                                <ArrowForward className="text-[0.6rem] md:text-[0.65rem]"/>
+                                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white/25 ring-1 ring-white/35 transition-colors group-hover:bg-white/35 lg:h-6 lg:w-6">
+                                    <ArrowForward
+                                        sx={{
+                                            fontSize: 11,
+                                            '@media (min-width: 1024px)': { fontSize: 13 },
+                                        }}
+                                    />
+                                </span>
                             </span>
                         </Link>
                         <button

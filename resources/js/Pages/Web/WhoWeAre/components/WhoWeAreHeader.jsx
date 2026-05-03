@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { ArrowForward, AutoAwesome } from '@mui/icons-material';
+import { ArrowForward } from '@mui/icons-material';
 import { Link } from '@inertiajs/react';
 
 const HERO_CAROUSEL_SLIDES = [
@@ -42,6 +42,43 @@ const HERO_CAROUSEL_SLIDES = [
 ];
 
 const SLIDE_COUNT = HERO_CAROUSEL_SLIDES.length;
+
+const WHO_WE_ARE_HERO_BG_IMAGE = '/images/home/stitch/who-we-are/hero/bg.jpg';
+
+const WHO_WE_ARE_TYPEWRITER_LINE = 'We are local experts who live there.';
+const WHO_WE_ARE_TW_PURPLE_START = 'We are '.length;
+const WHO_WE_ARE_TW_PURPLE_END = WHO_WE_ARE_TW_PURPLE_START + 'local experts'.length;
+const WHO_WE_ARE_EYEBROW_TRANSITION_MS = 560;
+const WHO_WE_ARE_TYPEWRITER_CHAR_MS = 38;
+const WHO_WE_ARE_REST_AFTER_TYPE_MS = 180;
+
+function WhoWeAreHeroTypewriterLine({ visibleLen, showCursor }) {
+    const g1 = WHO_WE_ARE_TYPEWRITER_LINE.slice(0, Math.min(visibleLen, WHO_WE_ARE_TW_PURPLE_START));
+    const purp =
+        visibleLen > WHO_WE_ARE_TW_PURPLE_START
+            ? WHO_WE_ARE_TYPEWRITER_LINE.slice(
+                  WHO_WE_ARE_TW_PURPLE_START,
+                  Math.min(visibleLen, WHO_WE_ARE_TW_PURPLE_END),
+              )
+            : '';
+    const g2 =
+        visibleLen > WHO_WE_ARE_TW_PURPLE_END
+            ? WHO_WE_ARE_TYPEWRITER_LINE.slice(WHO_WE_ARE_TW_PURPLE_END, visibleLen)
+            : '';
+
+    return (
+        <span className="block min-h-[1.35em] font-['Raleway',system-ui,sans-serif] text-[1.2rem] font-normal italic leading-snug tracking-[-0.02em] sm:text-[1.35rem] md:text-[1.5rem]">
+            {g1 ? <span className="text-[#666666]">{g1}</span> : null}
+            {purp ? <span className="text-[#514ae6]">{purp}</span> : null}
+            {g2 ? <span className="text-[#666666]">{g2}</span> : null}
+            {showCursor ? (
+                <span className="ml-px inline-block animate-pulse font-light text-[#999999]" aria-hidden>
+                    |
+                </span>
+            ) : null}
+        </span>
+    );
+}
 
 /** Center-mode track: one dominant slide with neighbours peeking — matches editorial carousel reference. */
 function WhoWeAreHeroCarousel() {
@@ -162,14 +199,14 @@ function WhoWeAreHeroCarousel() {
 
     return (
         <div
-            className="relative -mx-5 mt-12 w-[calc(100%+2.5rem)] max-w-none sm:mt-14 md:-mx-10 md:mt-16 md:w-[calc(100%+5rem)] lg:-mx-16 lg:mt-20 lg:w-[calc(100%+8rem)]"
+            className="relative -mx-5 mt-6 w-[calc(100%+2.5rem)] max-w-none sm:mt-7 md:-mx-10 md:mt-8 md:w-[calc(100%+5rem)] lg:-mx-16 lg:mt-10 lg:w-[calc(100%+8rem)]"
             role="region"
             aria-roledescription="carousel"
             aria-label="Who we are gallery"
         >
             <div
                 ref={viewportRef}
-                className="touch-pan-x cursor-grab overflow-hidden pb-1 active:cursor-grabbing"
+                className="touch-pan-x cursor-grab overflow-hidden pt-6 pb-10 active:cursor-grabbing md:pt-10 md:pb-14"
                 onPointerDown={onPointerDown}
                 onPointerUp={endDrag}
                 onPointerCancel={cancelDrag}
@@ -199,18 +236,18 @@ function WhoWeAreHeroCarousel() {
                                 }}
                                 aria-hidden={!active}
                             >
-                                <div className="relative h-full w-full overflow-hidden rounded-[1.75rem] shadow-[0_28px_60px_-28px_rgba(26,26,46,0.28)] ring-1 ring-black/[0.06] md:rounded-[2.25rem]">
+                                <div className="group relative h-full w-full overflow-hidden rounded-[1.75rem] border-[14px] border-white shadow-[0_-10px_36px_-8px_rgba(26,26,46,0.22),0_28px_60px_-28px_rgba(26,26,46,0.28)] transition-shadow duration-300 ease-out hover:shadow-[0_-12px_42px_-8px_rgba(26,26,46,0.28),0_30px_62px_-26px_rgba(26,26,46,0.34)] motion-reduce:transition-none md:rounded-[2.25rem]">
                                     <img
                                         src={slide.src}
                                         alt={active ? slide.alt : ''}
-                                        className="pointer-events-none h-full w-full object-cover"
+                                        className="pointer-events-none h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
                                         draggable={false}
                                         loading={i === 0 ? 'eager' : 'lazy'}
                                     />
                                     {active && (
-                                        <div className="pointer-events-none absolute bottom-4 left-4 right-4 z-[1] sm:bottom-5 sm:left-5 sm:right-5">
-                                            <div className="inline-flex max-w-full rounded-2xl border border-white/95 bg-black/40 px-4 py-2.5 shadow-lg backdrop-blur-md sm:max-w-[min(100%,26rem)]">
-                                                <span className="text-left text-[11px] font-semibold leading-snug tracking-tight text-white sm:text-[12px]">
+                                        <div className="pointer-events-none absolute bottom-4 right-4 z-[1] max-w-[min(26rem,calc(100%-2rem))] sm:bottom-5 sm:right-5 sm:max-w-[min(26rem,calc(100%-2.5rem))]">
+                                            <div className="ml-auto inline-flex max-w-full rounded-2xl bg-black/40 px-4 py-2.5 shadow-lg backdrop-blur-md">
+                                                <span className="text-right text-[11px] font-semibold leading-snug tracking-tight text-white sm:text-[12px]">
                                                     {slide.locationLabel}
                                                 </span>
                                             </div>
@@ -239,63 +276,176 @@ function WhoWeAreHeroCarousel() {
     );
 }
 
-const WhoWeAreHeader = () => (
-    <section
-        className="relative px-5 pb-10 pt-12 md:px-10 md:pb-14 md:pt-16 lg:px-16 lg:pb-16"
-        style={{
-            background: `
-                        radial-gradient(ellipse 88% 78% at 100% 100%, rgba(233, 213, 255, 0.56) 0%, transparent 56%),
-                        radial-gradient(ellipse 62% 48% at 92% 96%, rgba(196, 181, 253, 0.42) 0%, transparent 52%),
-                        radial-gradient(ellipse 72% 52% at 6% 94%, rgba(252, 231, 243, 0.42) 0%, transparent 48%),
-                        linear-gradient(180deg, #faf9fb 0%, #ffffff 55%, #ffffff 100%)
-                    `,
-        }}
-    >
-        <div className="relative mx-auto max-w-[1120px]">
-            {/* Eyebrow with extending lines */}
-            <div className="mb-8 flex items-center gap-3 md:mb-10">
-                <div className="flex flex-1 items-center gap-2">
-                    <div className="h-px flex-1 bg-[#7c3aed]/15" />
-                    <div className="h-1 w-1 rounded-full bg-[#7c3aed]/35" />
-                </div>
-                <span className="inline-flex shrink-0 items-center gap-2 rounded-full border border-[#a78bfa]/45 bg-white/90 px-5 py-2 font-['Manrope',system-ui,sans-serif] text-[11px] font-semibold uppercase tracking-[0.2em] text-[#6d28d9] md:gap-2.5 md:px-6 md:py-2.5 md:text-[12px]">
-                    <AutoAwesome sx={{ fontSize: 13 }} />
-                    About Us
-                </span>
-                <div className="flex flex-1 items-center gap-2">
-                    <div className="h-1 w-1 rounded-full bg-[#7c3aed]/35" />
-                    <div className="h-px flex-1 bg-[#7c3aed]/15" />
-                </div>
-            </div>
+function WhoWeAreHeader() {
+    const [heroReduceMotion, setHeroReduceMotion] = useState(false);
+    const [eyebrowIn, setEyebrowIn] = useState(false);
+    const [typewriterLen, setTypewriterLen] = useState(0);
+    const [heroRestIn, setHeroRestIn] = useState(false);
+    const typeIntervalRef = useRef(null);
+    const restTimeoutRef = useRef(null);
 
-            {/* Heading — Manrope (explicit; matches site UI type) */}
-            <h1 className="mx-auto max-w-[820px] text-center font-['Manrope',system-ui,sans-serif] text-[2.35rem] font-extrabold leading-[1.08] tracking-[-0.035em] text-[#1a1a2e] sm:text-[3rem] md:text-[3.65rem] md:leading-[1.06] !mb-6 md:!mb-8">
-                Discover Our Mission and Values in <span className="text-[#312e81]">Local Travel</span>
-            </h1>
+    useEffect(() => {
+        const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+        const sync = () => {
+            const reduce = mq.matches;
+            setHeroReduceMotion(reduce);
+            if (reduce) {
+                setEyebrowIn(true);
+                setTypewriterLen(WHO_WE_ARE_TYPEWRITER_LINE.length);
+                setHeroRestIn(true);
+            }
+        };
+        sync();
+        mq.addEventListener('change', sync);
+        return () => mq.removeEventListener('change', sync);
+    }, []);
 
-            {/* Subtitle */}
-            <p className="mx-auto mb-9 max-w-[580px] text-center font-['Manrope',system-ui,sans-serif] text-[16px] leading-[1.75] text-[#666666] sm:text-[17px] md:mb-10 md:text-[18px] md:leading-[1.72]">
-                We are dedicated to providing exceptional travel experiences through a compassionate, personalised approach built on genuine local expertise.
-            </p>
+    useEffect(() => {
+        if (heroReduceMotion) return undefined;
+        const id = window.requestAnimationFrame(() => {
+            window.requestAnimationFrame(() => setEyebrowIn(true));
+        });
+        return () => window.cancelAnimationFrame(id);
+    }, [heroReduceMotion]);
 
-            {/* CTA — hover sweep matches header nav Start Planning */}
-            <div className="mb-5 flex justify-center md:mb-8">
-                <Link
-                    href="/plan"
-                    className="group who-we-are-hero-start-planning inline-flex items-center gap-3 px-9 py-4 text-[15px] md:px-10 md:py-[1.05rem] md:text-[16px]"
-                >
-                    <span className="relative z-[1] inline-flex items-center gap-3">
-                        Start Planning
-                        <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/25 ring-1 ring-white/35 transition-colors group-hover:bg-white/35 md:h-10 md:w-10">
-                            <ArrowForward sx={{ fontSize: 18 }} />
-                        </span>
+    useEffect(() => {
+        if (heroReduceMotion || !eyebrowIn) return undefined;
+
+        const startDelay = window.setTimeout(() => {
+            let i = 0;
+            typeIntervalRef.current = window.setInterval(() => {
+                i += 1;
+                setTypewriterLen(i);
+                if (i >= WHO_WE_ARE_TYPEWRITER_LINE.length) {
+                    if (typeIntervalRef.current != null) {
+                        window.clearInterval(typeIntervalRef.current);
+                        typeIntervalRef.current = null;
+                    }
+                    restTimeoutRef.current = window.setTimeout(
+                        () => setHeroRestIn(true),
+                        WHO_WE_ARE_REST_AFTER_TYPE_MS,
+                    );
+                }
+            }, WHO_WE_ARE_TYPEWRITER_CHAR_MS);
+        }, WHO_WE_ARE_EYEBROW_TRANSITION_MS);
+
+        return () => {
+            window.clearTimeout(startDelay);
+            if (typeIntervalRef.current != null) {
+                window.clearInterval(typeIntervalRef.current);
+                typeIntervalRef.current = null;
+            }
+            if (restTimeoutRef.current != null) {
+                window.clearTimeout(restTimeoutRef.current);
+                restTimeoutRef.current = null;
+            }
+        };
+    }, [eyebrowIn, heroReduceMotion]);
+
+    const showTwCursor =
+        !heroReduceMotion && typewriterLen > 0 && typewriterLen < WHO_WE_ARE_TYPEWRITER_LINE.length;
+
+    const eyebrowMotionClass = heroReduceMotion
+        ? ''
+        : `transition-all duration-[560ms] ease-out ${
+              eyebrowIn ? 'translate-y-0 opacity-100' : '-translate-y-5 opacity-0'
+          }`;
+
+    const heroRestMotionClass = heroReduceMotion
+        ? ''
+        : `transition-all duration-[780ms] ease-out ${
+              heroRestIn ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-5 opacity-0'
+          }`;
+
+    return (
+        <section
+            className="relative px-5 pb-10 pt-12 md:px-10 md:pb-14 md:pt-16 lg:px-16 lg:pb-16"
+            style={{
+                backgroundColor: '#faf9fb',
+                backgroundImage: `
+                linear-gradient(
+                    180deg,
+                    #faf9fb 0%,
+                    rgba(250, 249, 251, 0.96) 8%,
+                    rgba(255, 255, 255, 0.78) 26%,
+                    rgba(255, 255, 255, 0.42) 48%,
+                    rgba(255, 255, 255, 0.14) 72%,
+                    transparent 100%
+                ),
+                linear-gradient(
+                    180deg,
+                    transparent 0%,
+                    transparent 52%,
+                    rgba(255, 255, 255, 0.28) 70%,
+                    rgba(250, 249, 251, 0.82) 86%,
+                    #faf9fb 100%
+                ),
+                radial-gradient(ellipse 95% 78% at 100% 100%, rgba(233, 213, 255, 0.28) 0%, transparent 56%),
+                url("${WHO_WE_ARE_HERO_BG_IMAGE}")
+            `,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center top',
+                backgroundRepeat: 'no-repeat',
+            }}
+        >
+            <div className="relative mx-auto max-w-[1120px]">
+                {/* Eyebrow — fade in from top */}
+                <div className={`mb-8 flex items-center gap-3 md:mb-10 ${eyebrowMotionClass}`}>
+                    <div className="flex flex-1 items-center gap-2">
+                        <div className="h-px flex-1 bg-[#7c3aed]/15" />
+                        <div className="h-1 w-1 rounded-full bg-[#7c3aed]/35" />
+                    </div>
+                    <span className="inline-flex shrink-0 items-center justify-center rounded-full border border-[#a78bfa]/45 bg-white/90 px-5 py-2 font-['Manrope',system-ui,sans-serif] text-[11px] font-semibold uppercase tracking-[0.2em] text-[#6d28d9] md:px-6 md:py-2.5 md:text-[12px]">
+                        About Us
                     </span>
-                </Link>
-            </div>
-        </div>
+                    <div className="flex flex-1 items-center gap-2">
+                        <div className="h-1 w-1 rounded-full bg-[#7c3aed]/35" />
+                        <div className="h-px flex-1 bg-[#7c3aed]/15" />
+                    </div>
+                </div>
 
-        <WhoWeAreHeroCarousel />
-    </section>
-);
+                {/* Heading — line 1 typewriter; line 2 fades with rest */}
+                <h1
+                    className="mx-auto max-w-[860px] text-center font-['Manrope',system-ui,sans-serif] text-[#1a1a2e] !mb-6 md:!mb-8"
+                    aria-label="We are local experts who live there. We are Plan Like a Local"
+                >
+                    <WhoWeAreHeroTypewriterLine visibleLen={typewriterLen} showCursor={showTwCursor} />
+                    <span
+                        className={`mt-2 block text-[2.35rem] font-extrabold leading-[1.12] tracking-[-0.035em] sm:mt-2.5 sm:text-[3rem] md:mt-3 md:text-[3.65rem] md:leading-[1.08] ${heroRestMotionClass}`}
+                    >
+                        <span className="font-normal">We are </span>
+                        <span className="text-[#514ae6]">Plan Like a Local</span>
+                    </span>
+                </h1>
+
+                <div className={`${heroRestMotionClass}`}>
+                    {/* Subtitle */}
+                    <p className="mx-auto mb-9 max-w-[580px] text-center font-['Manrope',system-ui,sans-serif] text-[16px] leading-[1.75] text-[#666666] sm:text-[17px] md:mb-10 md:text-[18px] md:leading-[1.72]">
+                        We live, breathe, and know the places we plan for — they're home to us. That's the everyday familiarity we bring to every itinerary we shape with you.
+                    </p>
+
+                    {/* CTA — hover sweep matches header nav Start Planning */}
+                    <div className="mb-2 flex justify-center md:mb-3">
+                        <Link
+                            href="/plan"
+                            className="group who-we-are-hero-start-planning inline-flex items-center gap-2.5 px-7 py-3 text-[14px] md:gap-3 md:px-8 md:py-3.5 md:text-[15px]"
+                        >
+                            <span className="relative z-[1] inline-flex items-center gap-2.5 md:gap-3">
+                                Start Planning
+                                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white/25 ring-1 ring-white/35 transition-colors group-hover:bg-white/35 md:h-9 md:w-9">
+                                    <ArrowForward sx={{ fontSize: 16 }} />
+                                </span>
+                            </span>
+                        </Link>
+                    </div>
+                </div>
+            </div>
+
+            <div className={`${heroRestMotionClass}`}>
+                <WhoWeAreHeroCarousel />
+            </div>
+        </section>
+    );
+}
 
 export default WhoWeAreHeader;
