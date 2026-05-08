@@ -22,7 +22,7 @@ class StorePlanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'specialist_id' => 'required|exists:specialists,id',
+            'specialist_id' => 'nullable|exists:specialists,id',
             'destination_id' => 'nullable|exists:destinations,id',
         ];
     }
@@ -33,7 +33,6 @@ class StorePlanRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'specialist_id.required' => 'A specialist must be selected.',
             'specialist_id.exists' => 'The selected specialist does not exist.',
             'destination_id.exists' => 'The selected destination does not exist.',
         ];

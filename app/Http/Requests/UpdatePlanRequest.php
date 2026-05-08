@@ -22,6 +22,7 @@ class UpdatePlanRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'specialist_id' => 'nullable|exists:specialists,id',
             'first_name' => 'nullable|string|max:255',
             'last_name' => 'nullable|string|max:255',
             'email' => 'nullable|email|max:255',

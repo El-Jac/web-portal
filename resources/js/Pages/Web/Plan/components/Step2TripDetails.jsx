@@ -3,6 +3,14 @@ import { router } from '@inertiajs/react';
 import { Grid, TextField, Typography, Checkbox, FormControlLabel, Autocomplete, Box } from '@mui/material';
 import SpecialistInfo from './SpecialistInfo';
 
+const inputSx = {
+    '& .MuiOutlinedInput-root': {
+        borderRadius: '12px',
+        '&.Mui-focused .MuiOutlinedInput-notchedOutline': { borderColor: '#3260FE' },
+    },
+    '& .MuiInputLabel-root.Mui-focused': { color: '#3260FE' },
+};
+
 const Step2TripDetails = ({ data, setData, errors, onInterestChange, activities = [], destinations = [], destinationData = null, planId }) => {
     const hasActivities = Array.isArray(activities) && activities.length > 0;
     const [selectedDestination, setSelectedDestination] = useState(null);
@@ -103,7 +111,11 @@ const Step2TripDetails = ({ data, setData, errors, onInterestChange, activities 
                 })
                 .then(dest => {
                     if (dest) {
-                        setSpecialists(dest.specialists || []);
+                        const fetchedSpecialists = dest.specialists || [];
+                        setSpecialists(fetchedSpecialists);
+                        if (fetchedSpecialists.length > 0) {
+                            setData('specialist_id', fetchedSpecialists[0].id);
+                        }
                         if (dest.activities) {
                             setDestinationActivities(dest.activities.filter(a => a.status === true || a.status === 1));
                         }
@@ -116,6 +128,7 @@ const Step2TripDetails = ({ data, setData, errors, onInterestChange, activities 
             console.log('Clearing destination data because no new value', data);
             setData('destination', '');
             setData('destination_id', '');
+            setData('specialist_id', null);
             setData('interests', []); // Clear interests when destination is cleared
             setSpecialists([]);
             setDestinationActivities([]);
@@ -127,6 +140,20 @@ const Step2TripDetails = ({ data, setData, errors, onInterestChange, activities 
 
     return (
         <Grid container spacing={3}>
+            <Grid size={{ xs: 12 }}>
+                <div className="mb-2">
+                    <h2
+                        className="mb-1 text-xl font-bold text-[#0f1419] sm:text-2xl"
+                        style={{ fontFamily: 'Manrope, sans-serif' }}
+                    >
+                        Your trip details
+                    </h2>
+                    <p className="text-[14px] text-[#3f484a]" style={{ fontFamily: 'Inter, sans-serif' }}>
+                        Tell us where you're headed and what you love to do.
+                    </p>
+                </div>
+            </Grid>
+
             {/* Destination Section */}
             <Grid size={{ xs: 12, sm: 6 }}>
                 <Autocomplete
@@ -149,12 +176,13 @@ const Step2TripDetails = ({ data, setData, errors, onInterestChange, activities 
                             label="Where do you want to go?"
                             error={!!errors.destination}
                             helperText={errors.destination}
+                            sx={inputSx}
                         />
                     )}
                 />
                 <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
                     Need help choosing where to go?{' '}
-                    <a href="#" style={{ color: '#1976d2' }}>Click here</a> to help figure out what you may be interested in.
+                    <a href="#" style={{ color: '#3260FE' }}>Click here</a> to help figure out what you may be interested in.
                 </Typography>
             </Grid>
 
@@ -180,6 +208,7 @@ const Step2TripDetails = ({ data, setData, errors, onInterestChange, activities 
                     onChange={(e) => setData('travel_dates', e.target.value)}
                     error={!!errors.travel_dates}
                     helperText={errors.travel_dates}
+                    sx={inputSx}
                 />
             </Grid>
 
@@ -192,12 +221,13 @@ const Step2TripDetails = ({ data, setData, errors, onInterestChange, activities 
                     onChange={(e) => setData('travelers', e.target.value)}
                     error={!!errors.travelers}
                     helperText={errors.travelers}
+                    sx={inputSx}
                 />
             </Grid>
 
             {/* Interests Section */}
             <Grid size={{ xs: 12 }}>
-                <Typography variant="body1" sx={{ mb: 2 }}>
+                <Typography variant="body1" sx={{ mb: 2, fontFamily: 'Manrope, sans-serif', fontWeight: 600, color: '#0f1419' }}>
                     What are your interests?
                 </Typography>
                 {hasDisplayActivities && data.destination_id ? (
@@ -232,11 +262,12 @@ const Step2TripDetails = ({ data, setData, errors, onInterestChange, activities 
             <Grid size={{ xs: 12 }}>
                 <TextField
                     fullWidth
-                    label="Any Other interests"
+                    label="Any other interests"
                     value={data.other_interests}
                     onChange={(e) => setData('other_interests', e.target.value)}
                     error={!!errors.other_interests}
                     helperText={errors.other_interests}
+                    sx={inputSx}
                 />
             </Grid>
         </Grid>
