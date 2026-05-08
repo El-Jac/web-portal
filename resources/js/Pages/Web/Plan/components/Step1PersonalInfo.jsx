@@ -1,13 +1,6 @@
 import React from 'react';
 import { Grid, TextField } from '@mui/material';
-
-const inputSx = {
-    '& .MuiOutlinedInput-root': {
-        borderRadius: '12px',
-        '&.Mui-focused .MuiOutlinedInput-notchedOutline': { borderColor: '#3260FE' },
-    },
-    '& .MuiInputLabel-root.Mui-focused': { color: '#3260FE' },
-};
+import { roundedInputSx as inputSx } from './planFormStyles';
 
 const Step1PersonalInfo = ({ data, setData, errors }) => {
     return (

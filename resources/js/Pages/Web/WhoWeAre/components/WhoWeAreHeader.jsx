@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from '@inertiajs/react';
 import { ArrowForward } from '@mui/icons-material';
+import SectionEyebrow from '../../../../Components/SectionEyebrow.jsx';
 
 const WhoWeAreHeader = ({ title = 'Who We Are', description }) => (
     <section className="relative overflow-hidden -mt-20">
@@ -22,9 +23,9 @@ const WhoWeAreHeader = ({ title = 'Who We Are', description }) => (
 
         {/* Content */}
         <div className="relative z-10 mx-auto max-w-[1120px] px-5 pt-40 pb-32 md:px-10 md:pt-48 md:pb-40 lg:px-16">
-            <span className="mb-5 inline-block text-[9px] font-black uppercase tracking-[0.3em] text-white/60">
+            <SectionEyebrow className="mb-5 inline-block text-white/60">
                 About Us
-            </span>
+            </SectionEyebrow>
             <h1 className="mb-6 max-w-[580px] text-[2.6rem] font-extrabold leading-[0.97] tracking-[-0.05em] text-white sm:text-[3.2rem] md:text-[4.2rem]">
                 {title}
                 <br/>

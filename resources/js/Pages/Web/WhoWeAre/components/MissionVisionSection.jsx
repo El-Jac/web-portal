@@ -1,4 +1,5 @@
 import React from 'react';
+import SectionEyebrow from '../../../../Components/SectionEyebrow.jsx';
 
 const MissionVisionSection = ({
     missionTitle = 'Our Mission',
@@ -9,9 +10,9 @@ const MissionVisionSection = ({
     <section className="bg-[#f9f9f9] px-5 py-20 md:px-10 md:py-28 lg:px-16">
         <div className="mx-auto max-w-[1120px]">
             <div className="mb-14 text-center">
-                <span className="mb-4 block text-[10px] font-semibold uppercase tracking-[0.18em] text-[#1a1c1c]">
+                <SectionEyebrow variant="subtle" className="mb-4 block text-[#1a1c1c]">
                     What Drives Us
-                </span>
+                </SectionEyebrow>
                 <h2 className="text-[2.15rem] font-extrabold leading-[0.98] tracking-[-0.05em] text-[#1a1c1c] sm:text-[2.5rem] md:text-[3.8rem]">
                     Purpose&nbsp;&amp;&nbsp;
                     <span className="font-light italic text-[#3260FE]">Direction.</span>

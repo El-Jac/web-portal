@@ -15,8 +15,12 @@ class CreatePlanAction extends AbstractPlanAction
         ]);
 
         $plan = Plan::create([
-            'specialist_id' => $data['specialist_id'],
+            'specialist_id' => $data['specialist_id'] ?? null,
             'destination_id' => $data['destination_id'] ?? null,
+            'first_name' => $data['first_name'] ?? null,
+            'last_name' => $data['last_name'] ?? null,
+            'email' => $data['email'] ?? null,
+            'phone' => $data['phone'] ?? null,
             'status' => 'draft',
             'appointment_status' => 'draft',
         ]);

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowForward } from '@mui/icons-material';
 import ApplySpecialistDialog from '../../../../Components/ApplySpecialistDialog.jsx';
+import SectionEyebrow from '../../../../Components/SectionEyebrow.jsx';
 
 const WorkForUsSection = ({
     title = 'Work For Us',
@@ -27,9 +28,9 @@ const WorkForUsSection = ({
                             style={{ background: 'radial-gradient(circle, #EA6D4F 0%, transparent 70%)' }}
                         />
 
-                        <span className="relative mb-5 inline-block text-[9px] font-black uppercase tracking-[0.3em] text-white/50">
+                        <SectionEyebrow className="relative mb-5 inline-block text-white/50">
                             Join the Team
-                        </span>
+                        </SectionEyebrow>
                         <h2 className="relative mb-6 text-[2.15rem] font-extrabold leading-[0.98] tracking-[-0.05em] text-white sm:text-[2.5rem] md:text-[3.5rem]">
                             {title}
                             <br/>

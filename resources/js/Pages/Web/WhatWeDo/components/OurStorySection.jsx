@@ -1,4 +1,5 @@
 import React from 'react';
+import SectionEyebrow from '../../../../Components/SectionEyebrow.jsx';
 
 const OurStorySection = ({
     imageSrc = '/web/our-story-image.webp',
@@ -22,9 +23,9 @@ const OurStorySection = ({
 
                 {/* Text — min-w-0 prevents grid blowout */}
                 <div className="min-w-0">
-                    <span className="mb-4 block text-[9px] font-black uppercase tracking-[0.3em] text-[#3f484a]">
+                    <SectionEyebrow className="mb-4 block text-[#3f484a]">
                         {subtitle}
-                    </span>
+                    </SectionEyebrow>
                     <h2 className="mb-6 text-[2rem] font-extrabold leading-[0.98] tracking-[-0.05em] text-[#1a1c1c] sm:text-[2.5rem] md:text-[3rem]">
                         {title}{' '}
                         <span className="font-light italic text-[#EA6D4F]">{titleAccent}</span>

@@ -5,6 +5,7 @@ import {
     MapOutlined,
     VerifiedOutlined,
 } from '@mui/icons-material';
+import SectionEyebrow from '../../../../Components/SectionEyebrow.jsx';
 
 const defaultServices = [
     {
@@ -41,9 +42,9 @@ const OurServicesSection = ({
             <div className="mx-auto max-w-[1120px]">
                 {/* Header */}
                 <div className="mb-14 text-center md:mb-18">
-                    <span className="mb-4 block text-[10px] font-semibold uppercase tracking-[0.18em] text-[#1a1c1c]">
+                    <SectionEyebrow variant="subtle" className="mb-4 block text-[#1a1c1c]">
                         How We Help
-                    </span>
+                    </SectionEyebrow>
                     <h2 className="mb-6 text-[2.15rem] font-extrabold leading-[0.98] tracking-[-0.05em] text-[#1a1c1c] sm:text-[2.5rem] md:text-[3.8rem]">
                         {title}
                         <br/>

@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {Link, usePage} from '@inertiajs/react';
-import {ArrowForward} from '@mui/icons-material';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import ContactUsDialog from './ContactUsDialog';
+import StartPlanningLink from './StartPlanningLink.jsx';
 import {navItems} from '../Pages/Web/Home/components/homeData';
 
 function normalizePath(path) {
@@ -121,18 +121,13 @@ const SiteFooter = () => {
                                     </a>
                                 ))}
                             </div>
-                            <Link
-                                href="/plan"
+                            <StartPlanningLink
                                 className="hero-cta-primary hero-cta-primary--bright-hover group inline-flex w-fit items-center rounded-xl px-6 py-3.5 text-[13px] text-white md:px-7 md:py-4 md:text-[14px]"
-                            >
-                                <span className="relative z-[1] inline-flex items-center gap-2">
-                                    Start planning
-                                    <ArrowForward
-                                        sx={{fontSize: 18}}
-                                        className="transition-transform duration-300 group-hover:translate-x-0.5"
-                                    />
-                                </span>
-                            </Link>
+                                innerClassName="relative z-[1] inline-flex items-center gap-2"
+                                label="Start planning"
+                                iconSx={{fontSize: 18}}
+                                iconClassName="transition-transform duration-300 group-hover:translate-x-0.5"
+                            />
                         </div>
 
                         {/* Site map */}

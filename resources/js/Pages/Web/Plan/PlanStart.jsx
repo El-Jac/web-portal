@@ -3,6 +3,7 @@ import { Link } from '@inertiajs/react';
 import { ArrowForward } from '@mui/icons-material';
 import WebsiteLayout from '../../../Layouts/WebsiteLayout.jsx';
 import { processSteps } from '../Home/components/homeData';
+import SectionEyebrow from '../../../Components/SectionEyebrow.jsx';
 
 const PlanStart = () => (
     <WebsiteLayout>
@@ -12,9 +13,9 @@ const PlanStart = () => (
             style={{ backgroundColor: '#eef0ff', borderRadius: '0 0 80px 80px' }}
         >
             <div className="mx-auto max-w-[1120px] relative z-10">
-                <span className="mb-5 inline-block text-[9px] font-black uppercase tracking-[0.3em] text-[#3260FE]">
+                <SectionEyebrow className="mb-5 inline-block text-[#3260FE]">
                     Start Planning
-                </span>
+                </SectionEyebrow>
                 <h1 className="mb-6 max-w-[640px] text-[2.4rem] font-extrabold leading-[0.97] tracking-[-0.05em] text-[#1a1c1c] sm:text-[3rem] md:text-[4rem]">
                     Your perfect trip,
                     <br/>
@@ -37,9 +38,9 @@ const PlanStart = () => (
         <section className="mesh-section bg-[#f9f9f9] px-5 py-20 md:px-10 md:py-28 lg:px-16">
             <div className="mx-auto max-w-[1120px]">
                 <div className="mb-14 text-center md:mb-18">
-                    <span className="mb-4 block text-[10px] font-semibold uppercase tracking-[0.18em] text-[#1a1c1c]">
+                    <SectionEyebrow variant="subtle" className="mb-4 block text-[#1a1c1c]">
                         The Process
-                    </span>
+                    </SectionEyebrow>
                     <h2 className="mb-6 text-[2.15rem] font-extrabold leading-[0.98] tracking-[-0.05em] text-[#1a1c1c] sm:text-[2.5rem] md:text-[3.8rem]">
                         Four steps to your
                         <br/>
@@ -85,9 +86,9 @@ const PlanStart = () => (
                 >
                     <div className="pointer-events-none absolute -top-20 -right-20 h-64 w-64 rounded-full opacity-20"
                          style={{ background: 'radial-gradient(circle, #3260FE 0%, transparent 70%)' }}/>
-                    <span className="relative mb-5 inline-block text-[9px] font-black uppercase tracking-[0.3em] text-white/50">
+                    <SectionEyebrow className="relative mb-5 inline-block text-white/50">
                         Ready?
-                    </span>
+                    </SectionEyebrow>
                     <h2 className="relative mb-6 text-[2rem] font-extrabold leading-[0.98] tracking-[-0.05em] text-white sm:text-[2.5rem] md:text-[3rem]">
                         Find your destination
                         <br/>

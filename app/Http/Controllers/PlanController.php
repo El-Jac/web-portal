@@ -18,6 +18,7 @@ use App\Actions\Plan\CheckPaymentStatusAction;
 use App\Http\Requests\StorePlanRequest;
 use App\Http\Requests\UpdatePlanRequest;
 use App\Http\Requests\GetPlanAvailabilityRequest;
+use App\Models\Destination;
 use App\Models\Plan;
 use App\Services\GoogleCalendarService;
 use Illuminate\Http\Request;
@@ -42,13 +43,62 @@ class PlanController extends Controller
         private CheckPaymentStatusAction $checkPaymentStatusAction,
     ) {}
     /**
-     * Create a new empty plan with specialist
+     * Create a new plan from submitted form data
      */
     public function store(StorePlanRequest $request)
     {
         $plan = $this->createPlanAction->execute($request->validated());
 
-        return redirect()->route('plans.show', $plan->id);
+        $params = ['plan' => $plan->id];
+        if ($request->query('step') !== null) {
+            $params['step'] = (int) $request->query('step');
+        }
+
+        return redirect()->route('plans.show', $params);
+    }
+
+    /**
+     * Show the stepper without creating a plan record yet
+     */
+    public function create()
+    {
+        $allDestinations = Destination::active()
+            ->orderBy('name')
+            ->get(['id', 'name'])
+            ->map(fn ($d) => ['id' => $d->id, 'name' => $d->name])
+            ->toArray();
+
+        return Inertia::render('Web/Plan/PlanStepper', [
+            'plan' => [
+                'id' => null,
+                'specialist_id' => null,
+                'destination_id' => null,
+                'first_name' => null,
+                'last_name' => null,
+                'email' => null,
+                'phone' => null,
+                'destination' => null,
+                'destination_data' => null,
+                'travel_dates' => null,
+                'travelers' => null,
+                'interests' => [],
+                'other_interests' => null,
+                'plan_type' => null,
+                'selected_plan' => null,
+                'status' => 'draft',
+                'appointment_status' => 'draft',
+                'payment_status' => 'pending',
+                'appointment_start' => null,
+                'appointment_end' => null,
+                'meeting_link' => null,
+                'plan_prices' => config('plans.prices'),
+                'specialist' => null,
+                'activities' => [],
+            ],
+            'destinations' => $allDestinations,
+            'showSuccessPage' => false,
+            'initialStep' => 0,
+        ]);
     }
 
     /**
@@ -57,17 +107,17 @@ class PlanController extends Controller
     public function show(Request $request, $id)
     {
         $plan = Plan::with(['specialist.country', 'destination.activities'])->findOrFail($id);
-        
+
         // Check for payment success/cancel query parameters
         $paymentStatus = $request->get('payment');
-        
+
         if ($paymentStatus === 'success') {
             // Refresh plan to get latest payment status
             $plan->refresh();
-            
+
             // Check payment status and update if needed
             $isPaid = $this->checkPaymentStatusAction->execute($plan);
-            
+
             if ($isPaid) {
                 // Payment was successful - show success page
                 session()->flash('payment_success', 'Payment completed successfully!');
@@ -80,6 +130,10 @@ class PlanController extends Controller
 
         // Get plan data using action
         $data = $this->getPlanDataAction->execute($plan, $paymentStatus);
+
+        if ($request->query('step') !== null) {
+            $data['initialStep'] = (int) $request->query('step');
+        }
 
         return Inertia::render('Web/Plan/PlanStepper', $data);
     }

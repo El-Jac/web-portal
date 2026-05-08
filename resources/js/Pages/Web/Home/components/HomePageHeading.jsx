@@ -1,6 +1,6 @@
 import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
-import {Link, router} from '@inertiajs/react';
-import {ArrowForward} from '@mui/icons-material';
+import {Link} from '@inertiajs/react';
+import StartPlanningLink from '../../../../Components/StartPlanningLink.jsx';
 
 const ACCENT_LINE1 = 'planned by real';
 const ACCENT_LINE2 = 'people who live there.';
@@ -198,15 +198,11 @@ function HomePageHeading() {
                     </div>
 
                     <div className="flex flex-col items-start gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-5 md:gap-7">
-                        <button
-                            onClick={() => router.post('/plans', {})}
+                        <StartPlanningLink
                             className="hero-cta-primary inline-flex items-center rounded-xl px-6 py-3.5 text-[13px] text-white md:px-7 md:py-4 md:text-[14px]"
-                        >
-                            <span className="relative z-[1] inline-flex items-center">
-                                Start Planning
-                                <ArrowForward sx={{ml: 1, fontSize: 18}}/>
-                            </span>
-                        </button>
+                            innerClassName="relative z-[1] inline-flex items-center"
+                            iconSx={{ml: 1, fontSize: 18}}
+                        />
                         <Link
                             href="/destinations"
                             className="hero-home-cta-secondary group inline-flex items-center gap-4 rounded-full py-2.5 pl-2 pr-4 text-white transition-colors hover:bg-white/12 md:text-[#3260FE] md:hover:bg-[rgba(50,96,254,0.08)] sm:py-3 sm:pl-2.5 sm:pr-5 md:gap-5"

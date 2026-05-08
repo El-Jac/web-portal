@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from '@inertiajs/react';
-import { ArrowForward } from '@mui/icons-material';
+import StartPlanningLink from '../../../../Components/StartPlanningLink.jsx';
+import SectionEyebrow from '../../../../Components/SectionEyebrow.jsx';
 
 const WhatWeDoHeader = ({ title = 'What We Do', description }) => (
     <section className="relative overflow-hidden -mt-20">
@@ -23,9 +23,9 @@ const WhatWeDoHeader = ({ title = 'What We Do', description }) => (
 
         {/* Content — pt-40 clears the fixed nav */}
         <div className="relative z-10 mx-auto max-w-[1120px] px-5 pt-40 pb-32 md:px-10 md:pt-48 md:pb-40 lg:px-16">
-            <span className="mb-5 inline-block text-[9px] font-black uppercase tracking-[0.3em] text-white/60">
+            <SectionEyebrow className="mb-5 inline-block text-white/60">
                 Our Story
-            </span>
+            </SectionEyebrow>
             <h1 className="mb-6 max-w-[580px] text-[2.6rem] font-extrabold leading-[0.97] tracking-[-0.05em] text-white sm:text-[3.2rem] md:text-[4.2rem]">
                 {title}
                 <br/>
@@ -36,13 +36,10 @@ const WhatWeDoHeader = ({ title = 'What We Do', description }) => (
                     {description}
                 </p>
             )}
-            <Link
-                href="/plan"
+            <StartPlanningLink
                 className="inline-flex items-center rounded-lg bg-[#3260FE] px-5 py-3 text-[10px] font-bold uppercase tracking-[0.16em] text-white shadow-lg shadow-[#3260FE]/30 transition-all hover:scale-[1.02]"
-            >
-                Start Planning
-                <ArrowForward sx={{ ml: 1, fontSize: 16 }}/>
-            </Link>
+                iconSx={{ ml: 1, fontSize: 16 }}
+            />
         </div>
 
         {/* Wave transition to white sections below */}
