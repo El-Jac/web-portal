@@ -1,22 +1,18 @@
 import React from 'react';
-import { Box, Typography, LinearProgress } from '@mui/material';
 
 const PlanStepperHeader = ({ activeStep, totalSteps }) => {
+    const progress = ((activeStep + 1) / totalSteps) * 100;
+
     return (
-        <Box sx={{ mb: 4, textAlign: 'center' }}>
-            <Typography variant="h4" sx={{ mb: 1, fontWeight: 'bold' }}>
-                Let's Plan like a Local
-            </Typography>
-            <Box sx={{ width: '100%', mt: 2 }}>
-                <LinearProgress
-                    variant="determinate"
-                    value={((activeStep + 1) / totalSteps) * 100}
-                    sx={{ height: 4, borderRadius: 2 }}
+        <div className="mb-6">
+            <div className="h-1 w-full overflow-hidden rounded-full bg-slate-100">
+                <div
+                    className="h-full rounded-full bg-[#3260FE] transition-all duration-500 ease-out"
+                    style={{ width: `${progress}%` }}
                 />
-            </Box>
-        </Box>
+            </div>
+        </div>
     );
 };
 
 export default PlanStepperHeader;
-

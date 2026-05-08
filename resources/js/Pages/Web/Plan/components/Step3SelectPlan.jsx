@@ -1,47 +1,46 @@
 import React, { useState } from 'react';
-import { Grid, Typography, Card, CardContent, Box, Avatar } from '@mui/material';
-import { Subscriptions } from '@mui/icons-material';
+import { CheckCircle } from '@mui/icons-material';
 
 const plans = [
     {
         icon: '/images/plans/explore.png',
         id: 'explore',
-        name: 'Explore chat',
-        description: 'Si ergo illa tantum fastidium compesce contra naturalem usum habili, quem habetis',
+        name: 'Explore Chat',
+        description: 'A focused session to kick-start your travel planning with expert local insight.',
         features: [
-            '1-hour video chat with your local specialist',
-            'AI-generated notes summarizing your session',
+            '30-minute video chat with your local specialist',
+            'AI-generated notes summarising your session',
         ],
-        price: '$',
-        time: "30 minutes",
+        price: '$99',
+        duration: '30 min',
     },
     {
         icon: '/images/plans/pathfinder.png',
         id: 'pathfinder',
-        name: 'Pathfinder chat',
-        description: 'Si ergo illa tantum fastidium compesce contra naturalem usum habili, quem habetis',
+        name: 'Pathfinder Chat',
+        description: 'A deeper dive to map out the perfect itinerary with curated local recommendations.',
         features: [
-            '1-hour video chat with your local specialist',
-            'AI-generated notes summarizing your session',
-            'Curated must-do list of activities, dining, and insider tips tailored to your trip',
+            '40-minute video chat with your local specialist',
+            'AI-generated notes summarising your session',
+            'Curated must-do list of activities, dining & insider tips',
         ],
-        price: '$$',
+        price: '$149',
+        duration: '40 min',
         recommended: true,
-        time: "40 minutes",
     },
     {
         id: 'premium',
         icon: '/images/plans/premium.png',
-        name: 'Premium chat',
-        description: 'Si ergo illa tantum fastidium compesce contra naturalem usum habili, quem habetis',
+        name: 'Premium Chat',
+        description: 'The full-service experience — thorough, priority-access planning for discerning travellers.',
         features: [
-            '1-hour video chat with your local specialist',
-            'AI-generated notes summarizing your session',
-            'Curated must-do list of activities, dining, and insider tips tailored to your trip',
+            '60-minute video chat with your local specialist',
+            'AI-generated notes summarising your session',
+            'Curated must-do list of activities, dining & insider tips',
             'Priority support and extended consultation time',
         ],
-        price: '$$$',
-        time: "60 minutes",
+        price: '$249',
+        duration: '60 min',
     },
 ];
 
@@ -55,113 +54,102 @@ const Step3SelectPlan = ({ data, setData, errors }) => {
     };
 
     return (
-        <Box>
-            <Typography variant="h5" sx={{ mb: 4, textAlign: 'center' }}>
-                Select a Plan
-            </Typography>
-            
-            {errors.plan_type && (
-                <Typography variant="body2" color="error" sx={{ mb: 2, textAlign: 'center' }}>
-                    {errors.plan_type}
-                </Typography>
-            )}
+        <div>
+            <div className="mb-8 text-center">
+                <h2
+                    className="mb-2 text-2xl font-bold tracking-tight text-[#0f1419] md:text-3xl"
+                    style={{ fontFamily: 'Manrope, sans-serif' }}
+                >
+                    Choose Your Plan
+                </h2>
+                <p className="mx-auto max-w-[420px] text-[15px] leading-relaxed text-[#3f484a]"
+                   style={{ fontFamily: 'Inter, sans-serif' }}>
+                    Pick the session that fits your travel style and budget.
+                </p>
+                {errors.plan_type && (
+                    <p className="mt-2 text-sm text-red-500">{errors.plan_type}</p>
+                )}
+            </div>
 
-            <Grid container spacing={3}>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-5">
                 {plans.map((plan) => {
                     const isSelected = selectedPlanId === plan.id;
-                    const isRecommended = plan.recommended;
-
                     return (
-                        <Grid size={{ xs: 12, md: 4 }} key={plan.id}>
-                            <Card
-                                sx={{
-                                    height: '100%',
-                                    cursor: 'pointer',
-                                    border: isSelected ? 2 : 1,
-                                    borderColor: isSelected ? 'primary.main' : 'divider',
-                                    bgcolor: isSelected ? 'action.selected' : 'background.paper',
-                                    transition: 'all 0.2s',
-                                    '&:hover': {
-                                        borderColor: 'primary.main',
-                                        boxShadow: 3,
-                                    },
-                                    position: 'relative',
-                                }}
-                                onClick={() => handlePlanSelect(plan.id)}
+                        <div
+                            key={plan.id}
+                            onClick={() => handlePlanSelect(plan.id)}
+                            className={[
+                                'relative flex cursor-pointer flex-col overflow-visible rounded-2xl border bg-white p-5 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 sm:rounded-3xl sm:p-6',
+                                isSelected
+                                    ? 'border-[#3260FE] shadow-[0_0_0_3px_rgba(50,96,254,0.12),0_20px_44px_-22px_rgba(50,96,254,0.2)]'
+                                    : 'border-slate-200/70 shadow-[0_1px_2px_rgba(15,23,42,0.04),0_20px_44px_-22px_rgba(15,23,42,0.08)] hover:border-slate-300/80',
+                            ].join(' ')}
+                        >
+                            {/* Recommended badge */}
+                            {plan.recommended && (
+                                <span className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border-2 border-[#EA6D4F] bg-slate-900/90 px-4 py-1 text-[0.7rem] font-semibold tracking-wide text-white backdrop-blur-md sm:px-5 sm:text-[0.75rem]">
+                                    Most Popular
+                                </span>
+                            )}
+
+                            {/* Plan icon */}
+                            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#3260FE]/8 sm:h-14 sm:w-14">
+                                <img
+                                    src={plan.icon}
+                                    alt={plan.name}
+                                    className="h-7 w-7 object-contain sm:h-8 sm:w-8"
+                                    onError={(e) => { e.target.style.display = 'none'; }}
+                                />
+                            </div>
+
+                            {/* Duration pill */}
+                            <span className="mb-3 inline-block self-start rounded-full bg-slate-100 px-3 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-[#3f484a]">
+                                {plan.duration}
+                            </span>
+
+                            <h3
+                                className="mb-2 text-[1.05rem] font-bold leading-snug text-[#0f1419] sm:text-lg"
+                                style={{ fontFamily: 'Manrope, sans-serif' }}
                             >
-                            
-                                <CardContent sx={{ p: 3 }}>
-                                    <Box sx={{ mb: 2, display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 1 }}>
-                                        
-                                        <Avatar>
-                                            <Subscriptions />
-                                        </Avatar>
-                                    </Box>
-                                    <Box sx={{ mb: 2, display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 1 }}>
-                                        <Typography variant="h6" sx={{ fontWeight: 600}}>
-                                            {plan.name}
-                                        </Typography>
-                                    </Box>
+                                {plan.name}
+                            </h3>
+                            <p className="mb-4 text-[13px] leading-relaxed text-[#3f484a] sm:text-sm">
+                                {plan.description}
+                            </p>
 
-                                    <Typography
-                                        variant="body2"
-                                        color="text.secondary"
-                                        sx={{ mb: 2, minHeight: 60 }}
-                                    >
-                                        {plan.description}
-                                    </Typography>
+                            <ul className="mb-6 flex flex-col gap-2">
+                                {plan.features.map((feature, i) => (
+                                    <li key={i} className="flex items-start gap-2 text-[13px] text-[#3f484a] sm:text-sm">
+                                        <CheckCircle sx={{ fontSize: 15, color: '#3260FE', mt: '2px', flexShrink: 0 }} />
+                                        {feature}
+                                    </li>
+                                ))}
+                            </ul>
 
-                                    <Box sx={{ mb: 8 }}>
-                                        {plan.features.map((feature, index) => (
-                                            <Box
-                                                key={index}
-                                                sx={{
-                                                    display: 'flex',
-                                                    alignItems: 'flex-start',
-                                                    mb: 1,
-                                                }}
-                                            >
-                                                <Typography
-                                                    sx={{
-                                                        color: 'success.main',
-                                                        mr: 1,
-                                                        fontSize: '1.2rem',
-                                                    }}
-                                                >
-                                                    ✓
-                                                </Typography>
-                                                <Typography variant="body2" color="text.secondary">
-                                                    {feature}
-                                                </Typography>
-                                            </Box>
-                                        ))}
-                                    </Box>
+                            {/* Price */}
+                            <div className="mt-auto border-t border-slate-100 pt-4">
+                                <span
+                                    className="text-2xl font-bold text-[#0f1419] sm:text-3xl"
+                                    style={{ fontFamily: 'Manrope, sans-serif' }}
+                                >
+                                    {plan.price}
+                                </span>
+                            </div>
 
-                                    <Box
-                                        sx={{
-                                            paddingTop: 2,
-                                            borderTop: 1,
-                                            borderColor: 'divider',
-                                            position: 'absolute',
-                                            bottom: 10,
-                                            left: 0,
-                                            right: 0,
-                                            textAlign: 'center',
-                                        }}
-                                    >
-                                        <Typography variant="h6" sx={{ fontWeight: 600 }}>
-                                            {plan.price}
-                                        </Typography>
-                                    </Box>
-                                </CardContent>
-                            </Card>
-                        </Grid>
+                            {/* Selected ring indicator */}
+                            {isSelected && (
+                                <div className="absolute right-4 top-4 h-5 w-5 rounded-full bg-[#3260FE] flex items-center justify-center">
+                                    <svg className="h-3 w-3 text-white" fill="none" viewBox="0 0 12 12">
+                                        <path d="M2 6l3 3 5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                                    </svg>
+                                </div>
+                            )}
+                        </div>
                     );
                 })}
-            </Grid>
-        </Box>
+            </div>
+        </div>
     );
 };
 
 export default Step3SelectPlan;
-
