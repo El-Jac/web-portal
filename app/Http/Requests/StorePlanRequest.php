@@ -24,6 +24,10 @@ class StorePlanRequest extends FormRequest
         return [
             'specialist_id' => 'nullable|exists:specialists,id',
             'destination_id' => 'nullable|exists:destinations,id',
+            'first_name' => 'nullable|string|max:255',
+            'last_name' => 'nullable|string|max:255',
+            'email' => 'nullable|email|max:255',
+            'phone' => 'nullable|string|max:255',
         ];
     }
 

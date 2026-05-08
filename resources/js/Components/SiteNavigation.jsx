@@ -1,7 +1,6 @@
 import React, {useEffect} from 'react';
 import {Link, usePage} from '@inertiajs/react';
 import {
-    ArrowForward,
     Close,
     GroupsOutlined,
     HomeOutlined,
@@ -11,6 +10,7 @@ import {
     WorkOutline,
 } from '@mui/icons-material';
 import {navItems} from '../Pages/Web/Home/components/homeData';
+import StartPlanningLink from './StartPlanningLink.jsx';
 
 /** Home is only listed in the mobile drawer; md+ nav hides it (logo links home). */
 const desktopNavItems = navItems.filter((item) => item.href !== '/');
@@ -110,15 +110,12 @@ const SiteNavigation = ({mobileMenuOpen, setMobileMenuOpen, onContactClick}) => 
                     </div>
 
                     <div className="flex shrink-0 items-center gap-2 md:gap-3">
-                        <Link
-                            href="/plan"
+                        <StartPlanningLink
                             className="nav-cta-start-planning hidden items-center font-semibold text-white md:inline-flex"
-                        >
-                            <span className="relative z-[1] inline-flex items-center gap-1.5 pl-1">
-                                Start Planning
-                                <ArrowForward className="text-[0.6rem] md:text-[0.65rem]"/>
-                            </span>
-                        </Link>
+                            innerClassName="relative z-[1] inline-flex items-center gap-1.5 pl-1"
+                            iconSx={{}}
+                            iconClassName="text-[0.6rem] md:text-[0.65rem]"
+                        />
                         <button
                             type="button"
                             onClick={() => setMobileMenuOpen((open) => !open)}
@@ -238,14 +235,12 @@ const SiteNavigation = ({mobileMenuOpen, setMobileMenuOpen, onContactClick}) => 
                         <p className="relative mx-auto mt-4 max-w-[17rem] text-center text-[15px] leading-relaxed text-white/90 sm:text-[16px]">
                             Connect with a local expert and build your trip with confidence.
                         </p>
-                        <Link
-                            href="/plan"
+                        <StartPlanningLink
                             className="relative mt-7 flex w-full items-center justify-center gap-2 rounded-xl bg-white/15 px-5 py-3.5 text-[14px] font-semibold text-white backdrop-blur-sm transition hover:bg-white/25"
+                            label="Get started"
+                            iconSx={{fontSize: 18}}
                             onClick={closeMenu}
-                        >
-                            Get started
-                            <ArrowForward sx={{fontSize: 18}}/>
-                        </Link>
+                        />
                     </div>
                 </div>
             </aside>

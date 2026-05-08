@@ -28,15 +28,17 @@ const stepImages = [
 
 const CARD_SHADOW = "0 1px 3px rgba(15,23,42,0.04), 0 8px 24px -8px rgba(15,23,42,0.06)";
 
-const PlanStepper = ({ plan, destinations = [], showSuccessPage = false }) => {
+const PlanStepper = ({ plan, destinations = [], showSuccessPage = false, initialStep = null }) => {
     const { flash } = usePage().props;
 
     if (showSuccessPage && plan.payment_status === 'paid') {
         return <PaymentSuccess plan={plan} />;
     }
 
-    const initialStep = plan.status === 'completed' ? 4 : 0;
-    const [activeStep, setActiveStep] = useState(initialStep);
+    const computedInitialStep = initialStep !== null && initialStep !== undefined
+        ? initialStep
+        : plan.status === 'completed' ? 4 : 0;
+    const [activeStep, setActiveStep] = useState(computedInitialStep);
 
     const isAppointmentCompleted = plan.status === 'completed';
     const activities = plan.activities ||
@@ -44,7 +46,7 @@ const PlanStepper = ({ plan, destinations = [], showSuccessPage = false }) => {
                       plan.destination?.activities ||
                       [];
 
-    const { data, setData, put, processing, errors } = useForm({
+    const { data, setData, post, put, processing, errors } = useForm({
         first_name: plan.first_name || "",
         last_name: plan.last_name || "",
         email: plan.email || "",
@@ -66,10 +68,17 @@ const PlanStepper = ({ plan, destinations = [], showSuccessPage = false }) => {
 
     const handleNext = () => {
         if (activeStep === 3) return;
+        const nextStep = Math.min(activeStep + 1, steps.length - 1);
+        if (!plan.id) {
+            post(`/plans?step=${nextStep}`, {
+                preserveScroll: true,
+            });
+            return;
+        }
         put(`/plans/${plan.id}`, {
             preserveScroll: true,
             preserveState: true,
-            onSuccess: () => setActiveStep((cur) => Math.min(cur + 1, steps.length - 1)),
+            onSuccess: () => setActiveStep(nextStep),
         });
     };
 

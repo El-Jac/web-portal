@@ -1,7 +1,8 @@
 import React from 'react';
 import {Link} from '@inertiajs/react';
-import {ArrowForward, Close, Menu} from '@mui/icons-material';
+import {Close, Menu} from '@mui/icons-material';
 import {navItems} from './homeData';
+import StartPlanningLink from '../../../../Components/StartPlanningLink.jsx';
 
 const HomeNavigation = ({mobileMenuOpen, setMobileMenuOpen}) => (
     <nav className="fixed inset-x-0 top-0 z-50 px-4 py-4 md:px-10 lg:px-16">
@@ -26,13 +27,10 @@ const HomeNavigation = ({mobileMenuOpen, setMobileMenuOpen}) => (
             </div>
 
             <div className="flex items-center gap-3">
-                <Link
-                    href="/plan"
+                <StartPlanningLink
                     className="hidden items-center rounded-lg bg-[#3260FE] px-5 py-2 text-[11px] font-semibold text-white shadow-lg shadow-[#3260FE]/20 transition-transform hover:scale-[1.02] md:inline-flex"
-                >
-                    Start Planning
-                    <ArrowForward sx={{fontSize: 18, ml: 1}}/>
-                </Link>
+                    iconSx={{fontSize: 18, ml: 1}}
+                />
                 <button
                     type="button"
                     onClick={() => setMobileMenuOpen((open) => !open)}
@@ -57,14 +55,11 @@ const HomeNavigation = ({mobileMenuOpen, setMobileMenuOpen}) => (
                             {item.label}
                         </Link>
                     ))}
-                    <Link
-                        href="/plan"
+                    <StartPlanningLink
                         className="inline-flex items-center justify-center rounded-xl bg-[#3260FE] px-5 py-3 text-sm font-semibold text-white"
+                        iconSx={{fontSize: 18, ml: 1}}
                         onClick={() => setMobileMenuOpen(false)}
-                    >
-                        Start Planning
-                        <ArrowForward sx={{fontSize: 18, ml: 1}}/>
-                    </Link>
+                    />
                 </div>
             </div>
         )}

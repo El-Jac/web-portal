@@ -2,14 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { router } from '@inertiajs/react';
 import { Grid, TextField, Typography, Checkbox, FormControlLabel, Autocomplete, Box } from '@mui/material';
 import SpecialistInfo from './SpecialistInfo';
-
-const inputSx = {
-    '& .MuiOutlinedInput-root': {
-        borderRadius: '12px',
-        '&.Mui-focused .MuiOutlinedInput-notchedOutline': { borderColor: '#3260FE' },
-    },
-    '& .MuiInputLabel-root.Mui-focused': { color: '#3260FE' },
-};
+import { roundedInputSx as inputSx } from './planFormStyles';
 
 const Step2TripDetails = ({ data, setData, errors, onInterestChange, activities = [], destinations = [], destinationData = null, planId }) => {
     const hasActivities = Array.isArray(activities) && activities.length > 0;

@@ -1,6 +1,6 @@
 import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
 import {Link} from '@inertiajs/react';
-import {ArrowForward} from '@mui/icons-material';
+import StartPlanningLink from '../../../../Components/StartPlanningLink.jsx';
 
 const CTA_IMAGE = '/images/home/stitch/cta-footer.jpg';
 
@@ -75,15 +75,12 @@ const ReadyToPlanSection = () => {
                                 No guesswork, no generic lists — just real insight from locals who love where they live.
                             </p>
                             <div className="flex flex-col items-center gap-6 sm:gap-4 sm:flex-row sm:flex-wrap sm:justify-center md:items-center md:justify-start">
-                                <Link
-                                    href="/plan"
+                                <StartPlanningLink
                                     className="hero-cta-primary hero-cta-primary--bright-hover inline-flex items-center rounded-xl px-6 py-3.5 text-[13px] text-white md:px-7 md:py-4 md:text-[14px]"
-                                >
-                                    <span className="relative z-[1] inline-flex items-center">
-                                        Start planning
-                                        <ArrowForward sx={{ml: 1, fontSize: 18}}/>
-                                    </span>
-                                </Link>
+                                    innerClassName="relative z-[1] inline-flex items-center"
+                                    label="Start planning"
+                                    iconSx={{ml: 1, fontSize: 18}}
+                                />
                                 <span className="hidden text-[13px] text-white/35 sm:inline" aria-hidden>
                                     or
                                 </span>
