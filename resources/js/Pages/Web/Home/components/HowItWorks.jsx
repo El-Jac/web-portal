@@ -2,7 +2,7 @@ import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
 import {processSteps} from './homeData';
 import BlendedBackground from '@/Components/BlendedBackground';
 
-const WHAT_WE_DO_TITLE = 'What We Do';
+const OUR_PROCESS_TITLE = 'Our Process';
 const WHAT_WE_DO_TYPE_MS = 46;
 /** Pause after title finishes typing, before headline + subcopy reveal */
 const WHAT_WE_DO_CONTENT_AFTER_TYPE_MS = 400;
@@ -28,7 +28,7 @@ const HowItWorks = () => {
         if (mqReduce.matches) {
             setReduceMotion(true);
             setSectionInView(true);
-            setTitleTyped(WHAT_WE_DO_TITLE);
+            setTitleTyped(OUR_PROCESS_TITLE);
             setContentVisible(true);
         }
     }, []);
@@ -82,8 +82,8 @@ const HowItWorks = () => {
         let i = 0;
         const id = setInterval(() => {
             i += 1;
-            setTitleTyped(WHAT_WE_DO_TITLE.slice(0, i));
-            if (i >= WHAT_WE_DO_TITLE.length) {
+            setTitleTyped(OUR_PROCESS_TITLE.slice(0, i));
+            if (i >= OUR_PROCESS_TITLE.length) {
                 clearInterval(id);
             }
         }, WHAT_WE_DO_TYPE_MS);
@@ -94,7 +94,7 @@ const HowItWorks = () => {
         if (reduceMotion || !sectionInView) {
             return undefined;
         }
-        if (titleTyped !== WHAT_WE_DO_TITLE) {
+        if (titleTyped !== OUR_PROCESS_TITLE) {
             return undefined;
         }
         const t = setTimeout(() => {
@@ -104,7 +104,7 @@ const HowItWorks = () => {
     }, [titleTyped, sectionInView, reduceMotion]);
 
     const showCursor =
-        sectionInView && !reduceMotion && titleTyped.length < WHAT_WE_DO_TITLE.length;
+        sectionInView && !reduceMotion && titleTyped.length < OUR_PROCESS_TITLE.length;
 
     return (
         <BlendedBackground
@@ -116,8 +116,8 @@ const HowItWorks = () => {
             <div className="relative z-[1] mx-auto max-w-[1120px]">
                 <div ref={headerRef} className="mb-12 text-center md:mb-16">
                     <span
-                        className="ibrow block min-h-[1.4em] pb-2 text-center md:pb-3"
-                        aria-label={WHAT_WE_DO_TITLE}
+                        className="ibrow mb-4 block min-h-[1.4em] !text-sm !leading-snug !tracking-[0.08em] text-center sm:!text-base md:!text-lg !text-[#EA6D4F]"
+                        aria-label={OUR_PROCESS_TITLE}
                     >
                         <span aria-hidden="true">
                             {titleTyped}

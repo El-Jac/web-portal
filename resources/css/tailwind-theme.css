@@ -111,3 +111,25 @@ h1 {
     line-height: 1.5;
     color: #545454;
 }
+
+/* Who We Are — infinite horizontal question carousel */
+@keyframes who-we-are-questions-marquee {
+    from {
+        transform: translate3d(0, 0, 0);
+    }
+    to {
+        transform: translate3d(-50%, 0, 0);
+    }
+}
+
+.who-we-are-questions-marquee-track {
+    animation: who-we-are-questions-marquee 520s linear infinite;
+    will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .who-we-are-questions-marquee-track {
+        animation: none;
+        will-change: auto;
+    }
+}

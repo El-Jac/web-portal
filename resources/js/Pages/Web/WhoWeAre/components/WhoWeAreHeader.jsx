@@ -407,21 +407,23 @@ function WhoWeAreHeader() {
                 {/* Heading — line 1 typewriter; line 2 fades with rest */}
                 <h1
                     className="mx-auto max-w-[860px] text-center font-['Manrope',system-ui,sans-serif] text-[#1a1a2e] !mb-6 md:!mb-8"
-                    aria-label="We are local experts who live there. We are Plan Like a Local"
+                    aria-label="We are local experts who live there. So we can help you Plan like a Local."
                 >
                     <WhoWeAreHeroTypewriterLine visibleLen={typewriterLen} showCursor={showTwCursor} />
                     <span
                         className={`mt-2 block text-[2.35rem] font-extrabold leading-[1.12] tracking-[-0.035em] sm:mt-2.5 sm:text-[3rem] md:mt-3 md:text-[3.65rem] md:leading-[1.08] ${heroRestMotionClass}`}
                     >
-                        <span className="font-normal">We are </span>
-                        <span className="text-[#514ae6]">Plan Like a Local</span>
+                        <span className="font-normal">So we can help you</span>
+                        <br />
+                        <span className="text-[#514ae6]">Plan like a Local.</span>
                     </span>
                 </h1>
 
                 <div className={`${heroRestMotionClass}`}>
                     {/* Subtitle */}
-                    <p className="mx-auto mb-9 max-w-[580px] text-center font-['Manrope',system-ui,sans-serif] text-[16px] leading-[1.75] text-[#666666] sm:text-[17px] md:mb-10 md:text-[18px] md:leading-[1.72]">
-                        We live, breathe, and know the places we plan for — they're home to us. That's the everyday familiarity we bring to every itinerary we shape with you.
+                    <p className="who-we-are-hero-origin-copy mx-auto mb-9 max-w-[720px] px-1 text-center font-['Manrope',system-ui,sans-serif] text-[1.4rem] font-normal leading-[1.65] text-[#666666] md:mb-10 md:leading-[1.62]">
+                        We live in the places we plan for — they’re home to us. We bring that everyday familiarity to every
+                        itinerary we shape with you.
                     </p>
 
                     {/* CTA — hover sweep matches header nav Start Planning */}

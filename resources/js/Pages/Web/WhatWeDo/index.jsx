@@ -19,7 +19,7 @@ const processSteps = [
 const Index = () => (
     <WebsiteLayout>
         <WhatWeDoHeader
-            title="What We Do"
+            title="Our Process"
             description="We connect curious travelers with local experts who turn great trips into unforgettable ones."
         />
         <MissionVisionSection

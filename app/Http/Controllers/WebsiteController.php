@@ -42,7 +42,7 @@ class WebsiteController extends Controller
     }
 
     /**
-     * Show the what we do page
+     * Show the Our Process page (route: /what-we-do)
      */
     public function whatWeDo()
     {

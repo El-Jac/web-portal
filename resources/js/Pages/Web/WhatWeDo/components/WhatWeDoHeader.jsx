@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from '@inertiajs/react';
 import { ArrowForward } from '@mui/icons-material';
 
-const WhatWeDoHeader = ({ title = 'What We Do', description }) => (
+const WhatWeDoHeader = ({ title = 'Our Process', description }) => (
     <section className="relative overflow-hidden -mt-20">
         {/* Hero image — same as home page */}
         <div
