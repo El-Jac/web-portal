@@ -44,6 +44,7 @@ class HandleInertiaRequests extends Middleware
                     'email' => $request->user()->email,
                     'role' => $request->user()->role,
                 ] : null,
+                'impersonating' => $request->session()->has('impersonator_id'),
             ],
             'flash' => [
                 'message' => $request->session()->get('message'),

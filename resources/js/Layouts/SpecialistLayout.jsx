@@ -27,7 +27,7 @@ import {
   Settings as SettingsIcon,
   Warning
 } from '@mui/icons-material';
-import { Link, router } from '@inertiajs/react';
+import { Link, router, usePage } from '@inertiajs/react';
 import adminTheme from '../themes/adminTheme';
 import Notification from '../Components/Notification';
 
@@ -35,6 +35,8 @@ const drawerWidth = 240;
 
 const SpecialistLayout = ({ children, user }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { auth } = usePage().props;
+  const isImpersonating = !!auth?.impersonating;
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -42,6 +44,10 @@ const SpecialistLayout = ({ children, user }) => {
 
   const handleLogout = () => {
     router.post('/specialist/logout');
+  };
+
+  const handleStopImpersonating = () => {
+    router.post('/specialist/stop-impersonating');
   };
 
   const menuItems = [
@@ -167,6 +173,19 @@ const SpecialistLayout = ({ children, user }) => {
         sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
       >
         <Toolbar />
+        {isImpersonating && (
+          <Alert
+            severity="warning"
+            sx={{ mb: 2 }}
+            action={
+              <Button color="inherit" size="small" onClick={handleStopImpersonating}>
+                Stop Impersonating
+              </Button>
+            }
+          >
+            You are impersonating {user?.name || 'this specialist'}. Actions taken here are recorded against their account.
+          </Alert>
+        )}
         <Notification />
         {children}
       </Box>
