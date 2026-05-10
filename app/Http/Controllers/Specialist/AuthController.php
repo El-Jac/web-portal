@@ -8,7 +8,9 @@ use App\Actions\Auth\SendPasswordResetLinkAction;
 use App\Actions\Auth\ResetPasswordAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SpecialistLoginRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
 
@@ -51,8 +53,32 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         $this->logoutSpecialistAction->execute($request);
-        
+
         return redirect()->route('specialist.login');
+    }
+
+    /**
+     * Stop impersonating and return to the original admin session
+     */
+    public function stopImpersonating(Request $request)
+    {
+        $impersonatorId = $request->session()->pull('impersonator_id');
+
+        if (!$impersonatorId) {
+            return redirect()->route('specialist.login');
+        }
+
+        $admin = User::find($impersonatorId);
+        if (!$admin || !$admin->isAdmin()) {
+            $this->logoutSpecialistAction->execute($request);
+            return redirect()->route('specialist.login');
+        }
+
+        Auth::login($admin);
+        $request->session()->regenerate();
+
+        return redirect()->route('admin.specialists.index')
+            ->with('success', 'Stopped impersonating.');
     }
 
     /**

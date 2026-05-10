@@ -12,7 +12,7 @@ import {
   Fab,
 } from '@mui/material';
 import {DataGrid} from '@mui/x-data-grid';
-import {Edit as EditIcon, Delete as DeleteIcon, Add as AddIcon, LockReset as LockResetIcon} from '@mui/icons-material';
+import {Edit as EditIcon, Delete as DeleteIcon, Add as AddIcon, LockReset as LockResetIcon, SwitchAccount as SwitchAccountIcon} from '@mui/icons-material';
 import {router, usePage} from '@inertiajs/react';
 import AdminLayout from '../../../Layouts/AdminLayout.jsx';
 import SpecialistFormDialog from '../../../Components/SpecialistFormDialog.jsx';
@@ -22,6 +22,7 @@ const List = (props) => {
     const [formOpen, setFormOpen] = useState(false);
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
     const [resetPasswordDialogOpen, setResetPasswordDialogOpen] = useState(false);
+    const [impersonateDialogOpen, setImpersonateDialogOpen] = useState(false);
     const [selectedSpecialist, setSelectedSpecialist] = useState(null);
     const [resetForm, setResetForm] = useState(false);
 
@@ -44,6 +45,17 @@ const List = (props) => {
     const handleResetPassword = (specialist) => {
         setSelectedSpecialist(specialist);
         setResetPasswordDialogOpen(true);
+    };
+
+    const handleImpersonate = (specialist) => {
+        setSelectedSpecialist(specialist);
+        setImpersonateDialogOpen(true);
+    };
+
+    const confirmImpersonate = () => {
+        if (selectedSpecialist) {
+            router.post(`/admin/specialists/${selectedSpecialist.id}/impersonate`);
+        }
     };
 
     const confirmDelete = () => {
@@ -136,7 +148,7 @@ const List = (props) => {
         {
             field: 'actions',
             headerName: 'Actions',
-            width: 180,
+            width: 220,
             sortable: false,
             renderCell: (params) => (
                 <Box>
@@ -155,6 +167,14 @@ const List = (props) => {
                         title="Reset Password"
                     >
                         <LockResetIcon/>
+                    </IconButton>
+                    <IconButton
+                        size="small"
+                        onClick={() => handleImpersonate(params.row)}
+                        color="info"
+                        title="Login as this specialist"
+                    >
+                        <SwitchAccountIcon/>
                     </IconButton>
                     <IconButton
                         size="small"
@@ -223,6 +243,25 @@ const List = (props) => {
                         <Button onClick={() => setDeleteDialogOpen(false)}>Cancel</Button>
                         <Button onClick={confirmDelete} color="error" variant="contained">
                             Delete
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+
+                <Dialog
+                    open={impersonateDialogOpen}
+                    onClose={() => setImpersonateDialogOpen(false)}
+                >
+                    <DialogTitle>Login as Specialist</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            You are about to log in as {selectedSpecialist?.first_name} {selectedSpecialist?.last_name}.
+                            Your admin session will be restored when you click "Stop Impersonating" from the specialist portal.
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={() => setImpersonateDialogOpen(false)}>Cancel</Button>
+                        <Button onClick={confirmImpersonate} color="info" variant="contained">
+                            Continue
                         </Button>
                     </DialogActions>
                 </Dialog>

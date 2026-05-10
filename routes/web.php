@@ -62,6 +62,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/specialists', [SpecialistController::class, 'store'])->name('specialists.store');
         Route::post('/specialists/{specialist}', [SpecialistController::class, 'update'])->name('specialists.update');
         Route::post('/specialists/{specialist}/reset-password', [SpecialistController::class, 'resetPassword'])->name('specialists.reset-password');
+        Route::post('/specialists/{specialist}/impersonate', [SpecialistController::class, 'impersonate'])->name('specialists.impersonate');
         Route::delete('/specialists/{specialist}', [SpecialistController::class, 'destroy'])->name('specialists.destroy');
 
         // Destination routes
@@ -159,6 +160,7 @@ Route::prefix('specialist')->name('specialist.')->group(function () {
     Route::get('/login', [SpecialistAuthController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [SpecialistAuthController::class, 'login']);
     Route::post('/logout', [SpecialistAuthController::class, 'logout'])->name('logout');
+    Route::post('/stop-impersonating', [SpecialistAuthController::class, 'stopImpersonating'])->name('stop-impersonating');
 
     // Password reset routes
     Route::get('/forgot-password', [SpecialistAuthController::class, 'showForgotPasswordForm'])->name('forgot-password');

@@ -14,8 +14,10 @@ use App\Http\Requests\StoreSpecialistRequest;
 use App\Http\Requests\UpdateSpecialistRequest;
 use App\Models\Specialist;
 use App\Models\Country;
+use App\Models\User;
 use App\Services\SpecialistOperationService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -164,5 +166,27 @@ class SpecialistController extends Controller
 
         return redirect()->route('admin.specialists.show', $updatedSpecialist)
             ->with('success', 'Trip count updated successfully.');
+    }
+
+    /**
+     * Log the admin in as the given specialist while remembering the original admin id.
+     */
+    public function impersonate(Request $request, Specialist $specialist)
+    {
+        $user = User::where('email', $specialist->email)
+            ->where('role', 'specialist')
+            ->first();
+
+        if (!$user) {
+            return redirect()->route('admin.specialists.index')
+                ->with('error', 'No user account found for this specialist.');
+        }
+
+        $request->session()->put('impersonator_id', Auth::id());
+        Auth::login($user);
+        $request->session()->regenerate();
+
+        return redirect('/specialist')
+            ->with('success', "Now impersonating {$specialist->first_name} {$specialist->last_name}.");
     }
 }
