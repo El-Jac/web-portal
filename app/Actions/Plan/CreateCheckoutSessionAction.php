@@ -51,7 +51,7 @@ class CreateCheckoutSessionAction extends AbstractPlanAction
             'invoice_creation' => [
                 'enabled' => true,
             ],
-            'return_url' => url("/plans/{$plan->id}?payment=success"),
+            'return_url' => url("/plans/create/{$plan->id}?payment=success"),
             'metadata' => [
                 'plan_id' => $plan->id,
             ],
